@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso al e-Book: Usa la IA y Trabaja Menos | OpenClaw</title>
+  <meta name="description" content="Aprende a transformar tu PYME con Inteligencia Artificial. Recupera hasta 10 horas semanales por persona. Acceso interactivo inmediato.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase_config.js"></script>
+
+  <style>
+    :root {
+      --bg: #070a12;
+      --card-bg: #0f172a;
+      --card-border: #1e293b;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --green: #10b981;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .glow-sphere {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1050px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-col { padding-right: 15px; }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ffffff 40%, #7dd3fc 70%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lead-desc {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-bottom: 28px;
+    }
+
+    .benefits-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .check-icon {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--green);
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .author-note {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 20px;
+    }
+
+    .author-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+    }
+
+    .author-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .author-text strong {
+      color: #fff;
+      display: block;
+    }
+
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 38px 32px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px -10px var(--accent-glow);
+      position: relative;
+    }
+
+    .form-card-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .form-card-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .form-card-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+      width: 100%;
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      color: #fff;
+      font-family: var(--font-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+      background: #0b1120;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+      background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+    }
+
+    .privacy-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .alert-box {
+      display: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .alert-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+    .alert-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      color: #6ee7b7;
+    }
+
+    @media (max-width: 850px) {
+      .container { grid-template-columns: 1fr; gap: 30px; }
+      .content-col { padding-right: 0; text-align: center; }
+      h1 { font-size: 2.2rem; }
+      .benefits-list { text-align: left; }
+      .author-note { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-sphere"></div>
+
+  <div class="container">
+    <div class="content-col">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;">
+        <img src="logo_gcc.png" alt="Logo GCC" style="height: 38px; object-fit: contain;">
+        <div class="brand-badge" style="margin-bottom: 0;">⚡ e-Book Interactivo Exclusivo</div>
+      </div>
+      <h1>Usa la IA y Trabaja Menos</h1>
+      <p class="lead-desc">
+        La guía definitiva para dueños de microempresas y PYMES que buscan dejar de ser esclavos de la operación y convertirse en directores de sistemas apalancados con Inteligencia Artificial.
+      </p>
+
+      <ul class="benefits-list">
+        <li class="benefit-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Ahorro Real de Tiempo:</strong> Aprende a recuperar entre 5 y 10 horas semanales por colaborador eliminando la carga repetitiva.</div>
+        </li>
+        <li class="benefit-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Segundo Cerebro (RAG):</strong> Transforma tus manuales, políticas y tarifas en un consultor 24/7 sin alucinaciones con NotebookLM.</div>
+        </li>
+        <li class="benefit-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Casos de Estudio Reales:</strong> Implementaciones comprobadas en ventas por WhatsApp, marketing, cobranza y onboarding.</div>
+        </li>
+        <li class="benefit-item">
+          <span class="check-icon">✓</span>
+          <div><strong>Plan Táctico de 14 Días:</strong> Hoja de ruta paso a paso para lograr tu primera victoria operativa medible.</div>
+        </li>
+        <li class="benefit-item">
+          <span class="check-icon" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">🎙️</span>
+          <div><strong>Masterclass en Audio (17 min):</strong> Edición en podcast para escuchar el análisis estratégico en el auto o mientras realizas otras actividades.</div>
+        </li>
+      </ul>
+
+      <div class="author-note">
+        <img src="logo_gcc.png" alt="Logo GCC" style="height: 36px; object-fit: contain;">
+        <img src="logo_ebook.jpg" alt="Logo eBook" class="author-img">
+        <div class="author-text">
+          <strong>GCC OpenClaw Business OS</strong>
+          Metodología de Productividad y Automatización de Negocios
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-card-title">Desbloquea el Acceso</div>
+        <div class="form-card-sub">Accede de inmediato a la versión interactiva completa</div>
+      </div>
+
+      <div id="alert-box" class="alert-box"></div>
+
+      <form id="lead-form" onsubmit="handleLeadSubmit(event)">
+        <div class="form-group">
+          <label for="name">👤 Tu Nombre Completo</label>
+          <input type="text" id="name" name="name" placeholder="Ej. Carlos Mendoza" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp">💬 WhatsApp / Teléfono</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="Ej. +52 1 55 1234 5678" required autocomplete="tel">
+        </div>
+
+        <div class="form-group">
+          <label for="email">✉️ Correo Electrónico</label>
+          <input type="email" id="email" name="email" placeholder="carlos@tuempresa.com" required autocomplete="email">
+        </div>
+
+        <button type="submit" id="btn-submit" class="btn-submit">
+          <span>🚀 Desbloquear e-Book Ahora</span>
+        </button>
+
+        <div class="privacy-text">
+          🔒 Cero Spam. Tus datos se almacenan de forma segura y nunca serán compartidos con terceros.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    async function handleLeadSubmit(e) {
+      e.preventDefault();
+      
+      const btn = document.getElementById('btn-submit');
+      const name = document.getElementById('name').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (!name || !whatsapp || !email) {
+        showAlert('Por favor completa todos los campos requeridos.', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Guardando y desbloqueando...';
+
+      const payload = {
+        name: name,
+        whatsapp: whatsapp,
+        email: email,
+        source: 'Landing e-Book Usa la IA y Trabaja Menos'
+      };
+
+      // 1. Guardar en Supabase Cloud (si el cliente está disponible)
+      let supabaseSaved = false;
+      const sb = getSupabaseClient();
+      if (sb) {
+        try {
+          const { data, error } = await sb
+            .from('ebook_leads')
+            .insert([payload]);
+            
+          if (!error) {
+            supabaseSaved = true;
+            console.log('✅ Lead guardado exitosamente en Supabase Cloud');
+          } else {
+            console.warn('Supabase insert notice:', error.message);
+          }
+        } catch (sbErr) {
+          console.warn('Error conectando con Supabase:', sbErr);
+        }
+      }
+
+      // 2. Guardar en LocalStorage (backup cliente)
+      try {
+        localStorage.setItem('openclaw_lead_user', JSON.stringify(payload));
+        let localLeads = JSON.parse(localStorage.getItem('openclaw_all_leads') || '[]');
+        localLeads.push({...payload, created_at: new Date().toISOString()});
+        localStorage.setItem('openclaw_all_leads', JSON.stringify(localLeads));
+      } catch (err) {}
+
+      // 3. Guardar en servidor local SQLite si está activo
+      try {
+        await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {}
+
+      showAlert('¡Acceso concedido! Redirigiendo al e-Book...', 'success');
+      setTimeout(() => {
+        window.location.href = 'ebook_interactivo.html';
+      }, 700);
+    }
+
+    function showAlert(msg, type) {
+      const alertBox = document.getElementById('alert-box');
+      alertBox.className = 'alert-box alert-' + type;
+      alertBox.innerText = msg;
+      alertBox.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

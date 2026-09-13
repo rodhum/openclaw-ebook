@@ -1,0 +1,72 @@
+1
+00:00:00,200 --> 00:00:12,800
+Desbloquea el potencial completo de tu empresa con operaciones autónomas.
+Escala con agentes multi-modelo open source a costo cero por token
+garantizando la privacidad total y soberanía de tus datos.
+
+2
+00:00:14,200 --> 00:00:25,800
+Muchas PYMES están atrapadas en suscripciones costosas y datos fragmentados.
+El verdadero escalamiento operativo sigue bloqueado por
+altos costos de APIs y silos desconectados de información.
+
+3
+00:00:26,000 --> 00:00:38,800
+La evolución autónoma va mucho más allá de simples copilotos.
+Al desplegar enjambres multi-agente en servidores locales,
+tu empresa logra costo marginal cero y multiplica su apalancamiento.
+
+4
+00:00:39,200 --> 00:00:51,000
+Nuestra arquitectura para la PYME autónoma es integral.
+Integra modelos abiertos locales, memoria relacional GraphRAG
+y orquestación robusta con máxima seguridad en cada capa.
+
+5
+00:00:51,400 --> 00:01:01,800
+La búsqueda tradicional con IA es limitada, pero GraphRAG lo cambia todo.
+Al mapear entidades y relaciones en un grafo de conocimiento,
+tu IA comprende a fondo el contexto comercial antes de actuar.
+
+6
+00:01:02,300 --> 00:01:14,800
+Construimos un potente sistema nervioso con orquestación híbrida.
+Automatizamos procesos críticos desde el evento inicial
+hasta la ejecución final sin necesidad de intervención manual.
+
+7
+00:01:15,200 --> 00:01:27,800
+La verdadera autonomía exige capacidades multimodales.
+Nuestros agentes escuchan, ven, razonan y navegan portales web,
+ejecutando tareas complejas según tus reglas de negocio.
+
+8
+00:01:28,400 --> 00:01:40,200
+Detén los costos descontrolados de las APIs comerciales de IA.
+Desplegar modelos open source en servidores locales congela tus costos en cero
+y protege tus secretos comerciales con confidencialidad absoluta.
+
+9
+00:01:40,400 --> 00:01:50,800
+La autonomía no es una caja negra; es 100% observable.
+Con firewalls proactivos y auditoría granular de eventos,
+monitoreas cada decisión agéntica con rigor empresarial.
+
+10
+00:01:51,100 --> 00:02:02,500
+Nuestro modelo económico acelera tu retorno de inversión cognitivo.
+Al reducir el costo de IA a casi cero, la eficiencia de los agentes
+se traduce directamente en un salto exponencial de tu margen operativo.
+
+11
+00:02:02,900 --> 00:02:14,500
+Seguimos una hoja de ruta probada y estructurada en 90 días:
+desde infraestructura y memoria hasta orquestación agéntica total,
+recuperando valioso tiempo operativo para tu equipo.
+
+12
+00:02:14,700 --> 00:02:22,400
+Deja de rentar inteligencia y construye activos propietarios.
+Inicia tu auditoría de arquitectura hoy mismo y transforma tu empresa
+en una organización verdaderamente autónoma con OpenClaw.
+

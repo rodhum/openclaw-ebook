@@ -1,0 +1,3360 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usa la IA y Trabaja Menos | e-Book Interactivo OpenClaw</title>
+  <meta name="description" content="Guía práctica y estratégica de Inteligencia Artificial para microempresas y PYMES. Aprende a recuperar hasta 10 horas semanales por colaborador.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Mermaid.js for Native Interactive Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#0d1322',
+        primaryColor: '#1e293b',
+        primaryBorderColor: '#38bdf8',
+        primaryTextColor: '#f8fafc',
+        lineColor: '#38bdf8',
+        secondaryColor: '#0f172a',
+        tertiaryColor: '#1e1b4b'
+      }
+    });
+  </script>
+
+  <style>
+    :root {
+      --bg: #070a12;
+      --sidebar-bg: #0b1120;
+      --card-bg: #0f172a;
+      --card-border: #1e293b;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --green: #10b981;
+      --purple: #a855f7;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Reading Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #10b981);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    /* Sidebar Navigation */
+    aside {
+      width: 320px;
+      background-color: var(--sidebar-bg);
+      border-right: 1px solid var(--card-border);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 50;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(11, 17, 32, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.3;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 16px 12px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .nav-item {
+      margin-bottom: 4px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .nav-link.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border-left: 3px solid var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-num {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      opacity: 0.7;
+    }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--card-border);
+      text-align: center;
+    }
+
+    .btn-share {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-share:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    /* Main Content Area */
+    main {
+      margin-left: 320px;
+      flex: 1;
+      padding: 40px 60px 120px;
+      max-width: 1100px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(7, 10, 18, 0.4) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 45px;
+      margin-bottom: 50px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #7dd3fc 70%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 800px;
+      margin-bottom: 24px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .stat-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px 20px;
+    }
+
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Chapter Containers */
+    .module-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      scroll-margin-top: 30px;
+    }
+
+    .module-header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .module-badge {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin: 28px 0 12px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 1.02rem;
+    }
+
+    .highlight-quote {
+      border-left: 4px solid var(--accent);
+      background: rgba(56, 189, 248, 0.05);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: #e2e8f0;
+      margin: 20px 0;
+    }
+
+    /* Interactive Comparison Grid */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .compare-table th {
+      background: #1e293b;
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 0.9rem;
+      color: #f8fafc;
+    }
+
+    .compare-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 0.92rem;
+      color: #cbd5e1;
+    }
+
+    .compare-table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Interactive ROI Calculator */
+    .calculator-card {
+      background: linear-gradient(145deg, #0f172a, #131d36);
+      border: 2px solid #0284c7;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px 0;
+      box-shadow: 0 15px 35px -10px var(--accent-glow);
+    }
+
+    .calc-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .input-group input {
+      width: 100%;
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-family: var(--font-mono);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .calc-result-box {
+      background: rgba(2, 44, 34, 0.6);
+      border: 1px solid #059669;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .calc-result-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #34d399;
+      font-family: var(--font-mono);
+    }
+
+    .calc-result-sub {
+      font-size: 0.85rem;
+      color: #a7f3d0;
+    }
+
+    /* Prompt Box with One-Click Copy */
+    .prompt-box {
+      background: #070a12;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .prompt-code {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: #7dd3fc;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .btn-copy {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover {
+      background: var(--accent);
+      color: #070a12;
+      border-color: var(--accent);
+    }
+
+    /* Diagrams Card */
+    .diagram-container {
+      background: #090e1a;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .diagram-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* Interactive 14-Day Checklist */
+    .checklist-container {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.2s;
+      border-radius: 8px;
+    }
+
+    .check-row:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .check-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      margin-top: 3px;
+    }
+
+    .check-info strong {
+      color: #fff;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .check-info span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Video Player Container */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      margin: 24px 0;
+      background: #000;
+    }
+
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Infographic Card Styling */
+    .infographic-box {
+      background: linear-gradient(180deg, #0d1322 0%, #080d1a 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      margin: 32px 0;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .infographic-box:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 20px 45px -10px rgba(56, 189, 248, 0.15);
+    }
+
+    .infographic-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .infographic-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .infographic-badge {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .infographic-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .infographic-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-zoom {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-zoom:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .infographic-preview {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .infographic-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .infographic-preview:hover img {
+      transform: scale(1.015);
+    }
+
+    .infographic-hover-hint {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 10, 18, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .infographic-preview:hover .infographic-hover-hint {
+      opacity: 1;
+    }
+
+    .hint-pill {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--accent);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .infographic-caption {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(4, 7, 14, 0.94);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-content {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+      cursor: default;
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close-btn:hover {
+      background: #ef4444;
+    }
+
+    /* Podcast Hero Banner */
+    .podcast-hero-banner {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 18px;
+      padding: 22px 26px;
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .podcast-hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .podcast-hero-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .podcast-icon-glow {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+      flex-shrink: 0;
+    }
+
+    .podcast-hero-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #c084fc;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .podcast-hero-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    .podcast-hero-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .podcast-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-play-hero {
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-play-hero:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+      background: linear-gradient(135deg, #c084fc, #9333ea);
+    }
+
+    .btn-view-episodes {
+      background: rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-view-episodes:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    /* Module 8: Full Podcast Card Experience */
+    .podcast-card {
+      background: linear-gradient(180deg, #131b2e 0%, #0b1120 100%);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(168, 85, 247, 0.2);
+      margin: 28px 0;
+    }
+
+    .podcast-top {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 30px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .podcast-cover-art {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 2px solid rgba(168, 85, 247, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .podcast-cover-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .podcast-live-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      color: #c084fc;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #a855f7;
+      animation: pulseAnim 1.5s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .podcast-meta h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .podcast-meta p {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .track-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .track-tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .track-tab-btn.active {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: #a855f7;
+      color: #f1f5f9;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+    }
+
+    .track-tab-btn:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    /* Player Controls Bar */
+    .player-controls-wrap {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .scrubber-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .time-stamp-text {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      min-width: 44px;
+    }
+
+    .audio-progress-bar {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audio-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #a855f7, #38bdf8);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f1f5f9;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: scale(1.06);
+    }
+
+    .ctrl-btn.play-main {
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border: none;
+      color: #fff;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.5);
+    }
+
+    .ctrl-btn.play-main:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(168, 85, 247, 0.7);
+    }
+
+    .speed-selector-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .speed-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-mono);
+    }
+
+    .speed-btn.active {
+      background: #a855f7;
+      color: #fff;
+    }
+
+    .speed-btn:hover:not(.active) {
+      color: #fff;
+    }
+
+    /* Timestamps Interactive Grid */
+    .timestamps-box {
+      margin-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+
+    .timestamps-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timestamp-chips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
+    }
+
+    .timestamp-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .timestamp-chip:hover {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.4);
+      transform: translateX(4px);
+    }
+
+    .time-badge {
+      background: #1e293b;
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .time-topic {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    /* Persistent Floating Audio Dock */
+    .floating-audio-dock {
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      z-index: 900;
+      background: rgba(11, 17, 32, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      border-radius: 16px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.3);
+      max-width: 480px;
+      width: calc(100vw - 48px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    }
+
+    .dock-art {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .dock-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .dock-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dock-sub {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .dock-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .dock-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .dock-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .dock-close:hover {
+      color: #fff;
+    }
+
+    /* Flashcards 3D & Quiz System */
+    .flashcards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+      perspective: 1000px;
+    }
+
+    .flashcard {
+      background: transparent;
+      height: 200px;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .flashcard-front {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+      color: #fff;
+    }
+
+    .flashcard-back {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(15, 23, 42, 0.95));
+      color: #f8fafc;
+      transform: rotateY(180deg);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .flashcard-hint {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Quiz Widget Styles */
+    .quiz-card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 28px 0;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .quiz-question {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .quiz-q-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      transition: all 0.2s;
+    }
+
+    .quiz-option-label:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+      color: #fff;
+    }
+
+    .quiz-option-label input[type="radio"] {
+      accent-color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .quiz-option-label.correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: #10b981 !important;
+      color: #fff !important;
+    }
+
+    .quiz-option-label.incorrect {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+    }
+
+    .btn-submit-quiz {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-submit-quiz:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(16, 185, 129, 0.45);
+    }
+
+    /* Certificate & Unlock Box */
+    .certificate-card {
+      display: none;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(6, 78, 59, 0.4));
+      border: 2px solid #10b981;
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .certificate-card.unlocked {
+      display: block;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .cert-badge-glow {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.6));
+    }
+
+    .cert-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .cert-sub {
+      color: #a7f3d0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-launch-l2 {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #818cf8 100%);
+      color: #030712;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 15px 35px var(--accent-glow);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-launch-l2:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 20px 45px rgba(56, 189, 248, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden Global Audio Element -->
+  <audio id="global-audio" preload="metadata"></audio>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <img src="logo_gcc.png" alt="Logo GCC" style="height: 30px; object-fit: contain;">
+        <div class="brand-badge" style="margin-bottom:0;">⚡ GCC OpenClaw</div>
+      </div>
+      <div class="sidebar-title">Usa la IA y Trabaja Menos</div>
+    </div>
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#intro" class="nav-link active"><span class="nav-num">00</span> Prólogo & Manifiesto</a></li>
+      <li class="nav-item"><a href="#mod0" class="nav-link"><span class="nav-num">M0</span> De Esclavo a Director</a></li>
+      <li class="nav-item"><a href="#mod1" class="nav-link"><span class="nav-num">M1</span> Los 3 Mitos & Pirámide</a></li>
+      <li class="nav-item"><a href="#mod2" class="nav-link"><span class="nav-num">M2</span> Framework R.C.E.F.</a></li>
+      <li class="nav-item"><a href="#mod3" class="nav-link"><span class="nav-num">M3</span> Segundo Cerebro (RAG)</a></li>
+      <li class="nav-item"><a href="#mod4" class="nav-link"><span class="nav-num">M4</span> Casos Reales x Área</a></li>
+      <li class="nav-item"><a href="#mod5" class="nav-link"><span class="nav-num">M5</span> Agentes & Automatización</a></li>
+      <li class="nav-item"><a href="#mod6" class="nav-link"><span class="nav-num">M6</span> Semáforo de Privacidad</a></li>
+      <li class="nav-item"><a href="#mod7" class="nav-link"><span class="nav-num">M7</span> Plan Táctico en 14 Días</a></li>
+      <li class="nav-item"><a href="#mod8" class="nav-link" style="color: #c084fc;"><span class="nav-num" style="color:#a855f7;">M8</span> Masterclass Audio 🎙️</a></li>
+      <li class="nav-item"><a href="#quiz" class="nav-link" style="color: #34d399;"><span class="nav-num" style="color:#10b981;">QZ</span> Quiz & Certificación 🎓</a></li>
+      <li class="nav-item"><a href="#libro2" class="nav-link" style="color: #38bdf8; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 6px; padding-top: 12px;"><span class="nav-num" style="color:#38bdf8;">L2</span> PYMES Autónomas 🚀</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <button class="btn-share" onclick="window.print()">
+        🖨️ Descargar / Imprimir PDF
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Toggle Button -->
+  <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menú">☰</button>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Banner -->
+    <section class="hero" id="intro">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap;">
+        <img src="logo_gcc.png" alt="Logo GCC" style="height: 36px; object-fit: contain;">
+        <span class="hero-tag" style="margin-bottom:0; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35);">Edición V2 Actualizada & Enriquecida (Datos 2026)</span>
+      </div>
+      <h1>Usa la IA y Trabaja Menos</h1>
+      <p class="hero-desc">Fundamentos Científicos, Arquitectura de Procesos y Retorno Cognitivo de la Inteligencia Artificial en Pequeños y Medianos Negocios.</p>
+      
+      <div class="highlight-quote">
+        <strong>Manifiesto del Emprendedor Inteligente V2:</strong> "El objetivo de la Inteligencia Artificial en la PYME no es reemplazar el talento humano ni acumular suscripciones de software costoso, sino eliminar la carga operativa de bajo valor para devolverle al empresario su libertad personal, potenciar a su equipo y escalar las ventas a costo marginal cercano a cero."
+      </div>
+
+      <!-- Podcast Hero Quick Access Banner -->
+      <div class="podcast-hero-banner">
+        <div class="podcast-hero-left">
+          <div class="podcast-icon-glow">🎙️</div>
+          <div>
+            <span class="podcast-hero-tag">EDICIÓN EN AUDIO • 17 MINUTOS</span>
+            <div class="podcast-hero-title">¿Prefieres escuchar la Masterclass en Audio?</div>
+            <div class="podcast-hero-sub">Análisis estratégico profundo para escuchar en el auto o de fondo mientras lees el e-Book.</div>
+          </div>
+        </div>
+        <div class="podcast-hero-actions">
+          <button class="btn-play-hero" id="hero-play-btn" onclick="togglePlayPause()"><span id="hero-btn-icon">▶</span> Reproducir Masterclass</button>
+          <a href="#mod8" class="btn-view-episodes">Ver Módulo 8 & Notas</a>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">5.6 - 7.2 h</div>
+          <div class="stat-label">Recuperadas/semana (5.6h equipo / 7.2h gerencia)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2.3x ROI</div>
+          <div class="stat-label">Mayor productividad en equipos formados en IA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">91% / 86%</div>
+          <div class="stat-label">91% aumentó ingresos y 86% mejoró margen</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">82% Nómina</div>
+          <div class="stat-label">Retuvo o aumentó nómina como multiplicador</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Resumen Embebido -->
+    <section class="module-section">
+      <div class="module-header">
+        <span class="module-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">🎬 Resumen Ejecutivo en Video • Nivel Ejecutivo</span>
+        <h2>El Blueprint de Productividad Autónoma</h2>
+      </div>
+      <p>Mira el resumen audiovisual de 2:28 minutos con el blueprint conceptual del libro:</p>
+      
+      <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+        <button id="btn-blueprint-subs" onclick="switchBlueprintVideo('sub')" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-weight: 600;">
+          💬 Versión con Subtítulos
+        </button>
+        <button id="btn-blueprint-nosubs" onclick="switchBlueprintVideo('nosub')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-weight: 600;">
+          🎬 Versión sin Subtítulos
+        </button>
+      </div>
+
+      <div class="video-wrapper">
+        <video id="blueprint-video-player" controls poster="logo_ebook.jpg">
+          <source id="blueprint-video-src" src="Autonomous_Productivity_Blueprint_ES_con_subtitulos.mp4" type="video/mp4">
+          Tu navegador no soporta reproducción de video HTML5.
+        </video>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: -12px; margin-bottom: 20px;">
+        🎬 Cápsula Ejecutiva: <em>Autonomous Productivity Blueprint (2:28 min)</em> • Audio en Español HD
+      </div>
+
+      <script>
+        function switchBlueprintVideo(type) {
+          const video = document.getElementById('blueprint-video-player');
+          const src = document.getElementById('blueprint-video-src');
+          const btnSubs = document.getElementById('btn-blueprint-subs');
+          const btnNoSubs = document.getElementById('btn-blueprint-nosubs');
+          const currentTime = video.currentTime;
+          const wasPlaying = !video.paused;
+
+          if (type === 'sub') {
+            src.src = 'Autonomous_Productivity_Blueprint_ES_con_subtitulos.mp4';
+            btnSubs.style.background = 'rgba(56, 189, 248, 0.2)';
+            btnSubs.style.borderColor = '#38bdf8';
+            btnSubs.style.color = '#38bdf8';
+            btnNoSubs.style.background = 'rgba(255,255,255,0.05)';
+            btnNoSubs.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnNoSubs.style.color = 'var(--text-muted)';
+          } else {
+            src.src = 'Autonomous_Productivity_Blueprint_ES_sin_subtitulos.mp4';
+            btnNoSubs.style.background = 'rgba(56, 189, 248, 0.2)';
+            btnNoSubs.style.borderColor = '#38bdf8';
+            btnNoSubs.style.color = '#38bdf8';
+            btnSubs.style.background = 'rgba(255,255,255,0.05)';
+            btnSubs.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnSubs.style.color = 'var(--text-muted)';
+          }
+          video.load();
+          video.currentTime = currentTime;
+          if (wasPlaying) {
+            video.play();
+          }
+        }
+      </script>
+    </section>
+
+    <!-- Módulo 0 -->
+    <section class="module-section" id="mod0">
+      <div class="module-header">
+        <span class="module-badge">Módulo 0</span>
+        <h2>El Despertar del Emprendedor Inteligente & La Brecha del 17.7%</h2>
+      </div>
+      
+      <h3>1. El Día en que la Operación Casi me Destruye</h3>
+      <p>Eran las 2:14 AM de un martes cualquiera. Sobre mi escritorio se acumulaban tres tazas de café frío, dos hojas de cálculo con datos desencajados y una lista interminable de mensajes sin responder de clientes molestos. Sentía una opresión en el pecho que cualquier dueño de PYME reconoce de inmediato: <strong>la sensación de ser el cuello de botella de tu propio negocio</strong>.</p>
+      <p>Esa noche entendí que trabajar 14 horas al día no es una medalla de honor; es un síntoma de falla estructural. La mayoría de las pequeñas y medianas empresas no quiebran por falta de ventas, sino por el agotamiento operativo de sus fundadores.</p>
+
+      <!-- Video Master Capsule 1: The New Digital Workforce -->
+      <div class="video-wrapper" style="margin: 28px 0;">
+        <video controls poster="logo_ebook.jpg">
+          <source src="video_new_digital_workforce.mp4" type="video/mp4">
+          Tu navegador no soporta reproducción de video HTML5.
+        </video>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: -16px; margin-bottom: 24px;">
+        🎬 Cápsula Ejecutiva: <em>The New Digital Workforce (1:58 min)</em> • Audio en Español HD
+      </div>
+
+      <h3>2. La Brecha del 17.7% y la Trampa de los 44 Puntos (Datos Bancarios 2026)</h3>
+      <p>El colapso operativo ocurre cuando el dueño de negocio confunde estar "ocupado" con ser productivo. Estudios bancarios y estadísticos de adopción (<strong>FactoryJet / JPMorgan Chase Institute</strong>) revelan un fenómeno crítico:</p>
+      
+      <div class="stats-row" style="margin: 20px 0;">
+        <div class="stat-card" style="border-left: 4px solid #38bdf8;">
+          <div class="stat-num" style="color: #38bdf8;">68% vs 17.7%</div>
+          <div class="stat-label"><strong>La Brecha de Integración Real:</strong> Aunque el 68% usa IA superficialmente como buscador, solo el <strong>17.7%</strong> paga e integra herramientas en sus flujos y transacciones reales.</div>
+        </div>
+        <div class="stat-card" style="border-left: 4px solid #ef4444;">
+          <div class="stat-num" style="color: #ef4444;">23% vs 67%</div>
+          <div class="stat-label"><strong>La Brecha de 44 Puntos:</strong> Las microempresas (&lt;5 empleados) tienen apenas 23% de adopción frente al 67% en firmas más estructuradas.</div>
+        </div>
+      </div>
+
+      <p>El software en la nube tradicional prometió salvarnos, pero nos convirtió en esclavos de 15 pestañas abiertas y hojas de cálculo desconectadas. El verdadero cuello de botella de la PYME moderna no es la falta de herramientas, sino que el ser humano sigue actuando como el <em>puente manual</em> entre sistemas que no se hablan entre sí.</p>
+
+      <!-- Infografía: El Humano como Pegamento Digital -->
+      <div class="infographic-box">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge">Infografía 0.1</span>
+            <div class="infographic-title">El Humano como Pegamento Digital</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('humano_pegamento_digital.png')">🔍 Ampliar</button>
+            <a href="humano_pegamento_digital.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('humano_pegamento_digital.png')">
+          <img src="humano_pegamento_digital.png" alt="Infografía: El Humano como Pegamento Digital">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Diagnóstico Estructural:</strong> Cómo la fragmentación de herramientas tradicionales convierte a tus colaboradores más talentosos en operadores mecánicos de copiar y pegar.
+        </div>
+      </div>
+
+      <h3>3. Copiloto vs. Esclavo de la Operación</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Eje de Análisis</th>
+            <th>El Operador Manual (Tradicional)</th>
+            <th>El Director de Sistemas (Apalancado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Rol del Dueño</strong></td>
+            <td>Resolver emergencias y redactar todo manualmente (14h/día).</td>
+            <td>Diseñar sistemas, validar borradores y tomar decisiones de alto valor.</td>
+          </tr>
+          <tr>
+            <td><strong>Gestión de Datos</strong></td>
+            <td>Búsqueda en carpetas, correos y chats dispersos de WhatsApp.</td>
+            <td>Base de conocimiento centralizada y privada (RAG / NotebookLM).</td>
+          </tr>
+          <tr>
+            <td><strong>Atención a Clientes</strong></td>
+            <td>Respuesta lenta condicionada al horario laboral y fatiga humana.</td>
+            <td>Agentes 24/7 con calificación, cotización y agendamiento autónomo.</td>
+          </tr>
+          <tr>
+            <td><strong>Crecimiento</strong></td>
+            <td>Lineal: cada venta adicional exige contratar más personal operativo.</td>
+            <td>Exponencial: escala la atención y el volumen a costo marginal ~cero.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Interactive Diagram Fig 0.1 -->
+      <div class="diagram-container">
+        <div class="mermaid">
+          flowchart LR
+              A["❌ Operador Manual<br/>14 hrs/día • Apagando fuegos<br/>Brecha 17.7%"] -->|Adopción Estratégica| B["👑 Director de Sistemas<br/>Supervisión • Copilotos • Flujos 24/7<br/>Ahorro 7.2 hrs/sem"]
+        </div>
+        <div class="diagram-caption">Figura 0.1: Transformación hacia el modelo apalancado de Director de Sistemas.</div>
+      </div>
+    </section>
+
+    <!-- Módulo 1 -->
+    <section class="module-section" id="mod1">
+      <div class="module-header">
+        <span class="module-badge">Módulo 1</span>
+        <h2>Desmitificando la IA en la PYME & Pirámide del Apalancamiento</h2>
+      </div>
+
+      <h3>Los 3 Grandes Mitos Desmontados con Evidencia 2026</h3>
+      <p>Existe una barrera invisible antes de la tecnología: la barrera de las creencias paralizantes. El 77% de los empresarios que no han adoptado IA afirman erróneamente no ver una aplicación práctica. Sin embargo, el <strong>80% de las PYMES que la integran reporta ganancias de productividad inmediatas de al menos 20%</strong>:</p>
+
+      <div class="stats-row" style="margin-bottom: 25px;">
+        <div class="stat-card">
+          <strong style="color: #ef4444; display:block; margin-bottom: 4px;">❌ Mito 1: "Es solo para gigantes tecnológicos"</strong>
+          <p style="font-size: 0.85rem; margin:0;">El <strong>45%</strong> de la adopción se realiza vía funciones nativas de software existente y el <strong>67%</strong> inicia con modelos gratuitos o de bajo costo sin añadir suscripciones pesadas.</p>
+        </div>
+        <div class="stat-card">
+          <strong style="color: #ef4444; display:block; margin-bottom: 4px;">❌ Mito 2: "Reemplazará a todo mi equipo"</strong>
+          <p style="font-size: 0.85rem; margin:0;">Los datos reales demuestran que el <strong>82% de las PYMES usuarias mantuvieron o aumentaron su nómina</strong>, utilizándola como multiplicador de talento.</p>
+        </div>
+        <div class="stat-card">
+          <strong style="color: #ef4444; display:block; margin-bottom: 4px;">❌ Mito 3: "Se requiere saber programar"</strong>
+          <p style="font-size: 0.85rem; margin:0;">El 37% lo cree falsamente. Hoy el control es en <strong>lenguaje natural</strong> y plataformas No-Code. El requisito no es programar, sino saber explicar con claridad los procesos del negocio.</p>
+        </div>
+      </div>
+
+      <!-- Niveles de Apalancamiento Cognitivo V2 -->
+      <h3>Niveles de Madurez y Apalancamiento Cognitivo</h3>
+      <table class="compare-table" style="margin-bottom: 24px;">
+        <thead>
+          <tr>
+            <th>Nivel de Apalancamiento</th>
+            <th>Rol del Usuario</th>
+            <th>Herramientas Tipo</th>
+            <th>Ahorro de Tiempo / Impacto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nivel 1: Tareas Básicas</strong></td>
+            <td>Operador de Prompts</td>
+            <td>ChatGPT, Claude, Gemini</td>
+            <td><strong>2 - 3 hrs/semana</strong> (Borradores, síntesis)</td>
+          </tr>
+          <tr>
+            <td><strong>Nivel 2: Asistentes Documentales</strong></td>
+            <td>Arquitecto de Procesos</td>
+            <td>NotebookLM, Deelo, Glide</td>
+            <td><strong>5 - 8 hrs/semana</strong> (Cero Alucinación, RAG)</td>
+          </tr>
+          <tr>
+            <td><strong>Nivel 3: Sistemas Autónomos</strong></td>
+            <td>Director de Sistemas</td>
+            <td>Make, n8n, Gorgias, Klaviyo</td>
+            <td><strong>10 - 15 hrs/semana</strong> (Escalamiento 24/7)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Matriz de Autodiagnóstico de Retorno Cognitivo -->
+      <h3>Matriz de Autodiagnóstico: Los 4 Ladrones de Tiempo Operativo</h3>
+      <p>No puedes automatizar lo que no has medido. Los 4 grandes ladrones de tiempo son: 1) El síndrome de la bandeja de entrada, 2) Reuniones sin minuta, 3) Transcripción manual de datos, y 4) Búsqueda de información perdida:</p>
+
+      <table class="compare-table" style="margin-bottom: 24px;">
+        <thead>
+          <tr>
+            <th>Actividad Diaria</th>
+            <th>Frecuencia</th>
+            <th>Tiempo Invertido</th>
+            <th>Naturaleza de la Tarea</th>
+            <th>Nivel IA Aplicable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Responder dudas frecuentes por WhatsApp</td>
+            <td>Diaria</td>
+            <td>8 horas / sem</td>
+            <td>Mecánica (mismas dudas repetitivas)</td>
+            <td><span class="badge" style="background:rgba(16,185,129,0.2);color:#34d399;padding:2px 8px;border-radius:6px;">Nivel 3 (Agente WhatsApp)</span></td>
+          </tr>
+          <tr>
+            <td>Redactar cotizaciones de servicios y propuestas</td>
+            <td>3x / semana</td>
+            <td>6 horas / sem</td>
+            <td>Híbrida (plantilla base + ajuste específico)</td>
+            <td><span class="badge" style="background:rgba(56,189,248,0.2);color:#38bdf8;padding:2px 8px;border-radius:6px;">Nivel 2 (Base RAG)</span></td>
+          </tr>
+          <tr>
+            <td>Resumir acuerdos y minutas de reuniones</td>
+            <td>2x / semana</td>
+            <td>3 horas / sem</td>
+            <td>Mecánica (transcripción y síntesis)</td>
+            <td><span class="badge" style="background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:6px;">Nivel 1 (Asistente Audio)</span></td>
+          </tr>
+          <tr>
+            <td>Conciliación y búsqueda de facturas / pólizas</td>
+            <td>Semanal</td>
+            <td>5 horas / sem</td>
+            <td>Mecánica (cotejo de campos y montos)</td>
+            <td><span class="badge" style="background:rgba(56,189,248,0.2);color:#38bdf8;padding:2px 8px;border-radius:6px;">Nivel 2 (OCR + RAG)</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Calculadora Interactiva de Retorno Cognitivo -->
+      <div class="calculator-card">
+        <div class="calc-title">🧮 Calculadora Interactiva de Retorno Cognitivo (ROI)</div>
+        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 20px;">
+          <strong>Fórmula Científica V2:</strong> Un equipo de 10 colaboradores que recupera 6.5 h/semana libera 260 h/mes. A $20 USD/h = <strong>$5,200 USD/mes</strong>. Un equipo de 5 que recupera 10 h/sem a $25/h ahorra <strong>$5,412.50 USD/mes</strong>:
+        </p>
+        <div class="calc-grid">
+          <div class="input-group">
+            <label>N° de Colaboradores (N)</label>
+            <input type="number" id="calc-team" value="5" min="1" max="1000" oninput="calculateROI()">
+          </div>
+          <div class="input-group">
+            <label>Horas Ahorradas x Semana (h)</label>
+            <input type="number" id="calc-hours" value="10" min="1" max="40" oninput="calculateROI()">
+          </div>
+          <div class="input-group">
+            <label>Costo Promedio x Hora (USD $)</label>
+            <input type="number" id="calc-rate" value="25" min="1" max="500" oninput="calculateROI()">
+          </div>
+        </div>
+        <div class="calc-result-box">
+          <div class="calc-result-num" id="calc-monthly-savings">$5,413 USD</div>
+          <div class="calc-result-sub" id="calc-yearly-savings">Ahorro mensual estimado • $64,950 USD al año de capacidad operativa recuperada</div>
+        </div>
+      </div>
+
+      <!-- Infografía Principal 1: Pirámide del Apalancamiento Cognitivo -->
+      <div class="infographic-box">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge">Infografía 1.1</span>
+            <div class="infographic-title">Pirámide del Apalancamiento Cognitivo</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('piramide_apalancamiento_cognitivo.png')">🔍 Ampliar</button>
+            <a href="piramide_apalancamiento_cognitivo.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('piramide_apalancamiento_cognitivo.png')">
+          <img src="piramide_apalancamiento_cognitivo.png" alt="Infografía: Pirámide del Apalancamiento Cognitivo">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Estructura de Madurez Digital:</strong> Los 3 niveles de adopción en la empresa — desde la asistencia básica en redacción hasta los agentes autónomos con supervisión humana.
+        </div>
+      </div>
+
+      <!-- Diagrama Piramide Fig 1.1 -->
+      <div class="diagram-container">
+        <div class="mermaid">
+          flowchart TD
+              N3["🥇 NIVEL 3: Sistemas Autónomos (Make, n8n, Gorgias, Klaviyo • 10-15h/sem)"]
+              N2["🥈 NIVEL 2: Asistentes Documentales (NotebookLM, Deelo, Glide • 5-8h/sem)"]
+              N1["🥉 NIVEL 1: Tareas Básicas (ChatGPT, Claude, Gemini • 2-3h/sem)"]
+              N1 --> N2 --> N3
+        </div>
+        <div class="diagram-caption">Figura 1.1: Flujo de escalamiento cognitivo en la PYME.</div>
+      </div>
+    </section>
+
+    <!-- Módulo 2 -->
+    <section class="module-section" id="mod2">
+      <div class="module-header">
+        <span class="module-badge">Módulo 2</span>
+        <h2>El Arte de Comunicarse con la IA: Framework R.C.E.F. & Few-Shot</h2>
+      </div>
+
+      <p>La diferencia entre una respuesta vaga de la IA y un entregable listo para producción radica en la estructura de la instrucción. El <strong>Framework R.C.E.F.</strong> y la técnica <strong>Few-Shot</strong> (dar ejemplos de entrada/salida) estandarizan la comunicación corporativa con cualquier modelo LLM:</p>
+
+      <div class="stats-row" style="margin-bottom: 20px;">
+        <div class="stat-card"><strong>[R] ROL</strong><p style="font-size: 0.8rem; margin:0;">Define la identidad, experiencia y perspectiva profesional.</p></div>
+        <div class="stat-card"><strong>[C] CONTEXTO</strong><p style="font-size: 0.8rem; margin:0;">Antecedentes del negocio, cliente, montos y situación exacta.</p></div>
+        <div class="stat-card"><strong>[E] EJECUCIÓN</strong><p style="font-size: 0.8rem; margin:0;">La tarea específica y paso a paso a realizar.</p></div>
+        <div class="stat-card"><strong>[F] FORMATO</strong><p style="font-size: 0.8rem; margin:0;">Estructura de salida (tabla, markdown, viñetas, tono).</p></div>
+      </div>
+
+      <h3>Plantilla Maestra R.C.E.F. para Cobranza y Atención B2B</h3>
+      <div class="prompt-box">
+        <button class="btn-copy" onclick="copyPrompt('prompt-rcef-1')">📋 Copiar Prompt</button>
+        <div class="prompt-code" id="prompt-rcef-1">[ROL]: Actúa como un Director de Cobranza y Atención al Cliente Senior con 15 años de experiencia en conciliación comercial B2B.
+[CONTEXTO]: Mi empresa vende servicios de consultoría e integración. El cliente 'Distribuidora Norte' tiene 15 días de atraso en la factura #1042 por $2,500 USD. Ha sido cliente fiel por 2 años pero no responde a llamadas.
+[EJECUCIÓN]: Redacta un correo de recordatorio cordial pero firme, reconociendo su lealtad, detallando el saldo pendiente y ofreciendo opciones de transferencia bancaria inmediata o plan en 2 pagos.
+[FORMATO]: Asunto directo y profesional + 3 párrafos concisos + Botón/Llamado a la acción claro para confirmar fecha de transferencia antes del viernes.
+[LÍMITES]: Cero agresividad o amenazas jurídicas; mantén un tono profesional, empático y orientado a preservar la relación comercial de largo plazo.</div>
+      </div>
+
+      <h3>Plantilla Few-Shot: Calificación Instantánea de Leads</h3>
+      <div class="prompt-box">
+        <button class="btn-copy" onclick="copyPrompt('prompt-rcef-2')">📋 Copiar Prompt</button>
+        <div class="prompt-code" id="prompt-rcef-2">[ROL]: Agente Clasificador de Oportunidades Comerciales.
+[CONTEXTO]: Analiza las notas del prospecto y clasifica según presupuesto y urgencia.
+[EJEMPLO 1]:
+Entrada: "Hola, queremos cotizar la automatización de 3 sucursales, tenemos presupuesto aprobado de $5,000 USD y arrancamos este mes."
+Salida: {"calificacion": "CALIENTE", "prioridad": "ALTA", "siguiente_accion": "Agendar llamada técnica en 24h"}
+[EJEMPLO 2]:
+Entrada: "Solo estoy investigando precios para un proyecto escolar."
+Salida: {"calificacion": "NO_APTO", "prioridad": "BAJA", "siguiente_accion": "Enviar enlace a recursos gratuitos"}
+[ENTRADA ACTUAL]:
+"{MENSAJE_DEL_CLIENTE}"
+[FORMATO]: Responde estrictamente con el objeto JSON validado.</div>
+      </div>
+    </section>
+
+    <!-- Módulo 3 -->
+    <section class="module-section" id="mod3">
+      <div class="module-header">
+        <span class="module-badge">Módulo 3</span>
+        <h2>El Kit Esencial de Herramientas & NotebookLM (RAG Privado)</h2>
+      </div>
+
+      <p><strong>NotebookLM</strong> representa el estándar de oro para la gestión documental privada en la PYME. Al operar bajo la arquitectura <strong>RAG (Retrieval-Augmented Generation)</strong>, garantiza cero alucinaciones y cero fugas de datos, respondiendo exclusivamente con base en los manuales, catálogos y políticas subidas por el usuario, e incluyendo citas directas comprobables en menos de 10 segundos.</p>
+
+      <!-- Ecosistema Vertical V2 -->
+      <h3>Ecosistema de Software Vertical Especializado (2026)</h3>
+      <table class="compare-table" style="margin: 20px 0;">
+        <thead>
+          <tr>
+            <th>Categoría / Sector</th>
+            <th>Herramienta Destacada</th>
+            <th>Caso de Uso PYME</th>
+            <th>Impacto Medido (Fuentes 2026)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gestión Documental</strong></td>
+            <td><strong>NotebookLM</strong></td>
+            <td>Segundo cerebro con RAG privado sobre PDFs, contratos y notas.</td>
+            <td><strong>Reducción del 90%</strong> en interrupciones al dueño.</td>
+          </tr>
+          <tr>
+            <td><strong>Construcción / Campo</strong></td>
+            <td><strong>ShareMyToolbox</strong></td>
+            <td>Control QR/GPS de herramientas y asignación de equipo a técnicos.</td>
+            <td><strong>Cero pérdidas de activos</strong> en obra ($14k USD ahorrados).</td>
+          </tr>
+          <tr>
+            <td><strong>Inmobiliaria / PropTech</strong></td>
+            <td><strong>Deelo + Restb.ai</strong></td>
+            <td>CRM unificado con visión por computadora para clasificar fotos de propiedades.</td>
+            <td>Respuesta a leads en <strong>&lt;2 minutos; +28% ventas</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong>Manufactura / Stock</strong></td>
+            <td><strong>Glide</strong></td>
+            <td>Apps No-Code conectadas en tiempo real a Google Sheets / SQL.</td>
+            <td>Automatización de alertas de inventario y pedidos.</td>
+          </tr>
+          <tr>
+            <td><strong>E-commerce</strong></td>
+            <td><strong>Gorgias + Klaviyo</strong></td>
+            <td>Soporte automatizado de pedidos (WISMO) e email marketing con IA.</td>
+            <td><strong>+31% mayor conversión</strong> en ventas recuperadas.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="diagram-container">
+        <div class="mermaid">
+          flowchart LR
+              Docs["📂 Manuales, Tarifas y Contratos Privados"] --> RAG["🔒 Indexación RAG en NotebookLM / Vector DB"]
+              RAG --> Team["👥 Equipo de Ventas / Operaciones"]
+              Team -->|Consulta en lenguaje natural| Ans["⚡ Respuesta en <5 seg con Citas Exactas Verificables"]
+        </div>
+        <div class="diagram-caption">Figura 3.1: Arquitectura de Inteligencia Documental Privada con RAG.</div>
+      </div>
+    </section>
+
+    <!-- Módulo 4 -->
+    <section class="module-section" id="mod4">
+      <div class="module-header">
+        <span class="module-badge">Módulo 4</span>
+        <h2>Casos de Uso Reales por Departamento (La Trinchera Operativa)</h2>
+      </div>
+
+      <p>La fuerza laboral digital opera en la trinchera diaria de las PYMES resolviendo cuellos de botella específicos con retornos económicos directos:</p>
+
+      <!-- Video Master Capsule 2: The PyME Digital Workforce -->
+      <div class="video-wrapper" style="margin: 28px 0;">
+        <video controls poster="logo_ebook.jpg">
+          <source src="video_pyme_digital_workforce.mp4" type="video/mp4">
+          Tu navegador no soporta reproducción de video HTML5.
+        </video>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: -16px; margin-bottom: 24px;">
+        🎬 Cápsula Ejecutiva: <em>The PyME Digital Workforce (2:49 min)</em> • Audio en Español HD
+      </div>
+
+      <!-- Infografía 4.1: Flujo de Ventas Totalmente Automatizado -->
+      <div class="infographic-box">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge">Infografía 4.1</span>
+            <div class="infographic-title">Flujo de Ventas Totalmente Automatizado</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('flujo_ventas_automatizado.png')">🔍 Ampliar</button>
+            <a href="flujo_ventas_automatizado.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('flujo_ventas_automatizado.png')">
+          <img src="flujo_ventas_automatizado.png" alt="Infografía: Flujo de Ventas Totalmente Automatizado">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Arquitectura Comercial:</strong> Del lead entrante en WhatsApp hasta la cotización personalizada en PDF y el agendamiento directo en Google Calendar.
+        </div>
+      </div>
+
+      <!-- Tabla Casos Hiperrealistas V2 -->
+      <h3>Casos de Estudio Hiperrealistas: Antes vs. Después</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Sector / Departamento</th>
+            <th>Antes de la IA (Dolor)</th>
+            <th>Intervención con IA / OpenClaw</th>
+            <th>Resultado Tangible</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bienes Raíces / PropTech</strong></td>
+            <td>Pérdida del 40% de leads por demora en respuesta fuera de horario.</td>
+            <td>Deelo + Restb.ai + Twilio (Agente 24/7 con visión para planos/fotos).</td>
+            <td><strong>Cita agendada en 3 minutos; +28% en ventas cerradas.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>E-commerce</strong></td>
+            <td>Cola de 180 tickets de soporte acumulados por estado de envíos.</td>
+            <td>Gorgias + Klaviyo + Shopify (Atención automática WISMO).</td>
+            <td><strong>Cola reducida a &lt;12 tickets; resueltos en 15 segundos.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Taller / Manufactura</strong></td>
+            <td>Pérdida recurrente de herramientas y activos en campo.</td>
+            <td>ShareMyToolbox con escaneo QR y alertas preventivas.</td>
+            <td><strong>Cero extravíos; $14,000 USD ahorrados al año.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Consultoría / Servicios</strong></td>
+            <td>15 horas/semana redactando informes y minutas manualmente.</td>
+            <td>NotebookLM + Framework R.C.E.F. + Plantillas Few-Shot.</td>
+            <td><strong>Informes listos en 20 minutos; +35% margen operativo.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Finanzas & Contabilidad</strong></td>
+            <td>Errores en captura manual de facturas y cotejo de pólizas.</td>
+            <td>Extracción IDP/OCR + Reconciliación automatizada en Make.</td>
+            <td><strong>-90% en errores de captura; conciliación en 5 minutos.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Módulo 5 -->
+    <section class="module-section" id="mod5">
+      <div class="module-header">
+        <span class="module-badge">Módulo 5</span>
+        <h2>De la Asistencia a la Automatización No-Code (Cotizador Autónomo)</h2>
+      </div>
+
+      <p>Conectar herramientas aisladas mediante plataformas No-Code como <strong>Make, Zapier, n8n o ManyChat</strong> permite construir procesos comerciales autónomos de extremo a extremo.</p>
+
+      <!-- Caso Emblemático: Cotizador Autónomo -->
+      <div class="stat-card" style="border-left: 4px solid #10b981; margin: 20px 0; background: rgba(16, 185, 129, 0.06);">
+        <strong style="color: #34d399; font-size: 1.05rem;">Caso Emblemático: Cotizador Autónomo en WhatsApp</strong>
+        <p style="font-size: 0.9rem; margin-top: 8px;">
+          1. <strong>Captura de Intención:</strong> ManyChat recibe el mensaje del prospecto y recopila requerimientos.<br>
+          2. <strong>Bucle de Reactivación de 23 Horas:</strong> Si el usuario interrumpe la conversación, el bot envía un recordatorio automático antes de cerrar la ventana de mensajería.<br>
+          3. <strong>Consulta en ERP:</strong> Make consulta el inventario y listas de precios en tiempo real.<br>
+          4. <strong>Generación y Envío:</strong> Genera un PDF formal membretado y lo entrega en el chat de WhatsApp en <strong>menos de 3 minutos</strong>.
+        </p>
+      </div>
+
+      <!-- Infografía Maestra 5.0 -->
+      <div class="infographic-box" style="border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 15px 40px -10px rgba(56, 189, 248, 0.2);">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Infografía Maestra 5.0</span>
+            <div class="infographic-title">Arquitectura de la PYME Autónoma</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('arquitectura_pyme_autonoma.png')">🔍 Ampliar</button>
+            <a href="arquitectura_pyme_autonoma.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('arquitectura_pyme_autonoma.png')">
+          <img src="arquitectura_pyme_autonoma.png" alt="Infografía: Arquitectura de la PYME Autónoma">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Framework OpenClaw:</strong> El mapa arquitectónico integral que conecta los canales de clientes, el motor de razonamiento agéntico, la base de datos privada y los ejecutores de negocio.
+        </div>
+      </div>
+
+      <!-- Tabla Comparativa Chatbot vs Agente -->
+      <h3>Chatbot Tradicional vs. Agente Autónomo</h3>
+      <table class="compare-table" style="margin-bottom: 24px;">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Chatbot Tradicional (Pasivo)</th>
+            <th>Agente Autónomo (Activo / OpenClaw)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Modo de Operación</strong></td>
+            <td>Reactivo: Solo responde cuando el usuario escribe una frase exacta.</td>
+            <td>Proactivo: Se activa por eventos (webhooks, horarios, correos, alertas).</td>
+          </tr>
+          <tr>
+            <td><strong>Acceso a Herramientas</strong></td>
+            <td>Limitado a su ventana de chat sin integración externa.</td>
+            <td>Lee/escribe en CRMs, emite facturas, consulta ERPs y bases SQL.</td>
+          </tr>
+          <tr>
+            <td><strong>Manejo de Errores</strong></td>
+            <td>Se detiene o emite mensajes genéricos de fallo.</td>
+            <td>Autocorrección con reintentos y alertas a supervisión humana (HITL).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Infografía 5.1: Arquitectura y Ecosistema de Agentes de IA -->
+      <div class="infographic-box">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge">Infografía 5.1</span>
+            <div class="infographic-title">Arquitectura y Ecosistema de Agentes de IA</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('arquitectura_agentes_ia.png')">🔍 Ampliar</button>
+            <a href="arquitectura_agentes_ia.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('arquitectura_agentes_ia.png')">
+          <img src="arquitectura_agentes_ia.png" alt="Infografía: Arquitectura y Ecosistema de Agentes de IA">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Capa Operativa Digital:</strong> Cómo interactúan los agentes de clasificación, generación y validación con tus herramientas diarias bajo supervisión humana (Human-in-the-Loop).
+        </div>
+      </div>
+
+      <div class="diagram-container">
+        <div class="mermaid">
+          flowchart TD
+              Form["📝 WhatsApp / Formulario Web"] --> ManyChat["🤖 ManyChat + ReAct Prompt"]
+              ManyChat -->|Bucle 23h si pausa| React["⏰ Recordatorio Automático"]
+              ManyChat --> Make["⚡ Make / n8n Conector ERP"]
+              Make --> PDF["📄 Genera PDF membretado con Stock"]
+              PDF --> Send["📲 Envío inmediato a WhatsApp en <3 min"]
+        </div>
+        <div class="diagram-caption">Figura 5.1: Flujo de Cotización Autónomo en 3 Minutos con ManyChat y Make.</div>
+      </div>
+    </section>
+
+    <!-- Módulo 6 -->
+    <section class="module-section" id="mod6">
+      <div class="module-header">
+        <span class="module-badge">Módulo 6</span>
+        <h2>Seguridad, Privacidad y Capacitación Humana (2.3x ROI)</h2>
+      </div>
+
+      <p>El <strong>38% de los empresarios</strong> teme a la IA por riesgos de seguridad y privacidad. Para operar con certeza absoluta se aplica el <strong>Semáforo de Privacidad</strong> combinado con formación continua del equipo:</p>
+
+      <!-- Infografía Principal 2: Semáforo de Seguridad para IA -->
+      <div class="infographic-box">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge">Infografía 6.1</span>
+            <div class="infographic-title">Semáforo de Seguridad y Privacidad para IA</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('semaforo_seguridad_ia.png')">🔍 Ampliar</button>
+            <a href="semaforo_seguridad_ia.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('semaforo_seguridad_ia.png')">
+          <img src="semaforo_seguridad_ia.png" alt="Infografía: Semáforo de Seguridad y Privacidad para IA">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Reglas de Gobernanza Corporativa:</strong> Guía de referencia rápida para capacitar a tu equipo sobre manejo seguro de datos y privacidad en modelos generativos.
+        </div>
+      </div>
+
+      <div class="stats-row" style="margin-bottom: 24px;">
+        <div class="stat-card" style="border-left: 4px solid #10b981;">
+          <strong style="color: #34d399;">🟢 ZONA VERDE (Seguro / Libre)</strong>
+          <p style="font-size: 0.85rem; margin-top: 4px;">Artículos públicos, copys de marketing, lluvia de ideas y dudas conceptuales generales.</p>
+        </div>
+        <div class="stat-card" style="border-left: 4px solid #eab308;">
+          <strong style="color: #fde047;">🟡 ZONA AMARILLA (Anonimizar PII)</strong>
+          <p style="font-size: 0.85rem; margin-top: 4px;">Cotizaciones y minutas retirando nombres de clientes, teléfonos y montos confidenciales.</p>
+        </div>
+        <div class="stat-card" style="border-left: 4px solid #ef4444;">
+          <strong style="color: #f87171;">🔴 ZONA ROJA (PROHIBIDO / RAG Local)</strong>
+          <p style="font-size: 0.85rem; margin-top: 4px;">Contraseñas, claves bancarias, secretos industriales y código fuente propietario (exclusivo para RAGs locales u offline).</p>
+        </div>
+      </div>
+
+      <!-- Factor de Capacitación Humana 2.3x -->
+      <div class="stat-card" style="border-left: 4px solid #a855f7; margin-bottom: 24px; background: rgba(168, 85, 247, 0.06);">
+        <strong style="color: #c084fc; font-size: 1.05rem;">🎓 El Factor Crítico de Capacitación Humana: 2.3x Retorno de Productividad</strong>
+        <p style="font-size: 0.9rem; margin-top: 6px;">
+          Estudios de adopción demuestran que las empresas que invierten en <strong>formar activamente a su personal en prompts y flujos de trabajo con IA obtienen un retorno de productividad 2.3 veces mayor</strong> que las que simplemente compran licencias de software sin entrenamiento. La herramienta es tan potente como la habilidad del operador que la dirige.
+        </p>
+      </div>
+
+      <!-- Ciberseguridad Aumentada por IA -->
+      <h3>Ciberseguridad Aumentada: El Escudo de la PYME</h3>
+      <div class="stats-row">
+        <div class="stat-card">
+          <strong style="color: #38bdf8;">🛡️ Detección Semántica de Phishing</strong>
+          <p style="font-size: 0.82rem; margin-top: 4px;">Filtrado avanzado de correos fraudulentos mediante análisis de intenciones y anomalías en encabezados.</p>
+        </div>
+        <div class="stat-card">
+          <strong style="color: #818cf8;">🔒 Guardrails de PII en Memoria</strong>
+          <p style="font-size: 0.82rem; margin-top: 4px;">Enmascaramiento regex y NER antes de transmitir cualquier variable sensible a APIs comerciales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Módulo 7 -->
+    <section class="module-section" id="mod7">
+      <div class="module-header">
+        <span class="module-badge">Módulo 7</span>
+        <h2>El Plan de Acción en 14 Días & Hoja de Ruta Táctica</h2>
+      </div>
+
+      <p>Sigue la hoja de ruta visual para desplegar tu primer sistema de productividad apalancada sin interrumpir las operaciones en curso:</p>
+
+      <!-- Infografía Principal 3: Ruta de Transformación con IA -->
+      <div class="infographic-box">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge">Infografía 7.1</span>
+            <div class="infographic-title">Ruta de Transformación con IA en la PYME</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('ruta_transformacion_ia.png')">🔍 Ampliar</button>
+            <a href="ruta_transformacion_ia.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('ruta_transformacion_ia.png')">
+          <img src="ruta_transformacion_ia.png" alt="Infografía: Ruta de Transformación con IA">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Roadmap de Implementación:</strong> Fases secuenciales de diagnóstico, gobernanza, prompts, segundo cerebro y despliegue del primer agente autónomo.
+        </div>
+      </div>
+
+      <!-- Tabla Táctica Día a Día V2 -->
+      <h3>Cronograma Táctico de Implementación (14 Días)</h3>
+      <table class="compare-table" style="margin-bottom: 24px;">
+        <thead>
+          <tr>
+            <th>Día / Fase</th>
+            <th>Objetivo Clave</th>
+            <th>Acción Específica</th>
+            <th>Entregable Esperado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Días 1 - 3</strong></td>
+            <td>Auditoría de Tiempo</td>
+            <td>Identificar las 3 tareas más repetitivas y cuellos de botella del equipo.</td>
+            <td>Matriz de diagnóstico de Retorno Cognitivo lista.</td>
+          </tr>
+          <tr>
+            <td><strong>Días 4 - 7</strong></td>
+            <td>Segundo Cerebro</td>
+            <td>Crear la primera libreta en NotebookLM con SOPs, manuales y tarifarios.</td>
+            <td>RAG documental privado operativo con 0% alucinación.</td>
+          </tr>
+          <tr>
+            <td><strong>Días 8 - 11</strong></td>
+            <td>Primer Flujo No-Code</td>
+            <td>Conectar WhatsApp/CRM con ManyChat o Make para cotizador/triaje.</td>
+            <td>Cotizador o calificador automático funcionando 24/7.</td>
+          </tr>
+          <tr>
+            <td><strong>Días 12 - 14</strong></td>
+            <td>Capacitación & HITL</td>
+            <td>Entrenar al equipo en R.C.E.F. y fijar reglas Human-in-the-Loop.</td>
+            <td><strong>Sistema autónomo con 10h/sem ahorradas por persona.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Marca las casillas conforme vayas completando la implementación en tu empresa (tu progreso se guarda automáticamente):</p>
+
+      <div class="checklist-container" id="checklist">
+        <div class="check-row">
+          <input type="checkbox" id="task-1" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 1: Diagnóstico y Auditoría de Tiempo</strong>
+            <span>Reunión con el equipo para identificar los 4 ladrones de tiempo y matriz de ROI.</span>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="task-2" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 2: Selección del Proceso Objetivo</strong>
+            <span>Elegir un solo proceso de alto dolor y bajo riesgo para automatizar (ej: cotizaciones).</span>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="task-3" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 3: Política del Semáforo de Privacidad</strong>
+            <span>Establecer reglas claras con el equipo sobre qué datos subir (Verde/Amarillo/Rojo).</span>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="task-4" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 4: Creación de la Biblioteca de Prompts</strong>
+            <span>Estandarizar las primeras 5 plantillas bajo el Framework R.C.E.F. y técnica Few-Shot.</span>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="task-5" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 5-6: Construcción del Segundo Cerebro</strong>
+            <span>Recopilar manuales y cargarlos en una libreta privada de NotebookLM.</span>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="task-6" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 7-10: Configuración del Primer Agente</strong>
+            <span>Armar el flujo No-Code (WhatsApp / Make / n8n) con supervisión humana.</span>
+          </div>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="task-7" onchange="saveChecklist()">
+          <div class="check-info">
+            <strong>Día 11-14: Lanzamiento Piloto & Medición de ROI</strong>
+            <span>Medir las horas recuperadas y celebrar la primera victoria operativa.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Módulo 8: Masterclass en Audio & Deep Dive -->
+    <section class="module-section" id="mod8">
+      <div class="module-header">
+        <span class="module-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.35);">Módulo 8 • Formato Audio</span>
+        <h2>Masterclass en Audio & Conversación Estratégica (17 min)</h2>
+      </div>
+
+      <p>Para aquellos momentos donde prefieres aprender mientras manejas, haces ejercicio o mientras navegas por los capítulos anteriores, hemos condensado los aprendizajes clave del libro en esta <strong>Masterclass en Audio de Alta Fidelidad</strong>.</p>
+
+      <!-- Interactive Spotify / Apple Podcasts Styled Player -->
+      <div class="podcast-card">
+        
+        <!-- Track Selector Tabs -->
+        <div class="track-tabs">
+          <button class="track-tab-btn active" id="tab-0" onclick="selectTrack(0)">
+            <span>🎙️</span> Pista 1: La IA en la Chamba (17 min)
+          </button>
+          <button class="track-tab-btn" id="tab-1" onclick="selectTrack(1)">
+            <span>🎧</span> Pista 2: Estructura o Caos (20 min)
+          </button>
+          <button class="track-tab-btn" id="tab-2" onclick="selectTrack(2)">
+            <span>⚡</span> Pista 3: Introducción Rápida (5 min)
+          </button>
+          <button class="track-tab-btn" id="tab-3" onclick="selectTrack(3)" style="border-color: rgba(56, 189, 248, 0.4); color: #38bdf8;">
+            <span>🚀</span> Pista 4: Enjambres Agénticos (24 min)
+          </button>
+        </div>
+
+        <div class="podcast-top">
+          <div class="podcast-cover-art">
+            <img src="logo_ebook.jpg" alt="Cover Podcast e-Book">
+            <div class="podcast-live-badge">
+              <span class="pulse-dot"></span>
+              <span id="player-status-badge">AUDIO HD</span>
+            </div>
+          </div>
+          
+          <div class="podcast-meta">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span class="brand-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3);">GCC OpenClaw Audio Edition</span>
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono);" id="track-duration-tag">17:05 min</span>
+            </div>
+            <h3 id="track-title-main">La IA en la Chamba y la Operación</h3>
+            <p id="track-desc-main">Análisis conversacional profundo sobre cómo los dueños de PYMES transforman su operación, automatizan tareas repetitivas y adoptan IA sin morir en el intento.</p>
+            
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="podcast_la_ia_en_la_chamba.m4a" download id="download-audio-link" class="btn-copy" style="text-decoration: none; padding: 8px 14px; font-size: 0.8rem;">
+                📥 Descargar Audio MP3/M4A
+              </a>
+              <button class="btn-copy" onclick="copyAudioLink()" style="padding: 8px 14px; font-size: 0.8rem;">
+                🔗 Copiar Enlace Directo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Audio Controls Widget -->
+        <div class="player-controls-wrap">
+          <div class="scrubber-bar-container">
+            <span class="time-stamp-text" id="time-current">00:00</span>
+            <div class="audio-progress-bar" id="audio-scrub-bar" onclick="seekAudioBar(event)">
+              <div class="audio-progress-fill" id="audio-progress-fill"></div>
+            </div>
+            <span class="time-stamp-text" id="time-total">17:05</span>
+          </div>
+
+          <div class="controls-row">
+            <div class="buttons-group">
+              <button class="ctrl-btn" onclick="skipAudio(-15)" title="Retroceder 15s">⏪ 15s</button>
+              <button class="ctrl-btn play-main" id="main-play-btn" onclick="togglePlayPause()" title="Reproducir / Pausar">
+                <span id="main-play-icon">▶</span>
+              </button>
+              <button class="ctrl-btn" onclick="skipAudio(15)" title="Adelantar 15s">15s ⏩</button>
+            </div>
+
+            <!-- Playback Speed Control -->
+            <div class="speed-selector-group">
+              <span style="font-size: 0.72rem; color: var(--text-muted); margin-right: 4px; font-weight: 700;">VELOCIDAD:</span>
+              <button class="speed-btn active" id="spd-1" onclick="setSpeed(1.0)">1.0x</button>
+              <button class="speed-btn" id="spd-125" onclick="setSpeed(1.25)">1.25x</button>
+              <button class="speed-btn" id="spd-15" onclick="setSpeed(1.5)">1.5x</button>
+              <button class="speed-btn" id="spd-2" onclick="setSpeed(2.0)">2.0x</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Timestamps / Chapter Jumps -->
+        <div class="timestamps-box">
+          <div class="timestamps-title">
+            <span>⏱️</span> Capítulos & Momentos Destacados (Haz clic para saltar al minuto exacto):
+          </div>
+          <div class="timestamp-chips-grid" id="timestamps-container">
+            <!-- Dynamic Chips -->
+            <div class="timestamp-chip" onclick="seekToSeconds(0)">
+              <span class="time-badge">00:00</span>
+              <span class="time-topic">El drama del dueño atrapado en la operación diaria</span>
+            </div>
+            <div class="timestamp-chip" onclick="seekToSeconds(165)">
+              <span class="time-badge">02:45</span>
+              <span class="time-topic">Por qué contratar más personal perpetúa el desorden</span>
+            </div>
+            <div class="timestamp-chip" onclick="seekToSeconds(350)">
+              <span class="time-badge">05:50</span>
+              <span class="time-topic">Cómo formular prompts con el Framework R.C.E.F.</span>
+            </div>
+            <div class="timestamp-chip" onclick="seekToSeconds(510)">
+              <span class="time-badge">08:30</span>
+              <span class="time-topic">NotebookLM y RAG: Consultas sin alucinaciones</span>
+            </div>
+            <div class="timestamp-chip" onclick="seekToSeconds(705)">
+              <span class="time-badge">11:45</span>
+              <span class="time-topic">Agentes de WhatsApp y automatización de presupuestos</span>
+            </div>
+            <div class="timestamp-chip" onclick="seekToSeconds(850)">
+              <span class="time-badge">14:10</span>
+              <span class="time-topic">Semáforo de Privacidad: Anonimización segura</span>
+            </div>
+            <div class="timestamp-chip" onclick="seekToSeconds(955)">
+              <span class="time-badge">15:55</span>
+              <span class="time-topic">Plan de Acción de 14 días para la primera victoria</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Key Insights Summary Card -->
+      <div class="prompt-box" style="margin-top: 30px;">
+        <h3 style="color: #c084fc; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+          💡 3 Grandes Conclusiones de la Sesión
+        </h3>
+        <ul style="padding-left: 20px; font-size: 0.92rem; color: #cbd5e1; line-height: 1.7;">
+          <li><strong>La IA es un amplificador de sistemas, no un sustituto de procesos:</strong> Si automatizas el caos, obtendrás caos a alta velocidad. Primero estandariza, luego delega al modelo.</li>
+          <li><strong>El valor está en la privacidad de tus datos (RAG):</strong> Los modelos públicos conocen el mundo, pero solo tu libreta privada de NotebookLM conoce tus políticas, márgenes y excepciones.</li>
+          <li><strong>Tu objetivo es la semana laboral apalancada:</strong> No busques que la IA resuelva el 100% de tu vida el primer día; basta con recuperar 2 horas diarias de tareas mecánicas para transformar tu rentabilidad.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Sección Especial: Quiz de Certificación & Flashcards 3D -->
+    <section class="module-section" id="quiz" style="border-left: 4px solid #10b981; background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, rgba(15, 23, 42, 0.85) 100%);">
+      <div class="module-header">
+        <span class="module-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">Evaluación & Certificación • Nivel 1</span>
+        <h2>Quiz de Certificación & Flashcards de Repaso</h2>
+      </div>
+
+      <p>Repasa los conceptos clave del libro con las <strong>Tarjetas 3D de Estudio Rápido</strong>. Cuando estés listo, responde la evaluación de 5 preguntas (requiere 80% de aciertos) para obtener tu <strong>Certificado Oficial</strong> y desbloquear el acceso al <strong>Libro 2: PYMES Autónomas</strong>.</p>
+
+      <!-- 3D Interactive Flashcards -->
+      <h3>🎴 Flashcards de Repaso Rápido (Haz clic en cada tarjeta para girarla)</h3>
+      <div class="flashcards-container">
+        
+        <div class="flashcard" onclick="flipCard(this)">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <div style="font-size: 1.8rem; margin-bottom: 8px;">🧠</div>
+              <strong>Framework R.C.E.F.</strong>
+              <div class="flashcard-hint">¿Qué significa cada sigla? (Clic para voltear)</div>
+            </div>
+            <div class="flashcard-back">
+              <strong style="color: #34d399; margin-bottom: 6px;">Estructura Maestra:</strong>
+              <p style="font-size: 0.82rem; margin:0;">[R]ol + [C]ontexto + [E]jecución + [F]ormato y Límites.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flashcard" onclick="flipCard(this)">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <div style="font-size: 1.8rem; margin-bottom: 8px;">🔒</div>
+              <strong>Segundo Cerebro (RAG)</strong>
+              <div class="flashcard-hint">¿Por qué elimina las alucinaciones?</div>
+            </div>
+            <div class="flashcard-back">
+              <strong style="color: #38bdf8; margin-bottom: 6px;">Anclaje Privado:</strong>
+              <p style="font-size: 0.82rem; margin:0;">Solo responde con base en tus manuales indexados, citando fuentes exactas.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flashcard" onclick="flipCard(this)">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <div style="font-size: 1.8rem; margin-bottom: 8px;">🚦</div>
+              <strong>Semáforo de Privacidad</strong>
+              <div class="flashcard-hint">¿Qué información está en ZONA ROJA?</div>
+            </div>
+            <div class="flashcard-back">
+              <strong style="color: #f87171; margin-bottom: 6px;">Prohibido en LLMs:</strong>
+              <p style="font-size: 0.82rem; margin:0;">Contraseñas, claves bancarias, secretos comerciales y PII no anonimizada.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flashcard" onclick="flipCard(this)">
+          <div class="flashcard-inner">
+            <div class="flashcard-front">
+              <div style="font-size: 1.8rem; margin-bottom: 8px;">🤖</div>
+              <strong>Chatbot vs. Agente</strong>
+              <div class="flashcard-hint">¿Cuál es la diferencia fundamental?</div>
+            </div>
+            <div class="flashcard-back">
+              <strong style="color: #c084fc; margin-bottom: 6px;">Capacidad de Acción:</strong>
+              <p style="font-size: 0.82rem; margin:0;">El agente ejecuta acciones multi-paso en herramientas externas (APIs, CRM, facturas).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quiz Form Container -->
+      <h3 style="margin-top: 36px;">📝 Evaluación de Certificación (5 Preguntas)</h3>
+      <div class="quiz-card" id="quiz-box">
+        
+        <!-- Pregunta 1 -->
+        <div class="quiz-question" id="q-block-1">
+          <div class="quiz-q-title">
+            <span style="color: var(--accent);">1.</span> ¿Cuál es la principal ventaja de implementar un Segundo Cerebro con NotebookLM / RAG en tu PYME?
+          </div>
+          <div class="quiz-options">
+            <label class="quiz-option-label" id="opt-1-a">
+              <input type="radio" name="q1" value="a"> Generar publicaciones virales en redes sociales automáticamente sin revisión.
+            </label>
+            <label class="quiz-option-label" id="opt-1-b">
+              <input type="radio" name="q1" value="b"> Consultar manuales, políticas y tarifas privadas con 0% alucinación y citas de origen exactas.
+            </label>
+            <label class="quiz-option-label" id="opt-1-c">
+              <input type="radio" name="q1" value="c"> Sustituir al 100% a los directores de departamento.
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="quiz-question" id="q-block-2">
+          <div class="quiz-q-title">
+            <span style="color: var(--accent);">2.</span> En el Framework R.C.E.F., ¿qué sección evita que el modelo responda con amenazas legales o invente precios?
+          </div>
+          <div class="quiz-options">
+            <label class="quiz-option-label" id="opt-2-a">
+              <input type="radio" name="q2" value="a"> [F]ormato y Límites / Restricciones claras.
+            </label>
+            <label class="quiz-option-label" id="opt-2-b">
+              <input type="radio" name="q2" value="b"> [R]ol únicamente.
+            </label>
+            <label class="quiz-option-label" id="opt-2-c">
+              <input type="radio" name="q2" value="c"> El tamaño de la fuente tipográfica.
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="quiz-question" id="q-block-3">
+          <div class="quiz-q-title">
+            <span style="color: var(--accent);">3.</span> Según el Semáforo de Privacidad, ¿qué debes hacer con un contrato que contiene nombres y montos reales antes de procesarlo en un LLM público?
+          </div>
+          <div class="quiz-options">
+            <label class="quiz-option-label" id="opt-3-a">
+              <input type="radio" name="q3" value="a"> Subirlo sin cambios porque los modelos son 100% confidenciales por defecto.
+            </label>
+            <label class="quiz-option-label" id="opt-3-b">
+              <input type="radio" name="q3" value="b"> Zona Amarilla: Anonimizar o enmascarar los nombres y cifras sensibles antes de enviarlo.
+            </label>
+            <label class="quiz-option-label" id="opt-3-c">
+              <input type="radio" name="q3" value="c"> Enviarlo únicamente por mensaje de voz.
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="quiz-question" id="q-block-4">
+          <div class="quiz-q-title">
+            <span style="color: var(--accent);">4.</span> ¿Cuál es la diferencia clave entre un Chatbot pasivo y un Agente Autónomo (Nivel 3)?
+          </div>
+          <div class="quiz-options">
+            <label class="quiz-option-label" id="opt-4-a">
+              <input type="radio" name="q4" value="a"> El chatbot tiene mejor ortografía que el agente.
+            </label>
+            <label class="quiz-option-label" id="opt-4-b">
+              <input type="radio" name="q4" value="b"> El agente ejecuta acciones proactivas multi-paso conectando CRMs, facturación y bases de datos.
+            </label>
+            <label class="quiz-option-label" id="opt-4-c">
+              <input type="radio" name="q4" value="c"> No hay ninguna diferencia técnica.
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="quiz-question" id="q-block-5">
+          <div class="quiz-q-title">
+            <span style="color: var(--accent);">5.</span> En el Plan de Acción de 14 Días, ¿cuál es el paso recomendado para los Días 1 y 2?
+          </div>
+          <div class="quiz-options">
+            <label class="quiz-option-label" id="opt-5-a">
+              <input type="radio" name="q5" value="a"> Comprar 10 licencias de software costoso de inmediato.
+            </label>
+            <label class="quiz-option-label" id="opt-5-b">
+              <input type="radio" name="q5" value="b"> Realizar una auditoría de tiempo con el equipo y seleccionar un solo proceso de alto dolor y bajo riesgo.
+            </label>
+            <label class="quiz-option-label" id="opt-5-c">
+              <input type="radio" name="q5" value="c"> Rediseñar la página web desde cero.
+            </label>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+          <button class="btn-submit-quiz" onclick="gradeQuiz()">
+            <span>🏆</span> Calificar Evaluación
+          </button>
+          <div id="quiz-feedback-text" style="font-size: 0.9rem; font-weight: 600; color: #94a3b8;"></div>
+        </div>
+
+      </div>
+
+      <!-- Certificate & Unlock Card -->
+      <div class="certificate-card" id="certificate-box">
+        <canvas id="confetti-canvas" style="position: absolute; inset: 0; pointer-events: none; width: 100%; height: 100%;"></canvas>
+        <div class="cert-badge-glow">🎖️</div>
+        <div class="cert-title">¡Felicitaciones! Has Aprobado la Evaluación</div>
+        <div class="cert-sub" id="cert-score-msg">Calificación Perfecta: 5/5 • Certificado Oficial de Productividad con IA Nivel 1</div>
+        <p style="color: #e2e8f0; max-width: 650px; margin: 0 auto 24px; font-size: 0.95rem;">
+          Has demostrado dominar los fundamentos de apalancamiento cognitivo, RAG y automatización. Ahora tienes acceso desbloqueado a la aplicación web interactiva del <strong>Libro 2: PYMES Autónomas (Nivel Enterprise)</strong>.
+        </p>
+        <a href="pymes_autonomas_interactivo.html" class="btn-launch-l2">
+          <span>🚀</span> Abrir Libro 2: PYMES Autónomas (Web App Interactiva)
+        </a>
+      </div>
+
+    </section>
+
+    <!-- Sección Especial: Libro 2 — PYMES Autónomas (Nivel Enterprise) -->
+    <section class="module-section" id="libro2" style="border-left: 4px solid #38bdf8; background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, rgba(15, 23, 42, 0.8) 100%);">
+      <div class="module-header">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <span class="module-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">Libro 2 • Nivel Enterprise & Escalamiento</span>
+          <span id="l2-lock-status" class="brand-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">🔓 ACCESO DESBLOQUEADO</span>
+        </div>
+        <h2>PYMES Autónomas: Escalamiento con Agentes Multi-Modelo, RAG Avanzado y Linux</h2>
+      </div>
+
+      <p>Has dominado los fundamentos de productividad del Libro 1. El <strong>Libro 2</strong> lleva a tu empresa a la vanguardia de la ingeniería agéntica moderna: agentes con capacidad de razonamiento ReAct, GraphRAG con bases vectoriales, orquestación local con costo cero por token y un plan de transformación a 90 días.</p>
+
+      <!-- Launch Web App Banner Card -->
+      <div style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(15, 23, 42, 0.95)); border: 2px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 24px 28px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.3);">
+        <div>
+          <span class="hero-tag" style="background: #38bdf8; color: #020617; font-weight: 800; margin-bottom: 8px;">✨ EXPERIENCIA WEB INTERACTIVA</span>
+          <h3 style="color: #fff; margin: 6px 0 4px; font-size: 1.3rem;">Aplicación Web Interactiva del Libro 2</h3>
+          <p style="color: #cbd5e1; margin: 0; font-size: 0.9rem;">Explora los 8 módulos avanzados con diagramas dinámicos, código bash, JSON Schemas y reproductor de audio dedicado.</p>
+        </div>
+        <a href="pymes_autonomas_interactivo.html" class="btn-launch-l2" style="font-size: 0.95rem; padding: 12px 24px;">
+          <span>⚡</span> Iniciar Libro 2 Interactivo
+        </a>
+      </div>
+
+      <!-- Infografía Maestra del Libro 2 -->
+      <div class="infographic-box" style="border-color: rgba(56, 189, 248, 0.4);">
+        <div class="infographic-header">
+          <div class="infographic-title-wrap">
+            <span class="infographic-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Infografía Arquitectónica L2</span>
+            <div class="infographic-title">Arquitectura Integral de la PYME Autónoma</div>
+          </div>
+          <div class="infographic-actions">
+            <button class="btn-zoom" onclick="openLightbox('arquitectura_pyme_autonoma.png')">🔍 Ampliar</button>
+            <a href="arquitectura_pyme_autonoma.png" download class="btn-zoom">📥 Descargar</a>
+          </div>
+        </div>
+        <div class="infographic-preview" onclick="openLightbox('arquitectura_pyme_autonoma.png')">
+          <img src="arquitectura_pyme_autonoma.png" alt="Arquitectura de la PYME Autónoma">
+          <div class="infographic-hover-hint">
+            <span class="hint-pill">🔍 Clic para ver en Alta Resolución</span>
+          </div>
+        </div>
+        <div class="infographic-caption">
+          <strong>Arquitectura de Grado Producción:</strong> Ingesta omnicanal, Swarms colaborativos, memoria Redis/PostgreSQL y guardrails de seguridad corporativa.
+        </div>
+      </div>
+
+      <!-- Grid de los 8 Módulos Avanzados del Libro 2 -->
+      <h3 style="margin-top: 24px;">Temario Ejecutivo del Libro 2</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+        
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M1. De la Asistencia a la Autonomía</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">El ciclo cognitivo ReAct (Reasoning + Acting) y los 5 niveles de autonomía agéntica en negocios.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M2. Ecosistema de Agentes Colaborativos</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Arquitectura en enjambre (Swarm): Agentes de Entrada, Calificación, Cotización y Facturación.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M3. RAG Avanzado & GraphRAG</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Grafos de conocimiento empresarial, embeddings híbridos y recuperación semántica de alta fidelidad.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M4. Soberanía de Datos ($0/token)</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Despliegue de Llama 3 / DeepSeek / Mistral en servidores locales Linux/Ubuntu con Ollama y vLLM.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M5. Infraestructura & Estado Compartido</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Redis para memoria volátil de corto plazo, PostgreSQL + pgvector para persistencia y colas asíncronas.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M6. Orquestación Multi-Canal</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Conexión bidireccional en tiempo real con WhatsApp Cloud API, Slack, Notion, Hubspot y Stripe.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M7. Guardrails y Observabilidad</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Monitoreo de latencia y costo de inferencia, auditoría de fallas y mecanismos Fail-Safe con intervención humana.</p>
+        </div>
+
+        <div class="stat-card" style="text-align: left; padding: 18px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;">M8. Plan de Escalamiento a 90 Días</div>
+          <p style="font-size: 0.83rem; color: #cbd5e1; margin:0;">Roadmap de 3 meses estructurado en sprints de 30 días para transformar cualquier PYME en una máquina autónoma.</p>
+        </div>
+
+      </div>
+
+      <!-- Descarga de Materiales del Libro 2 -->
+      <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 24px; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <h4 style="color: #38bdf8; margin: 0 0 6px 0; font-size: 1.1rem;">📥 Descargar Libro 2 & Presentación Ejecutiva</h4>
+          <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">Archivos oficiales de arquitectura para ingeniería y dirección general.</p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="libro_completo_usa_la_ia_y_trabaja_menos_v2.pdf" download class="btn-play-hero" style="background: linear-gradient(135deg, #0284c7, #38bdf8); color: #020617; text-decoration: none; padding: 10px 18px; font-weight: 700; font-size: 0.85rem;">
+            📘 Libro 1 V2 (PDF)
+          </a>
+          <a href="libro_completo_pymes_autonomas_v2.pdf" download class="btn-play-hero" style="background: linear-gradient(135deg, #818cf8, #a855f7); color: #ffffff; text-decoration: none; padding: 10px 18px; font-weight: 700; font-size: 0.85rem;">
+            🚀 Libro 2 V2 (PDF)
+          </a>
+          <a href="Autonomous_SME_Scaling.pdf" download class="btn-view-episodes" style="border-color: rgba(56, 189, 248, 0.4); color: #38bdf8; text-decoration: none; padding: 10px 18px; font-size: 0.85rem;">
+            📊 Presentación (PDF)
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Persistent Floating Mini-Player Dock -->
+  <div class="floating-audio-dock" id="floating-dock" style="display: none;">
+    <img src="logo_ebook.jpg" alt="Mini Art" class="dock-art">
+    <div class="dock-info">
+      <div class="dock-title" id="dock-title-text">La IA en la Chamba y la Operación</div>
+      <div class="dock-sub">
+        <span id="dock-time-text">00:00 / 17:05</span> • <span id="dock-speed-text">1.0x</span>
+      </div>
+    </div>
+    <button class="dock-btn" onclick="togglePlayPause()" title="Play / Pausa">
+      <span id="dock-play-icon">▶</span>
+    </button>
+    <button class="dock-close" onclick="closeDock()" title="Ocultar reproductor flotante">✕</button>
+  </div>
+
+  <script>
+    // Audio Player State & Tracks Configuration
+    const audioTracks = [
+      {
+        title: "La IA en la Chamba y la Operación",
+        src: "podcast_la_ia_en_la_chamba.m4a",
+        durationText: "17:05 min",
+        desc: "Análisis conversacional profundo sobre cómo los dueños de PYMES transforman su operación, automatizan tareas repetitivas y adoptan IA sin morir en el intento.",
+        timestamps: [
+          { seconds: 0, time: "00:00", label: "El drama del dueño atrapado en la operación diaria" },
+          { seconds: 165, time: "02:45", label: "Por qué contratar más personal perpetúa el desorden" },
+          { seconds: 350, time: "05:50", label: "Cómo formular prompts con el Framework R.C.E.F." },
+          { seconds: 510, time: "08:30", label: "NotebookLM y RAG: Consultas sin alucinaciones" },
+          { seconds: 705, time: "11:45", label: "Agentes de WhatsApp y automatización de presupuestos" },
+          { seconds: 850, time: "14:10", label: "Semáforo de Privacidad: Anonimización segura" },
+          { seconds: 955, time: "15:55", label: "Plan de Acción de 14 días para la primera victoria" }
+        ]
+      },
+      {
+        title: "Estructura o Caos: El Dilema de las PYMES",
+        src: "podcast_estructura_o_caos.m4a",
+        durationText: "20:49 min",
+        desc: "El debate definitivo entre diseñar manuales operativos antes de automatizar o parchar emergencias diarias con software improvisado.",
+        timestamps: [
+          { seconds: 0, time: "00:00", label: "Diagnóstico inicial de cuellos de botella en la empresa" },
+          { seconds: 240, time: "04:00", label: "El costo oculto de la rotación y la dependencia de personas" },
+          { seconds: 580, time: "09:40", label: "Estandarización de procesos críticos de atención" },
+          { seconds: 890, time: "14:50", label: "De la intuición a los tableros de control con IA" },
+          { seconds: 1140, time: "19:00", label: "Cierre estratégico y pasos de consolidación" }
+        ]
+      },
+      {
+        title: "Cápsula Express: Introducción a la IA",
+        src: "podcast_introduccion_ia.mp3",
+        durationText: "05:14 min",
+        desc: "Cápsula introductoria rápida de 5 minutos diseñada para colaboradores y directivos que dan sus primeros pasos con IA.",
+        timestamps: [
+          { seconds: 0, time: "00:00", label: "Qué es y qué NO es la IA en los negocios" },
+          { seconds: 90, time: "01:30", label: "Modelos de lenguaje vs Motores de búsqueda" },
+          { seconds: 210, time: "03:30", label: "Primer experimento práctico de 5 minutos" }
+        ]
+      },
+      {
+        title: "Escala tu Empresa con Enjambres Agénticos",
+        src: "podcast_pymes_autonomas.m4a",
+        durationText: "23:46 min",
+        desc: "Masterclass avanzada sobre orquestación de enjambres multi-agente, GraphRAG empresarial y soberanía de datos con modelos open source a costo $0 por token.",
+        timestamps: [
+          { seconds: 0, time: "00:00", label: "Del Copiloto al Enjambre Autónomo (Swarm ReAct)" },
+          { seconds: 255, time: "04:15", label: "Por qué fallan los chats aislados y la necesidad de contratos JSON" },
+          { seconds: 570, time: "09:30", label: "GraphRAG vs RAG vectorial: Relaciones entre entidades" },
+          { seconds: 860, time: "14:20", label: "Soberanía de datos: Llama 3 en Ubuntu local a $0 USD/token" },
+          { seconds: 1125, time: "18:45", label: "Orquestación en tiempo real con Redis y PostgreSQL" },
+          { seconds: 1290, time: "21:30", label: "Roadmap de transformación y valor comercial a 90 días" }
+        ]
+      }
+    ];
+
+    let currentTrackIdx = 0;
+    let audio = document.getElementById('global-audio');
+    let isPlaying = false;
+    let currentPlaybackRate = 1.0;
+    let dockDismissed = false;
+
+    // Initialize Audio Source
+    function initAudioTrack(idx) {
+      currentTrackIdx = idx;
+      const track = audioTracks[idx];
+      audio.src = track.src;
+      audio.playbackRate = currentPlaybackRate;
+
+      document.getElementById('track-title-main').innerText = track.title;
+      document.getElementById('track-desc-main').innerText = track.desc;
+      document.getElementById('track-duration-tag').innerText = track.durationText;
+      document.getElementById('download-audio-link').href = track.src;
+      document.getElementById('dock-title-text').innerText = track.title;
+
+      // Update Tabs styling
+      for (let i = 0; i < audioTracks.length; i++) {
+        const tab = document.getElementById('tab-' + i);
+        if (tab) {
+          if (i === idx) tab.classList.add('active');
+          else tab.classList.remove('active');
+        }
+      }
+
+      // Render Timestamps
+      const tsContainer = document.getElementById('timestamps-container');
+      if (tsContainer && track.timestamps) {
+        tsContainer.innerHTML = track.timestamps.map(ts => `
+          <div class="timestamp-chip" onclick="seekToSeconds(${ts.seconds})">
+            <span class="time-badge">${ts.time}</span>
+            <span class="time-topic">${ts.label}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function selectTrack(idx) {
+      const wasPlaying = !audio.paused;
+      initAudioTrack(idx);
+      if (wasPlaying || idx !== 0) {
+        audio.play().then(() => {
+          setPlayingState(true);
+        }).catch(err => console.log('Audio autoplay prevented:', err));
+      }
+    }
+
+    function togglePlayPause() {
+      if (audio.paused) {
+        if (!audio.src || audio.src === '' || audio.src.endsWith('.html')) {
+          initAudioTrack(currentTrackIdx);
+        }
+        audio.play().then(() => {
+          setPlayingState(true);
+        }).catch(e => {
+          console.error("Playback error:", e);
+        });
+      } else {
+        audio.pause();
+        setPlayingState(false);
+      }
+    }
+
+    function setPlayingState(playing) {
+      isPlaying = playing;
+      const icon = playing ? '⏸' : '▶';
+      const mainIcon = document.getElementById('main-play-icon');
+      const heroIcon = document.getElementById('hero-btn-icon');
+      const dockIcon = document.getElementById('dock-play-icon');
+      const badge = document.getElementById('player-status-badge');
+
+      if (mainIcon) mainIcon.innerText = icon;
+      if (heroIcon) heroIcon.innerText = icon;
+      if (dockIcon) dockIcon.innerText = icon;
+      if (badge) badge.innerText = playing ? 'EN REPRODUCCIÓN' : 'AUDIO HD';
+
+      const heroBtn = document.getElementById('hero-play-btn');
+      if (heroBtn) {
+        heroBtn.innerHTML = playing ? '<span>⏸</span> Pausar Masterclass' : '<span>▶</span> Reproducir Masterclass';
+      }
+
+      const dock = document.getElementById('floating-dock');
+      if (dock && !dockDismissed) {
+        dock.style.display = 'flex';
+      }
+    }
+
+    function skipAudio(seconds) {
+      audio.currentTime = Math.max(0, Math.min(audio.duration || 9999, audio.currentTime + seconds));
+    }
+
+    function seekToSeconds(seconds) {
+      if (!audio.src || audio.src === '' || audio.src.endsWith('.html')) {
+        initAudioTrack(currentTrackIdx);
+      }
+      audio.currentTime = seconds;
+      if (audio.paused) {
+        audio.play().then(() => setPlayingState(true));
+      }
+    }
+
+    function seekAudioBar(e) {
+      const bar = document.getElementById('audio-scrub-bar');
+      const rect = bar.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, clickX / rect.width));
+      if (audio.duration) {
+        audio.currentTime = pct * audio.duration;
+      }
+    }
+
+    function setSpeed(rate) {
+      currentPlaybackRate = rate;
+      audio.playbackRate = rate;
+      const speeds = [1.0, 1.25, 1.5, 2.0];
+      const ids = ['spd-1', 'spd-125', 'spd-15', 'spd-2'];
+      ids.forEach((id, index) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          if (speeds[index] === rate) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+      document.getElementById('dock-speed-text').innerText = rate + 'x';
+    }
+
+    function closeDock() {
+      dockDismissed = true;
+      document.getElementById('floating-dock').style.display = 'none';
+    }
+
+    function formatTime(secs) {
+      if (isNaN(secs) || secs === Infinity) return "00:00";
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function copyAudioLink() {
+      const url = window.location.origin + window.location.pathname + '#mod8';
+      navigator.clipboard.writeText(url).then(() => {
+        alert("¡Enlace directo al Módulo de Audio copiado al portapapeles!");
+      });
+    }
+
+    // Audio element event listeners
+    audio.addEventListener('timeupdate', () => {
+      const current = audio.currentTime;
+      const total = audio.duration || 1025;
+      const pct = (current / total) * 100;
+
+      const fill = document.getElementById('audio-progress-fill');
+      if (fill) fill.style.width = pct + '%';
+
+      const curText = document.getElementById('time-current');
+      if (curText) curText.innerText = formatTime(current);
+
+      const totText = document.getElementById('time-total');
+      if (totText && audio.duration) totText.innerText = formatTime(audio.duration);
+
+      const dockTime = document.getElementById('dock-time-text');
+      if (dockTime) dockTime.innerText = formatTime(current) + ' / ' + formatTime(total);
+    });
+
+    audio.addEventListener('ended', () => {
+      setPlayingState(false);
+      // Auto-advance track if available
+      if (currentTrackIdx < audioTracks.length - 1) {
+        selectTrack(currentTrackIdx + 1);
+      }
+    });
+
+    // 1. Reading Progress Bar & Active Section Tracking
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+
+      // Update Active Navigation Link
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      let current = '';
+
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        if (winScroll >= top) {
+          current = sec.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // 2. Interactive ROI Calculator Logic
+    function calculateROI() {
+      const team = parseFloat(document.getElementById('calc-team').value) || 0;
+      const hours = parseFloat(document.getElementById('calc-hours').value) || 0;
+      const rate = parseFloat(document.getElementById('calc-rate').value) || 0;
+
+      // Formula: (N * h * 4.33 weeks/month) * rate
+      const monthlySavings = (team * hours * 4.333) * rate;
+      const yearlySavings = monthlySavings * 12;
+
+      document.getElementById('calc-monthly-savings').innerText = '$' + Math.round(monthlySavings).toLocaleString('en-US') + ' USD';
+      document.getElementById('calc-yearly-savings').innerText = 'Ahorro mensual estimado • $' + Math.round(yearlySavings).toLocaleString('en-US') + ' USD al año recuperados';
+    }
+
+    // 3. One-Click Prompt Copying
+    function copyPrompt(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = '✅ ¡Copiado!';
+        btn.style.background = '#10b981';
+        btn.style.color = '#fff';
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.background = '#1e293b';
+          btn.style.color = '#f1f5f9';
+        }, 2000);
+      });
+    }
+
+    // 4. LocalStorage Checklist Persistence
+    function saveChecklist() {
+      const checks = {};
+      for (let i = 1; i <= 7; i++) {
+        const el = document.getElementById('task-' + i);
+        if (el) checks['task-' + i] = el.checked;
+      }
+      localStorage.setItem('ebook_checklist', JSON.stringify(checks));
+    }
+
+    function loadChecklist() {
+      const saved = localStorage.getItem('ebook_checklist');
+      if (saved) {
+        const checks = JSON.parse(saved);
+        for (let key in checks) {
+          const el = document.getElementById(key);
+          if (el) el.checked = checks[key];
+        }
+      }
+    }
+
+    // 5. Mobile Sidebar Toggle
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    // 6. Infographic Fullscreen Lightbox
+    function openLightbox(imageSrc) {
+      const modal = document.getElementById('lightbox-modal');
+      const modalImg = document.getElementById('lightbox-img');
+      if (modal && modalImg) {
+        modalImg.src = imageSrc;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target && e.target.tagName === 'IMG') return; // Don't close if clicking image directly
+      const modal = document.getElementById('lightbox-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Keyboard ESC to close lightbox
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+    // 7. Flashcards 3D Flip
+    function flipCard(cardEl) {
+      cardEl.classList.toggle('flipped');
+    }
+
+    // 8. Quiz Grading & Unlocking Logic
+    const correctAnswers = {
+      q1: 'b',
+      q2: 'a',
+      q3: 'b',
+      q4: 'b',
+      q5: 'b'
+    };
+
+    function gradeQuiz() {
+      let score = 0;
+      let total = 5;
+      let answeredAll = true;
+
+      // Clear previous styles
+      for (let i = 1; i <= total; i++) {
+        ['a', 'b', 'c'].forEach(opt => {
+          const lbl = document.getElementById(`opt-${i}-${opt}`);
+          if (lbl) {
+            lbl.classList.remove('correct', 'incorrect');
+          }
+        });
+      }
+
+      for (let i = 1; i <= total; i++) {
+        const radios = document.getElementsByName('q' + i);
+        let selectedVal = null;
+        for (const r of radios) {
+          if (r.checked) {
+            selectedVal = r.value;
+            break;
+          }
+        }
+
+        if (!selectedVal) {
+          answeredAll = false;
+        } else {
+          const selectedLabel = document.getElementById(`opt-${i}-${selectedVal}`);
+          const correctLabel = document.getElementById(`opt-${i}-${correctAnswers['q' + i]}`);
+          
+          if (selectedVal === correctAnswers['q' + i]) {
+            score++;
+            if (selectedLabel) selectedLabel.classList.add('correct');
+          } else {
+            if (selectedLabel) selectedLabel.classList.add('incorrect');
+            if (correctLabel) correctLabel.classList.add('correct');
+          }
+        }
+      }
+
+      const feedback = document.getElementById('quiz-feedback-text');
+      const certBox = document.getElementById('certificate-box');
+      const certMsg = document.getElementById('cert-score-msg');
+
+      if (!answeredAll) {
+        if (feedback) {
+          feedback.innerHTML = `<span style="color: #fde047;">⚠️ Por favor responde las 5 preguntas antes de calificar.</span>`;
+        }
+        return;
+      }
+
+      if (score >= 4) {
+        localStorage.setItem('ebook_quiz_passed', 'true');
+        if (feedback) {
+          feedback.innerHTML = `<span style="color: #34d399;">🎉 ¡Aprobado con ${score}/${total} aciertos (${Math.round((score/total)*100)}%)!</span>`;
+        }
+        if (certMsg) {
+          certMsg.innerText = `Calificación: ${score}/${total} (${Math.round((score/total)*100)}%) • Certificado Oficial de Productividad con IA Nivel 1`;
+        }
+        if (certBox) {
+          certBox.classList.add('unlocked');
+          certBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          launchConfetti();
+        }
+      } else {
+        if (feedback) {
+          feedback.innerHTML = `<span style="color: #ef4444;">Has obtenido ${score}/${total}. Revisa las opciones marcadas en verde y vuelve a intentarlo para desbloquear el Libro 2.</span>`;
+        }
+      }
+    }
+
+    // 9. Particle Confetti Animation
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const particles = [];
+      const colors = ['#38bdf8', '#10b981', '#a855f7', '#fde047', '#f43f5e'];
+
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.5,
+          r: Math.random() * 6 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 4,
+          vy: Math.random() * 3 + 2,
+          rot: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 6
+        });
+      }
+
+      let frame = 0;
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 1.4);
+          ctx.restore();
+
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.rotSpeed;
+        });
+
+        frame++;
+        if (frame < 120) {
+          requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      render();
+    }
+
+    function checkSavedQuizStatus() {
+      if (localStorage.getItem('ebook_quiz_passed') === 'true') {
+        const certBox = document.getElementById('certificate-box');
+        if (certBox) certBox.classList.add('unlocked');
+      }
+    }
+
+    // Run on startup
+    window.onload = function() {
+      calculateROI();
+      loadChecklist();
+      initAudioTrack(0);
+      checkSavedQuizStatus();
+    };
+  </script>
+
+  <!-- Infographic Fullscreen Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox(event)">
+    <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="Infografía en Alta Resolución">
+  </div>
+
+</body>
+</html>

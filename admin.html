@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Leads Supabase | e-Book OpenClaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase_config.js"></script>
+
+  <style>
+    :root {
+      --bg: #070a12;
+      --card-bg: #0f172a;
+      --card-border: #1e293b;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    h1 { font-size: 1.8rem; font-weight: 800; color: #fff; }
+
+    .header-actions { display: flex; gap: 12px; }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover { box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .stat-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); }
+
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: #1e293b;
+      padding: 14px 18px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 0.92rem;
+      color: #cbd5e1;
+    }
+
+    tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+    .wa-link {
+      color: #34d399;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .wa-link:hover { background: rgba(16, 185, 129, 0.2); }
+
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <img src="logo_gcc.png" alt="Logo GCC" style="height: 38px; object-fit: contain;">
+        <div>
+          <h1>☁️ Panel de Leads GCC OpenClaw</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Base de datos en tiempo real (Supabase Cloud) del e-Book "Usa la IA y Trabaja Menos"</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button onclick="exportToCSV()" class="btn btn-primary">📥 Exportar a CSV / Excel</button>
+        <a href="landing.html" class="btn btn-outline" target="_blank">🌐 Ver Landing Page</a>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val" id="total-leads">0</div>
+        <div class="stat-lbl">Total de Leads Capturados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="today-leads" style="color: var(--green);">0</div>
+        <div class="stat-lbl">Registros de Hoy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" style="color: #38bdf8;">Supabase</div>
+        <div class="stat-lbl" id="db-status">Conectando con la nube...</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+            <th>WhatsApp Directo</th>
+            <th>Correo Electrónico</th>
+            <th>Fecha y Hora</th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+          <tr>
+            <td colspan="5" class="empty-state">Cargando base de datos de leads...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let globalLeads = [];
+
+    async function loadLeads() {
+      const tbody = document.getElementById('leads-tbody');
+      let leads = [];
+      let sourceName = "Supabase Cloud";
+
+      // 1. Intentar consultar Supabase Cloud directamente
+      const sb = getSupabaseClient();
+      if (sb) {
+        try {
+          const { data, error } = await sb
+            .from('ebook_leads')
+            .select('*')
+            .order('id', { ascending: false });
+
+          if (!error && data && data.length > 0) {
+            leads = data;
+            document.getElementById('db-status').innerText = '☁️ Conectado a Supabase';
+          }
+        } catch (e) {
+          console.log('Supabase query error:', e);
+        }
+      }
+
+      // 2. Fallback a Servidor Local SQLite si no hay datos en Supabase
+      if (leads.length === 0) {
+        try {
+          const res = await fetch('/api/leads');
+          if (res.ok) {
+            leads = await res.json();
+            document.getElementById('db-status').innerText = '💾 Conectado a SQLite Local';
+          }
+        } catch (e) {}
+      }
+
+      // 3. Fallback a LocalStorage si no hay backend activo
+      if (leads.length === 0) {
+        const local = localStorage.getItem('openclaw_all_leads');
+        if (local) {
+          const parsed = JSON.parse(local);
+          leads = parsed.map((item, idx) => ({
+            id: idx + 1,
+            name: item.name,
+            whatsapp: item.whatsapp,
+            email: item.email,
+            created_at: item.timestamp || 'Reciente'
+          }));
+          document.getElementById('db-status').innerText = '📱 Almacenamiento Local';
+        }
+      }
+
+      globalLeads = leads;
+      document.getElementById('total-leads').innerText = leads.length;
+
+      if (leads.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Aún no hay leads registrados. Comparte la landing page para empezar a captar prospectos.</td></tr>';
+        return;
+      }
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const todayCount = leads.filter(l => (l.created_at || '').includes(todayStr)).length;
+      document.getElementById('today-leads').innerText = todayCount;
+
+      tbody.innerHTML = leads.map(l => {
+        const cleanWa = (l.whatsapp || '').replace(/[^0-9]/g, '');
+        const dateStr = l.created_at ? new Date(l.created_at).toLocaleString('es-MX') : 'Reciente';
+        return `
+          <tr>
+            <td style="font-family: var(--font-mono); font-weight:700;">#${l.id}</td>
+            <td><strong>${escapeHtml(l.name)}</strong></td>
+            <td>
+              <a href="https://wa.me/${cleanWa}?text=${encodeURIComponent('Hola ' + l.name + ', un gusto saludarte de parte de OpenClaw. Vimos que solicitaste acceso al e-Book Usa la IA y Trabaja Menos. ¿Te gustaría agendar una breve sesión estratégica?')}" 
+                 target="_blank" 
+                 class="wa-link">
+                💬 ${escapeHtml(l.whatsapp)}
+              </a>
+            </td>
+            <td><a href="mailto:${escapeHtml(l.email)}" style="color: #38bdf8; text-decoration:none;">${escapeHtml(l.email)}</a></td>
+            <td style="font-size: 0.85rem; color: #94a3b8;">${escapeHtml(dateStr)}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function exportToCSV() {
+      if (!globalLeads || globalLeads.length === 0) {
+        alert("No hay leads para exportar.");
+        return;
+      }
+      let csvContent = "ID,Nombre,WhatsApp,Email,Fecha_Registro\n";
+      globalLeads.forEach(r => {
+        csvContent += `"${r.id}","${r.name}","${r.whatsapp}","${r.email}","${r.created_at}"\n`;
+      });
+      const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'leads_ebook_openclaw.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    window.onload = loadLeads;
+  </script>
+</body>
+</html>
