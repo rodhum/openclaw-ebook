@@ -67,17 +67,33 @@
     /* Sidebar Navigation */
     aside {
       width: var(--sidebar-width);
-      background: rgba(10, 15, 29, 0.95);
+      background: rgba(10, 15, 29, 0.96);
       border-right: 1px solid var(--border-color);
       height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
+      bottom: 0;
       display: flex;
       flex-direction: column;
       backdrop-filter: blur(20px);
-      z-index: 90;
+      z-index: 150;
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 140;
+    }
+    .sidebar-overlay.active {
+      display: block;
     }
 
     .sidebar-header {
@@ -192,9 +208,10 @@
     /* Main Content Area */
     main {
       margin-left: var(--sidebar-width);
-      padding: 40px 60px 120px;
-      width: calc(100% - var(--sidebar-width));
-      max-width: 1060px;
+      flex: 1;
+      min-width: 0;
+      padding: 0 48px 120px 48px;
+      max-width: calc(100% - var(--sidebar-width));
     }
 
     /* Hero Section */
@@ -711,23 +728,16 @@
       border-color: #ef4444;
     }
 
-    @media (max-width: 900px) {
-      aside { transform: translateX(-100%); }
-      aside.open { transform: translateX(0); }
-      main { margin-left: 0; padding: 20px 16px 100px; width: 100%; }
-      .podcast-top { grid-template-columns: 1fr; text-align: center; }
-      .podcast-cover-art { max-width: 140px; margin: 0 auto; }
-    }
-
     /* Sticky Top Return Navigation Bar */
     .top-nav-bar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10, 15, 29, 0.92);
+      background: rgba(10, 15, 29, 0.95);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 10px 24px;
+      padding: 12px 24px;
+      margin: 0 -48px 36px -48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -760,11 +770,43 @@
       padding: 7px 12px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
       display: none;
+      line-height: 1;
     }
+
     @media (max-width: 900px) {
-      .mobile-menu-toggle { display: block; }
+      aside {
+        transform: translateX(-100%);
+        z-index: 250;
+      }
+      aside.open {
+        transform: translateX(0);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.8);
+      }
+      main {
+        margin-left: 0;
+        padding: 0 16px 100px 16px;
+        max-width: 100%;
+        width: 100%;
+      }
+      .top-nav-bar {
+        margin: 0 -16px 24px -16px;
+        padding: 10px 16px;
+      }
+      .mobile-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .podcast-top {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .podcast-cover-art {
+        max-width: 140px;
+        margin: 0 auto;
+      }
     }
 
     /* Floating Return Button */
@@ -1021,18 +1063,11 @@
 </head>
 <body>
 
-  <!-- Sticky Top Return Navigation Bar -->
-  <div class="top-nav-bar">
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Menú">☰</button>
-      <a href="ebook_interactivo.html" class="btn-top-back">
-        <span>⬅️</span> Volver al Libro 1 (Fundamentos)
-      </a>
-    </div>
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 700; display: inline-block;">🚀 Libro 2: Nivel Enterprise</span>
-    </div>
-  </div>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Mobile Sidebar Overlay Backdrop -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
   <!-- Floating Return Button -->
   <a href="ebook_interactivo.html" class="floating-back-btn" title="Volver al Libro 1: Usa la IA y Trabaja Menos">
@@ -1041,9 +1076,6 @@
 
   <!-- Hidden Global Audio Element -->
   <audio id="global-audio" preload="metadata"></audio>
-
-  <!-- Reading Progress Bar -->
-  <div id="progress-bar"></div>
 
   <!-- Sidebar Navigation -->
   <aside id="sidebar">
@@ -1085,6 +1117,19 @@
 
   <!-- Main Content -->
   <main>
+
+    <!-- Sticky Top Return Navigation Bar -->
+    <div class="top-nav-bar">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Menú">☰</button>
+        <a href="ebook_interactivo.html" class="btn-top-back">
+          <span>⬅️</span> Volver al Libro 1 (Fundamentos)
+        </a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 700; display: inline-block;">🚀 Libro 2: Nivel Enterprise</span>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="intro">
@@ -2096,12 +2141,54 @@ python3 -m vllm.entrypoints.openai.api_server \
       });
     }
 
-    // Scroll Progress
+    // 4. Mobile Sidebar Toggle
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      if (sidebar) sidebar.classList.toggle('open');
+      if (overlay) overlay.classList.toggle('active');
+    }
+
+    // Auto-close sidebar on link click on mobile
+    document.querySelectorAll('#sidebar .nav-link, #sidebar .btn-return-b1').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 900) {
+          const sidebar = document.getElementById('sidebar');
+          const overlay = document.getElementById('sidebar-overlay');
+          if (sidebar) sidebar.classList.remove('open');
+          if (overlay) overlay.classList.remove('active');
+        }
+      });
+    });
+
+    // Scroll Progress & Active Navigation Spy
     window.addEventListener('scroll', () => {
-      const winScroll = document.documentElement.scrollTop;
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
+      const pBar = document.getElementById('progress-bar');
+      if (pBar) pBar.style.width = scrolled + '%';
+
+      // Update Active Navigation Link
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      let current = '';
+
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 140;
+        if (winScroll >= top) {
+          current = sec.getAttribute('id');
+        }
+      });
+
+      if (current) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
     });
   </script>
 </body>
