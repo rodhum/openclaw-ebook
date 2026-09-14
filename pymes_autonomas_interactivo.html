@@ -714,13 +714,330 @@
     @media (max-width: 900px) {
       aside { transform: translateX(-100%); }
       aside.open { transform: translateX(0); }
-      main { margin-left: 0; padding: 30px 20px 100px; width: 100%; }
+      main { margin-left: 0; padding: 20px 16px 100px; width: 100%; }
       .podcast-top { grid-template-columns: 1fr; text-align: center; }
       .podcast-cover-art { max-width: 140px; margin: 0 auto; }
+    }
+
+    /* Sticky Top Return Navigation Bar */
+    .top-nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 15, 29, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .btn-top-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      color: #030712 !important;
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-top-back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+      background: #38bdf8;
+    }
+    .mobile-menu-toggle {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .mobile-menu-toggle { display: block; }
+    }
+
+    /* Floating Return Button */
+    .floating-back-btn {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      z-index: 999;
+      background: linear-gradient(135deg, #0369a1, #38bdf8);
+      color: #020617 !important;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 12px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .floating-back-btn:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.7);
+    }
+
+    /* Visual Framework Card Outer Wrapper */
+    .figure-container-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 28px 0;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+    .figure-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .figure-caption-text {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-top: 18px;
+      line-height: 1.45;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+    }
+
+    /* FIGURA 1: Cadena de Valor (4 Bloques + Flecha Superior + Barra Inferior) */
+    .chain-top-arrow {
+      background: linear-gradient(90deg, #d97706 0%, #f59e0b 90%, #fbbf24 100%);
+      color: #020617;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      position: relative;
+      letter-spacing: 0.02em;
+    }
+    .chain-top-arrow::after {
+      content: '▶';
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+    }
+    .chain-boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 800px) {
+      .chain-boxes-grid { grid-template-columns: 1fr; }
+    }
+    .chain-box {
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 150px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .chain-box-1 { background: #1e293b; color: #e2e8f0; }
+    .chain-box-2 { background: #1e3a8a; color: #e0e7ff; }
+    .chain-box-3 { background: #0369a1; color: #e0f2fe; }
+    .chain-box-4 { background: #065f46; color: #d1fae5; }
+    .chain-box-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      opacity: 0.8;
+      margin-bottom: 2px;
+    }
+    .chain-box-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .chain-box-desc {
+      font-size: 0.78rem;
+      line-height: 1.4;
+      opacity: 0.9;
+      margin: 0;
+    }
+    .chain-bottom-banner {
+      background: #b45309;
+      color: #fef3c7;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 8px 16px;
+      border-radius: 20px;
+      line-height: 1.4;
+    }
+
+    /* FIGURA 3: Flujo de 6 Pasos Interconectados */
+    .stream-flow-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      align-items: stretch;
+      margin: 16px 0;
+    }
+    @media (max-width: 900px) {
+      .stream-flow-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+    .stream-block {
+      border-radius: 8px;
+      padding: 16px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    .stream-block-1 { background: #0ea5e9; }
+    .stream-block-2 { background: #1e3a8a; }
+    .stream-block-3 { background: #0d9488; }
+    .stream-block-4 { background: #d97706; }
+    .stream-block-5 { background: #15803d; }
+    .stream-block-6 { background: #dc2626; }
+    .stream-block-title {
+      font-weight: 800;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .stream-block-desc {
+      font-size: 0.72rem;
+      opacity: 0.92;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    /* FIGURA 4: Matriz 2x2 */
+    .matrix-wrapper {
+      position: relative;
+      padding-left: 36px;
+      padding-bottom: 30px;
+      margin: 20px 0;
+    }
+    .matrix-y-axis {
+      position: absolute;
+      left: 4px;
+      top: 0;
+      bottom: 30px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .matrix-y-axis-label {
+      transform: rotate(-90deg);
+      white-space: nowrap;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .matrix-x-axis {
+      position: absolute;
+      bottom: 4px;
+      left: 36px;
+      right: 0;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .matrix-2x2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      background: #475569;
+      border: 2px solid #475569;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .matrix-cell {
+      padding: 24px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+    }
+    .matrix-cell-tl { background: #3b2d35; color: #fecdd3; }
+    .matrix-cell-tr { background: #1e382b; color: #bbf7d0; }
+    .matrix-cell-bl { background: #1e293b; color: #bae6fd; }
+    .matrix-cell-br { background: #38311d; color: #fef08a; }
+    .matrix-cell-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .matrix-cell-desc {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      line-height: 1.35;
+      max-width: 220px;
+    }
+
+    /* FIGURA 5: Timeline */
+    .timeline-svg-wrap {
+      width: 100%;
+      overflow-x: auto;
+      padding: 10px 0;
     }
   </style>
 </head>
 <body>
+
+  <!-- Sticky Top Return Navigation Bar -->
+  <div class="top-nav-bar">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Menú">☰</button>
+      <a href="ebook_interactivo.html" class="btn-top-back">
+        <span>⬅️</span> Volver al Libro 1 (Fundamentos)
+      </a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 700; display: inline-block;">🚀 Libro 2: Nivel Enterprise</span>
+    </div>
+  </div>
+
+  <!-- Floating Return Button -->
+  <a href="ebook_interactivo.html" class="floating-back-btn" title="Volver al Libro 1: Usa la IA y Trabaja Menos">
+    <span>⬅️</span> Volver a Libro 1
+  </a>
 
   <!-- Hidden Global Audio Element -->
   <audio id="global-audio" preload="metadata"></audio>
@@ -924,115 +1241,161 @@
 
       <p>La adopción de IA no es un evento binario; es una escalera de maduración económica donde cada peldaño multiplica el margen bruto de la empresa:</p>
 
-      <!-- Los 4 Niveles de Valor Operativo -->
-      <table class="compare-table" style="margin: 20px 0;">
-        <thead>
-          <tr>
-            <th>Nivel de Evolución</th>
-            <th>Mecanismo Operativo</th>
-            <th>Intervención Humana</th>
-            <th>Impacto en P&L / Margen</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Nivel 1: Asistentes Aislados</strong></td>
-            <td>Chats en navegador para redacción de copys y resúmenes.</td>
-            <td>100% manual (Humano copia y pega).</td>
-            <td><strong>Bajo</strong> (Ahorro de minutos individuales dispersos).</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 2: Tareas Repetitivas</strong></td>
-            <td>Extracción OCR de facturas y transcripción de minutas.</td>
-            <td>Supervisión directa por tarea.</td>
-            <td><strong>Medio</strong> (Ahorro de 5 a 8 horas semanales por administrativo).</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 3: Agentes Departamentales</strong></td>
-            <td>Agente de Ventas 24/7 o Agente de Cobranza con flujos automáticos.</td>
-            <td>Revisión de excepciones (HITL).</td>
-            <td><strong>Alto</strong> (+35% conversión de leads y -40% mora).</td>
-          </tr>
-          <tr>
-            <td><strong style="color: #38bdf8;">Nivel 4: Orquestación Total</strong></td>
-            <td>Flujo End-to-End: Captación $\rightarrow$ Cotización $\rightarrow$ ERP $\rightarrow$ Cobro $\rightarrow$ Retención.</td>
-            <td>Supervisión ejecutiva y métricas macro.</td>
-            <td><strong>Exponencial</strong> (Escalamiento con costo marginal $0 por cliente).</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Línea Temporal 2026-2028 -->
-      <h3 style="margin-top: 28px;">Línea Temporal de la IA en la PYME: De Copiloto a Business OS</h3>
-      <div class="stats-row" style="margin: 20px 0;">
-        <div class="stat-card" style="border-left: 3px solid #64748b; text-align: left; padding: 18px;">
-          <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 700;">2024 - 2025</span>
-          <strong style="color: #cbd5e1; font-size: 0.95rem; display: block; margin: 4px 0;">Fase 1: La Era de los Copilotos</strong>
-          <p style="font-size: 0.82rem; color: #94a3b8; margin: 0;">Asistentes en navegador, generación de texto y experimentos aislados en marketing.</p>
+      <!-- FIGURA 1: Cadena de Valor de la IA en la PYME (Visual Box Matching Paper) -->
+      <div class="figure-container-card">
+        <div class="figure-title">Cadena de valor de la IA en la PYME</div>
+        
+        <!-- Flecha Superior -->
+        <div class="chain-top-arrow">
+          Evolución del valor operativo y económico en la PYME
         </div>
 
-        <div class="stat-card" style="border-left: 3px solid #38bdf8; text-align: left; padding: 18px;">
-          <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700;">2026 (ACTUAL)</span>
-          <strong style="color: #38bdf8; font-size: 0.95rem; display: block; margin: 4px 0;">Fase 2: Agentes Locales & Asíncronos</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">Inferencia local en Linux, GraphRAG empresarial y enjambres multi-agente conectados a ERPs.</p>
+        <!-- 4 Bloques Horizontales -->
+        <div class="chain-boxes-grid">
+          <div class="chain-box chain-box-1">
+            <div class="chain-box-num">1</div>
+            <div class="chain-box-title">Detectar / Redactar</div>
+            <p class="chain-box-desc">Identificar anomalías, copys iniciales, resúmenes y consultas sueltas de texto en chats aislados.</p>
+          </div>
+
+          <div class="chain-box chain-box-2">
+            <div class="chain-box-num">2</div>
+            <div class="chain-box-title">Explicar / Analizar</div>
+            <p class="chain-box-desc">Ayudar al equipo y al cliente a entender datos, contratos, finanzas y reportes de negocio.</p>
+          </div>
+
+          <div class="chain-box chain-box-3">
+            <div class="chain-box-num">3</div>
+            <div class="chain-box-title">Documentar / Estructurar</div>
+            <p class="chain-box-desc">Estructurar el know-how en RAG privado, minutas y reducir drásticamente la carga administrativa.</p>
+          </div>
+
+          <div class="chain-box chain-box-4">
+            <div class="chain-box-num">4</div>
+            <div class="chain-box-title">Orquestar / Ejecutar</div>
+            <p class="chain-box-desc">Conectar captación, cotización, ERP, facturación, cobro y retención en flujo autónomo 24/7.</p>
+          </div>
         </div>
 
-        <div class="stat-card" style="border-left: 3px solid #10b981; text-align: left; padding: 18px;">
-          <span style="font-size: 0.75rem; color: #34d399; font-weight: 700;">2027 - 2028</span>
-          <strong style="color: #34d399; font-size: 0.95rem; display: block; margin: 4px 0;">Fase 3: Business OS Autónomo</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">Sistemas operativos corporativos multi-agente: compras, ventas y finanzas auto-coordinados.</p>
+        <!-- Barra Inferior de Diagnóstico -->
+        <div class="chain-bottom-banner">
+          La mayoría de las soluciones actuales se sitúan entre detectar y explicar. La transformación real empieza cuando la IA documenta, coordina y reduce fricción.
+        </div>
+
+        <div class="figure-caption-text">
+          <strong>Figura 1. Cadena de valor de la IA en la PYME:</strong> La evolución no debe medirse solo por su capacidad de generar texto en un chat, sino por su integración en el flujo operativo y financiero de la compañía.
+        </div>
+      </div>
+
+      <!-- FIGURA 5: Evolución Probable de la IA en la PYME (Timeline) -->
+      <div class="figure-container-card" style="margin-top: 32px;">
+        <div class="figure-title">Evolución probable de la IA en la PYME</div>
+        
+        <div class="timeline-svg-wrap">
+          <svg viewBox="0 0 900 180" style="width: 100%; min-width: 650px; height: auto; font-family: var(--font-sans);">
+            <!-- Horizontal Axis Line with Arrow -->
+            <line x1="80" y1="95" x2="820" y2="95" stroke="#64748b" stroke-width="2.5" />
+            <polygon points="820,90 835,95 820,100" fill="#64748b" />
+
+            <!-- Stage 1 (2020-2024 - Cyan) -->
+            <text x="140" y="45" fill="#38bdf8" font-size="16" font-weight="800" text-anchor="middle">2020-2024</text>
+            <circle cx="140" cy="95" r="22" fill="#0284c7" stroke="#38bdf8" stroke-width="3" />
+            <text x="140" y="102" fill="#ffffff" font-size="16" font-weight="800" text-anchor="middle">1</text>
+            <text x="140" y="142" fill="#ffffff" font-size="13.5" font-weight="800" text-anchor="middle">Detección</text>
+            <text x="140" y="162" fill="#94a3b8" font-size="12" text-anchor="middle">y demos</text>
+
+            <!-- Stage 2 (2025-2026 - Green) -->
+            <text x="360" y="45" fill="#34d399" font-size="16" font-weight="800" text-anchor="middle">2025-2026</text>
+            <circle cx="360" cy="95" r="22" fill="#15803d" stroke="#34d399" stroke-width="3" />
+            <text x="360" y="102" fill="#ffffff" font-size="16" font-weight="800" text-anchor="middle">2</text>
+            <text x="360" y="142" fill="#ffffff" font-size="13.5" font-weight="800" text-anchor="middle">Integración</text>
+            <text x="360" y="162" fill="#94a3b8" font-size="12" text-anchor="middle">en flujos concretos</text>
+
+            <!-- Stage 3 (2027-2029 - Yellow) -->
+            <text x="580" y="45" fill="#fbbf24" font-size="16" font-weight="800" text-anchor="middle">2027-2029</text>
+            <circle cx="580" cy="95" r="22" fill="#d97706" stroke="#fbbf24" stroke-width="3" />
+            <text x="580" y="102" fill="#ffffff" font-size="16" font-weight="800" text-anchor="middle">3</text>
+            <text x="580" y="142" fill="#ffffff" font-size="13.5" font-weight="800" text-anchor="middle">IA multimodal</text>
+            <text x="580" y="162" fill="#94a3b8" font-size="12" text-anchor="middle">y orquestación</text>
+
+            <!-- Stage 4 (2030+ - Red) -->
+            <text x="770" y="45" fill="#f87171" font-size="16" font-weight="800" text-anchor="middle">2030+</text>
+            <circle cx="770" cy="95" r="22" fill="#dc2626" stroke="#f87171" stroke-width="3" />
+            <text x="770" y="102" fill="#ffffff" font-size="16" font-weight="800" text-anchor="middle">4</text>
+            <text x="770" y="142" fill="#ffffff" font-size="13.5" font-weight="800" text-anchor="middle">Inteligencia</text>
+            <text x="770" y="162" fill="#94a3b8" font-size="12" text-anchor="middle">operativa</text>
+          </svg>
+        </div>
+
+        <div class="figure-caption-text">
+          <strong>Figura 5. Evolución probable de la IA en la PYME:</strong> Ruta tecnológica desde asistentes personales aislados hasta el Sistema Operativo Empresarial Autónomo Multi-Agente.
         </div>
       </div>
     </section>
 
-    <!-- Radar de Madurez 5 Ejes -->
+    <!-- Radar de Madurez 6 Ejes -->
     <section class="module-section" id="madurez" style="border-left: 4px solid #10b981; background: linear-gradient(180deg, rgba(16, 185, 129, 0.04) 0%, rgba(15, 23, 42, 0.85) 100%);">
       <div class="module-header">
         <span class="module-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">🧭 Autodiagnóstico Trimestral</span>
-        <h2>Mapa de Madurez en IA para PYMEs: Radar de 5 Ejes</h2>
+        <h2>Mapa de Madurez de IA en la PYME</h2>
       </div>
 
-      <p>Evalúa el nivel de madurez operativa de tu empresa en los 5 pilares críticos de la arquitectura autónoma:</p>
+      <p>Evalúa el nivel de madurez operativa de tu empresa en los 6 pilares críticos de la arquitectura autónoma:</p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 24px 0;">
-        <div class="stat-card" style="text-align: left; padding: 18px; border-left: 3px solid #38bdf8;">
-          <strong style="color: #38bdf8; font-size: 0.95rem; display: block; margin-bottom: 4px;">1. Ingesta y Calidad de Datos</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
-            <strong>Nivel 1:</strong> Audios y capturas caóticas en WhatsApp.<br>
-            <strong>Nivel 4:</strong> Extracción estructurada automática con validación de campos clave antes de impactar el ERP.
-          </p>
+      <!-- FIGURA 2: Radar Chart SVG -->
+      <div class="figure-container-card" style="text-align: center;">
+        <div class="figure-title">Mapa de madurez de IA en la PYME</div>
+        
+        <div style="max-width: 480px; margin: 0 auto; position: relative;">
+          <svg viewBox="0 0 500 500" style="width: 100%; height: auto; font-family: var(--font-sans);">
+            <!-- Concentric Circles -->
+            <circle cx="250" cy="250" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+            <circle cx="250" cy="250" r="80" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+            <circle cx="250" cy="250" r="120" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+            <circle cx="250" cy="250" r="160" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+            <circle cx="250" cy="250" r="200" fill="none" stroke="#475569" stroke-width="1.5" />
+
+            <!-- Axis spoke lines (6 axes) -->
+            <line x1="250" y1="250" x2="250" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+            <line x1="250" y1="250" x2="423.2" y2="150" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+            <line x1="250" y1="250" x2="423.2" y2="350" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+            <line x1="250" y1="250" x2="250" y2="450" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+            <line x1="250" y1="250" x2="76.8" y2="350" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+            <line x1="250" y1="250" x2="76.8" y2="150" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+            <!-- Scale Labels (2, 4, 6, 8, 10) -->
+            <text x="286" y="228" fill="#94a3b8" font-size="11" text-anchor="middle">2</text>
+            <text x="320" y="208" fill="#94a3b8" font-size="11" text-anchor="middle">4</text>
+            <text x="355" y="188" fill="#94a3b8" font-size="11" text-anchor="middle">6</text>
+            <text x="390" y="168" fill="#94a3b8" font-size="11" text-anchor="middle">8</text>
+            <text x="428" y="148" fill="#38bdf8" font-weight="700" font-size="12" text-anchor="middle">10</text>
+
+            <!-- Radar Polygon (Perfil PYME en Transformación) -->
+            <polygon points="250,150 397,165 328,295 250,380 198,280 155,195" 
+                     fill="rgba(56, 189, 248, 0.28)" 
+                     stroke="#38bdf8" 
+                     stroke-width="2.5" />
+
+            <!-- Vertex Dots -->
+            <circle cx="250" cy="150" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+            <circle cx="397" cy="165" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+            <circle cx="328" cy="295" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+            <circle cx="250" cy="380" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+            <circle cx="198" cy="280" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+            <circle cx="155" cy="195" r="5" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+
+            <!-- Outer Dimension Labels -->
+            <text x="250" y="32" fill="#ffffff" font-weight="700" font-size="12" text-anchor="middle">Documentación</text>
+            <text x="440" y="145" fill="#ffffff" font-weight="700" font-size="12" text-anchor="start">Ingesta / Datos</text>
+            <text x="440" y="360" fill="#ffffff" font-weight="700" font-size="12" text-anchor="start">Economía</text>
+            <text x="250" y="475" fill="#ffffff" font-weight="700" font-size="12" text-anchor="middle">Seguimiento</text>
+            <text x="60" y="360" fill="#ffffff" font-weight="700" font-size="12" text-anchor="end">Integración</text>
+            <text x="60" y="145" fill="#ffffff" font-weight="700" font-size="12" text-anchor="end">Comunicación</text>
+          </svg>
         </div>
 
-        <div class="stat-card" style="text-align: left; padding: 18px; border-left: 3px solid #a855f7;">
-          <strong style="color: #c084fc; font-size: 0.95rem; display: block; margin-bottom: 4px;">2. Documentación & SOPs en RAG</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
-            <strong>Nivel 1:</strong> Manuales desactualizados en Word o memoria del fundador.<br>
-            <strong>Nivel 4:</strong> GraphRAG corporativo indexado que responde consultas operativas con 100% de trazabilidad.
-          </p>
-        </div>
-
-        <div class="stat-card" style="text-align: left; padding: 18px; border-left: 3px solid #10b981;">
-          <strong style="color: #34d399; font-size: 0.95rem; display: block; margin-bottom: 4px;">3. Integración con Sistemas Core</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
-            <strong>Nivel 1:</strong> Chatbots aislados sin conexión a bases de datos.<br>
-            <strong>Nivel 4:</strong> Agentes con Function Calling ejecutando consultas SQL, facturación y actualización de inventario.
-          </p>
-        </div>
-
-        <div class="stat-card" style="text-align: left; padding: 18px; border-left: 3px solid #f59e0b;">
-          <strong style="color: #fbbf24; font-size: 0.95rem; display: block; margin-bottom: 4px;">4. Omnicanalidad y Agentes 24/7</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
-            <strong>Nivel 1:</strong> Atención manual en horario de oficina.<br>
-            <strong>Nivel 4:</strong> Enjambre omnicanal coordinado (WhatsApp, Web, Mail) con memoria compartida de cliente.
-          </p>
-        </div>
-
-        <div class="stat-card" style="text-align: left; padding: 18px; border-left: 3px solid #ec4899; grid-column: 1 / -1;">
-          <strong style="color: #f472b6; font-size: 0.95rem; display: block; margin-bottom: 4px;">5. Gobierno, Observabilidad & ROI</strong>
-          <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">
-            <strong>Nivel 1:</strong> Adopción informal sin políticas de privacidad.<br>
-            <strong>Nivel 4:</strong> Dashboard con métricas de latencia, coste por token, tasa de resolución autónoma y auditoría trimestral.
-          </p>
+        <div class="figure-caption-text">
+          <strong>Figura 2. Mapa de madurez de IA en la PYME:</strong> Evaluación de 6 dimensiones operativas. Permite identificar desbalances (por ejemplo, tener buena comunicación pero baja integración con el ERP) antes de comprometer capital.
         </div>
       </div>
 
@@ -1042,10 +1405,10 @@
         <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px;">Selecciona el estado predominante en tu negocio para obtener tu diagnóstico ejecutivo:</p>
         
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
-          <button onclick="calcMaturity(1)" class="btn-copy-code" style="padding: 8px 16px;">Nivel 1: Exploración</button>
-          <button onclick="calcMaturity(2)" class="btn-copy-code" style="padding: 8px 16px;">Nivel 2: Tareas Repetitivas</button>
-          <button onclick="calcMaturity(3)" class="btn-copy-code" style="padding: 8px 16px;">Nivel 3: Departamentos Integrados</button>
-          <button onclick="calcMaturity(4)" class="btn-copy-code" style="padding: 8px 16px; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">Nivel 4: Empresa Autónoma</button>
+          <button onclick="calcMaturity(1)" class="btn-copy-code" style="padding: 8px 16px;">Nivel 1: Detección y Demos</button>
+          <button onclick="calcMaturity(2)" class="btn-copy-code" style="padding: 8px 16px;">Nivel 2: Integración Concreta</button>
+          <button onclick="calcMaturity(3)" class="btn-copy-code" style="padding: 8px 16px;">Nivel 3: Multimodal & Enjambre</button>
+          <button onclick="calcMaturity(4)" class="btn-copy-code" style="padding: 8px 16px; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">Nivel 4: Inteligencia Operativa</button>
         </div>
 
         <div id="maturity-result" style="background: rgba(0,0,0,0.4); border-radius: 10px; padding: 14px; font-size: 0.88rem; color: #e2e8f0; border-left: 3px solid #34d399;">
@@ -1057,13 +1420,13 @@
         function calcMaturity(lvl) {
           const res = document.getElementById('maturity-result');
           if (lvl === 1) {
-            res.innerHTML = '<strong style="color:#fbbf24;">Diagnóstico: Nivel 1 (Exploración Básica)</strong><br>Tu empresa usa IA de forma aislada. <em>Prioridad:</em> Crear tu primer RAG privado con SOPs en NotebookLM y formalizar el Semáforo de Privacidad.';
+            res.innerHTML = '<strong style="color:#fbbf24;">Diagnóstico: Nivel 1 (Detección y Demos)</strong><br>Tu empresa usa IA de forma aislada para redactar. <em>Prioridad:</em> Crear tu primer RAG privado con SOPs en NotebookLM y formalizar el Semáforo de Privacidad.';
           } else if (lvl === 2) {
-            res.innerHTML = '<strong style="color:#38bdf8;">Diagnóstico: Nivel 2 (Automatización de Tareas)</strong><br>Ya ahorras horas en redacción y minutas. <em>Prioridad:</em> Estandarizar contratos JSON Schema e iniciar la conexión a bases de datos o ERP con Make/n8n.';
+            res.innerHTML = '<strong style="color:#38bdf8;">Diagnóstico: Nivel 2 (Integración en Flujos Concretos)</strong><br>Ahorras horas en extracción OCR y minutas. <em>Prioridad:</em> Estandarizar contratos JSON Schema e iniciar la conexión a bases de datos o ERP con Make/n8n.';
           } else if (lvl === 3) {
-            res.innerHTML = '<strong style="color:#818cf8;">Diagnóstico: Nivel 3 (Agentes Departamentales)</strong><br>Tus agentes atienden clientes y cotizan con supervisión. <em>Prioridad:</em> Desplegar inferencia local en Linux ($0/token) y orquestar el flujo completo End-to-End.';
+            res.innerHTML = '<strong style="color:#818cf8;">Diagnóstico: Nivel 3 (IA Multimodal y Orquestación)</strong><br>Tus agentes atienden clientes por voz y cotizan con supervisión. <em>Prioridad:</em> Desplegar inferencia local en Linux ($0/token) y orquestar el flujo completo End-to-End.';
           } else {
-            res.innerHTML = '<strong style="color:#34d399;">Diagnóstico: Nivel 4 (PYME AI-Native Autónoma)</strong><br>Enhorabuena: operas con enjambres coordinados, GraphRAG y soberanía total. <em>Prioridad:</em> Optimización GEO/AEO para dominar búsquedas y auditoría continua de margen.';
+            res.innerHTML = '<strong style="color:#34d399;">Diagnóstico: Nivel 4 (Inteligencia Operativa Autónoma)</strong><br>Enhorabuena: operas con enjambres coordinados, GraphRAG y soberanía total. <em>Prioridad:</em> Optimización GEO/AEO para dominar búsquedas y auditoría continua de margen.';
           }
         }
       </script>
@@ -1176,6 +1539,53 @@
   },
   "required": ["lead_id", "company_name", "budget_usd", "items_requested", "recommended_plan"]
 }</pre>
+      </div>
+
+      <!-- FIGURA 3: Flujo IA Operativo en la PYME (Prevenir el Error Aguas Arriba) -->
+      <div class="figure-container-card" style="margin-top: 32px;">
+        <div class="figure-title">Flujo IA Operativo en la PYME (Prevenir el Error Aguas Arriba)</div>
+        
+        <div class="stream-flow-container">
+          <!-- Paso 1 -->
+          <div class="stream-block stream-block-1">
+            <div class="stream-block-title">Captura Comercial</div>
+            <p class="stream-block-desc">Lead, WhatsApp, llamada, fotos y datos</p>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="stream-block stream-block-2">
+            <div class="stream-block-title">Validación IA</div>
+            <p class="stream-block-desc">Archivo completo, NIF/RFC, stock y viable</p>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="stream-block stream-block-3">
+            <div class="stream-block-title">Propuesta Asistida</div>
+            <p class="stream-block-desc">Cotización técnica y condiciones comerciales</p>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="stream-block stream-block-4">
+            <div class="stream-block-title">Revisión Humana</div>
+            <p class="stream-block-desc">Criterio comercial y técnico (HITL)</p>
+          </div>
+
+          <!-- Paso 5 -->
+          <div class="stream-block stream-block-5">
+            <div class="stream-block-title">Ejecución / Entrega</div>
+            <p class="stream-block-desc">Ingreso a ERP, logística y despacho</p>
+          </div>
+
+          <!-- Paso 6 -->
+          <div class="stream-block stream-block-6">
+            <div class="stream-block-title">Cobro & Aprendizaje</div>
+            <p class="stream-block-desc">Métricas, facturación, cobro y mejora</p>
+          </div>
+        </div>
+
+        <div class="figure-caption-text">
+          <strong>Figura 3. Flujo operativo PYME:</strong> La IA aporta el máximo valor cuando mejora la calidad del dato inicial en la captación y evita que un error avance hasta la facturación, logística y cobranza.
+        </div>
       </div>
     </section>
 
@@ -1324,6 +1734,56 @@ python3 -m vllm.entrypoints.openai.api_server \
           </tr>
         </tbody>
       </table>
+
+      <!-- FIGURA 4: Matriz de Riesgo y Valor de la IA en la PYME -->
+      <div class="figure-container-card" style="margin-top: 32px;">
+        <div class="figure-title">Matriz de riesgo y valor de una IA en la PYME</div>
+        
+        <div class="matrix-wrapper">
+          <!-- Y-Axis Label & Arrow -->
+          <div class="matrix-y-axis">
+            <div class="matrix-y-axis-label">
+              <span>▲</span> Riesgo operativo / regulatorio / datos
+            </div>
+          </div>
+
+          <!-- 2x2 Grid -->
+          <div class="matrix-2x2-grid">
+            <!-- Top-Left Quadrant -->
+            <div class="matrix-cell matrix-cell-tl">
+              <div class="matrix-cell-title">Evitar o limitar</div>
+              <div class="matrix-cell-desc">IAs públicas sin DPA, datos confidenciales no anonimizados, alto riesgo con poco retorno.</div>
+            </div>
+
+            <!-- Top-Right Quadrant -->
+            <div class="matrix-cell matrix-cell-tr">
+              <div class="matrix-cell-title">Implantar con gobernanza</div>
+              <div class="matrix-cell-desc">Facturación, pagos, contratos comerciales y scoring crediticio con supervisión HITL.</div>
+            </div>
+
+            <!-- Bottom-Left Quadrant -->
+            <div class="matrix-cell matrix-cell-bl">
+              <div class="matrix-cell-title">Curiosidad tecnológica</div>
+              <div class="matrix-cell-desc">Generación de imágenes decorativas, copys genéricos de redes y experimentos aislados.</div>
+            </div>
+
+            <!-- Bottom-Right Quadrant -->
+            <div class="matrix-cell matrix-cell-br">
+              <div class="matrix-cell-title">Candidata a piloto</div>
+              <div class="matrix-cell-desc">Transcripción de minutas, triaje de tickets, extracción OCR de facturas y respuestas a FAQ.</div>
+            </div>
+          </div>
+
+          <!-- X-Axis Label & Arrow -->
+          <div class="matrix-x-axis">
+            Impacto en el flujo operativo y económico <span>►</span>
+          </div>
+        </div>
+
+        <div class="figure-caption-text">
+          <strong>Figura 4. Matriz de decisión 2x2:</strong> Clasificación de herramientas y procesos según su impacto operativo en el negocio vs. el nivel de riesgo de privacidad y gobernanza.
+        </div>
+      </div>
     </section>
 
     <!-- Módulo 7 -->

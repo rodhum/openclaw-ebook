@@ -1466,6 +1466,150 @@
       transform: scale(1.04) translateY(-2px);
       box-shadow: 0 20px 45px rgba(56, 189, 248, 0.5);
     }
+
+    /* Visual Framework Card Outer Wrapper */
+    .figure-container-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 28px 0;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+    .figure-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .figure-caption-text {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-top: 18px;
+      line-height: 1.45;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+    }
+
+    /* FIGURA 3: Flujo de 6 Pasos Interconectados */
+    .stream-flow-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      align-items: stretch;
+      margin: 16px 0;
+    }
+    @media (max-width: 900px) {
+      .stream-flow-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+    .stream-block {
+      border-radius: 8px;
+      padding: 16px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    .stream-block-1 { background: #0ea5e9; }
+    .stream-block-2 { background: #1e3a8a; }
+    .stream-block-3 { background: #0d9488; }
+    .stream-block-4 { background: #d97706; }
+    .stream-block-5 { background: #15803d; }
+    .stream-block-6 { background: #dc2626; }
+    .stream-block-title {
+      font-weight: 800;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .stream-block-desc {
+      font-size: 0.72rem;
+      opacity: 0.92;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    /* FIGURA 4: Matriz 2x2 */
+    .matrix-wrapper {
+      position: relative;
+      padding-left: 36px;
+      padding-bottom: 30px;
+      margin: 20px 0;
+    }
+    .matrix-y-axis {
+      position: absolute;
+      left: 4px;
+      top: 0;
+      bottom: 30px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .matrix-y-axis-label {
+      transform: rotate(-90deg);
+      white-space: nowrap;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .matrix-x-axis {
+      position: absolute;
+      bottom: 4px;
+      left: 36px;
+      right: 0;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .matrix-2x2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      background: #475569;
+      border: 2px solid #475569;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .matrix-cell {
+      padding: 24px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+    }
+    .matrix-cell-tl { background: #3b2d35; color: #fecdd3; }
+    .matrix-cell-tr { background: #1e382b; color: #bbf7d0; }
+    .matrix-cell-bl { background: #1e293b; color: #bae6fd; }
+    .matrix-cell-br { background: #38311d; color: #fef08a; }
+    .matrix-cell-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .matrix-cell-desc {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      line-height: 1.35;
+      max-width: 220px;
+    }
   </style>
 </head>
 <body>
@@ -1945,22 +2089,50 @@
         <div class="diagram-caption">Figura 1.1: Flujo de escalamiento cognitivo en la PYME.</div>
       </div>
 
-      <!-- Flujo de Calidad de Datos "Prevenir el Error Aguas Arriba" (Upstream Quality) -->
-      <h3 style="margin-top: 32px;">Flujo de Calidad Operativa: Prevenir el Error Aguas Arriba (Upstream Quality)</h3>
-      <p>Una de las lecciones operativas más críticas de sectores de alta precisión (como la odontología digital y la manufactura avanzada) es que <strong>el coste de corregir un error se multiplica por 10 en cada eslabón que avanza en la cadena</strong>. La IA no está para limpiar datos basura al final del mes; su verdadero poder está en <strong>impedir que los datos basura entren a tus sistemas</strong>:</p>
+      <!-- FIGURA 3: Flujo IA Operativo en la PYME (Prevenir el Error Aguas Arriba) -->
+      <div class="figure-container-card" style="margin-top: 32px;">
+        <div class="figure-title">Flujo IA Operativo en la PYME (Prevenir el Error Aguas Arriba)</div>
+        
+        <div class="stream-flow-container">
+          <!-- Paso 1 -->
+          <div class="stream-block stream-block-1">
+            <div class="stream-block-title">Captura Comercial</div>
+            <p class="stream-block-desc">Lead, WhatsApp, llamada, fotos y datos</p>
+          </div>
 
-      <div class="stats-row" style="margin: 20px 0;">
-        <div class="stat-card" style="border-left: 4px solid #ef4444; text-align: left; padding: 20px;">
-          <strong style="color: #f87171; font-size: 0.98rem; display: block; margin-bottom: 6px;">❌ Modelo Tradicional con Retrabajo en Cascada</strong>
-          <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.5; margin: 0;">
-            El comercial toma mal el pedido o la cotización en WhatsApp $\rightarrow$ Administración pasa datos incompletos al ERP $\rightarrow$ Logística despacha el producto equivocado $\rightarrow$ El cliente rechaza la entrega y suspende el pago $\rightarrow$ <strong>El equipo pierde 6 horas resolviendo una crisis evitable</strong>.
-          </p>
+          <!-- Paso 2 -->
+          <div class="stream-block stream-block-2">
+            <div class="stream-block-title">Validación IA</div>
+            <p class="stream-block-desc">Archivo completo, NIF/RFC, stock y viable</p>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="stream-block stream-block-3">
+            <div class="stream-block-title">Propuesta Asistida</div>
+            <p class="stream-block-desc">Cotización técnica y condiciones comerciales</p>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="stream-block stream-block-4">
+            <div class="stream-block-title">Revisión Humana</div>
+            <p class="stream-block-desc">Criterio comercial y técnico (HITL)</p>
+          </div>
+
+          <!-- Paso 5 -->
+          <div class="stream-block stream-block-5">
+            <div class="stream-block-title">Ejecución / Entrega</div>
+            <p class="stream-block-desc">Ingreso a ERP, logística y despacho</p>
+          </div>
+
+          <!-- Paso 6 -->
+          <div class="stream-block stream-block-6">
+            <div class="stream-block-title">Cobro & Aprendizaje</div>
+            <p class="stream-block-desc">Métricas, facturación, cobro y mejora</p>
+          </div>
         </div>
-        <div class="stat-card" style="border-left: 4px solid #10b981; text-align: left; padding: 20px;">
-          <strong style="color: #34d399; font-size: 0.98rem; display: block; margin-bottom: 6px;">✅ Modelo IA con Validación en la Ingesta Inicial</strong>
-          <p style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.5; margin: 0;">
-            El cliente solicita la cotización $\rightarrow$ Un agente inteligente extrae y valida en tiempo real: NIF/RFC, stock disponible, dirección geolocalizada y margen mínimo $\rightarrow$ Si falta un dato clave, lo solicita al instante $\rightarrow$ <strong>El pedido entra al ERP 100% limpio y sin fricción</strong>.
-          </p>
+
+        <div class="figure-caption-text">
+          <strong>Figura 3. Flujo operativo PYME:</strong> La IA aporta el máximo valor cuando mejora la calidad del dato inicial en la captación y evita que un error avance hasta la facturación, logística y cobranza.
         </div>
       </div>
 
@@ -2342,56 +2514,54 @@ Salida: {"calificacion": "NO_APTO", "prioridad": "BAJA", "siguiente_accion": "En
         </div>
       </div>
 
-      <!-- Matriz de Riesgo vs. Valor de una IA en la PYME -->
-      <h3 style="margin-top: 32px;">Matriz de Riesgo vs. Valor Operativo</h3>
-      <p>Antes de contratar cualquier software de IA o autorizar un nuevo flujo, somételo a la <strong>Matriz de Decisión 2x2</strong>. La IA no elimina el riesgo empresarial: lo cambia de sitio (hacia la supervisión humana y la calidad del dato):</p>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+      <!-- FIGURA 4: Matriz de Riesgo y Valor de la IA en la PYME -->
+      <div class="figure-container-card" style="margin-top: 32px;">
+        <div class="figure-title">Matriz de riesgo y valor de una IA en la PYME</div>
         
-        <div class="stat-card" style="border-left: 4px solid #10b981; text-align: left; padding: 18px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span class="hero-tag" style="background: rgba(16, 185, 129, 0.2); color: #34d399; margin: 0; padding: 2px 8px; font-size: 0.72rem;">Cuadrante 1</span>
-            <span style="font-size: 0.72rem; color: #34d399; font-weight: 700;">ALTO VALOR • BAJO RIESGO</span>
+        <div class="matrix-wrapper">
+          <!-- Y-Axis Label & Arrow -->
+          <div class="matrix-y-axis">
+            <div class="matrix-y-axis-label">
+              <span>▲</span> Riesgo operativo / regulatorio / datos
+            </div>
           </div>
-          <strong style="color: #fff; font-size: 0.95rem; display: block; margin-bottom: 4px;">🚀 Despliegue Inmediato (Quick Wins)</strong>
-          <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0; line-height: 1.45;">
-            Transcripción de minutas de reuniones, borradores de respuestas a clientes frecuentes, clasificación de tickets de soporte y generación de ideas de contenido.
-          </p>
+
+          <!-- 2x2 Grid -->
+          <div class="matrix-2x2-grid">
+            <!-- Top-Left Quadrant -->
+            <div class="matrix-cell matrix-cell-tl">
+              <div class="matrix-cell-title">Evitar o limitar</div>
+              <div class="matrix-cell-desc">IAs públicas sin DPA, datos confidenciales no anonimizados, alto riesgo con poco retorno.</div>
+            </div>
+
+            <!-- Top-Right Quadrant -->
+            <div class="matrix-cell matrix-cell-tr">
+              <div class="matrix-cell-title">Implantar con gobernanza</div>
+              <div class="matrix-cell-desc">Facturación, pagos, contratos comerciales y scoring crediticio con supervisión HITL.</div>
+            </div>
+
+            <!-- Bottom-Left Quadrant -->
+            <div class="matrix-cell matrix-cell-bl">
+              <div class="matrix-cell-title">Curiosidad tecnológica</div>
+              <div class="matrix-cell-desc">Generación de imágenes decorativas, copys genéricos de redes y experimentos aislados.</div>
+            </div>
+
+            <!-- Bottom-Right Quadrant -->
+            <div class="matrix-cell matrix-cell-br">
+              <div class="matrix-cell-title">Candidata a piloto</div>
+              <div class="matrix-cell-desc">Transcripción de minutas, triaje de tickets, extracción OCR de facturas y respuestas a FAQ.</div>
+            </div>
+          </div>
+
+          <!-- X-Axis Label & Arrow -->
+          <div class="matrix-x-axis">
+            Impacto en el flujo operativo y económico <span>►</span>
+          </div>
         </div>
 
-        <div class="stat-card" style="border-left: 4px solid #f59e0b; text-align: left; padding: 18px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span class="hero-tag" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; margin: 0; padding: 2px 8px; font-size: 0.72rem;">Cuadrante 2</span>
-            <span style="font-size: 0.72rem; color: #fbbf24; font-weight: 700;">ALTO VALOR • ALTO RIESGO</span>
-          </div>
-          <strong style="color: #fff; font-size: 0.95rem; display: block; margin-bottom: 4px;">🛡️ Piloto Estricto con Supervisión (HITL)</strong>
-          <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0; line-height: 1.45;">
-            Emisión de cotizaciones a medida con margen sensible, conciliación de cuentas por cobrar, redacción de contratos comerciales y análisis crediticio de clientes.
-          </p>
+        <div class="figure-caption-text">
+          <strong>Figura 4. Matriz de decisión 2x2:</strong> Clasificación de herramientas y procesos según su impacto operativo en el negocio vs. el nivel de riesgo de privacidad y gobernanza.
         </div>
-
-        <div class="stat-card" style="border-left: 4px solid #818cf8; text-align: left; padding: 18px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span class="hero-tag" style="background: rgba(129, 140, 248, 0.2); color: #818cf8; margin: 0; padding: 2px 8px; font-size: 0.72rem;">Cuadrante 3</span>
-            <span style="font-size: 0.72rem; color: #818cf8; font-weight: 700;">BAJO VALOR • BAJO RIESGO</span>
-          </div>
-          <strong style="color: #fff; font-size: 0.95rem; display: block; margin-bottom: 4px;">🎨 Opcional / Experimentación</strong>
-          <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0; line-height: 1.45;">
-            Generación de imágenes decorativas para redes sociales, rediseño de avatares corporativos y resúmenes de podcasts de entretenimiento.
-          </p>
-        </div>
-
-        <div class="stat-card" style="border-left: 4px solid #ef4444; text-align: left; padding: 18px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span class="hero-tag" style="background: rgba(239, 68, 68, 0.2); color: #f87171; margin: 0; padding: 2px 8px; font-size: 0.72rem;">Cuadrante 4</span>
-            <span style="font-size: 0.72rem; color: #f87171; font-weight: 700;">BAJO VALOR • ALTO RIESGO</span>
-          </div>
-          <strong style="color: #fff; font-size: 0.95rem; display: block; margin-bottom: 4px;">⛔ PROHIBIDO / Trampa de Moda</strong>
-          <p style="font-size: 0.83rem; color: #cbd5e1; margin: 0; line-height: 1.45;">
-            Subir bases de datos completas de clientes o contratos con secretos comerciales a herramientas web gratuitas de IA sin acuerdo de procesamiento de datos (DPA).
-          </p>
-        </div>
-
       </div>
     </section>
 
