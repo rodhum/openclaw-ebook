@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura Operativa OpenClaw & PYME Autónoma 2026",
+    "output": "openclaw_architecture_interactive.html",
+    "visual_preset": "blueprint",
+    "animation": "trace",
+    "quality_profile": "standard",
+    "views": [
+      {
+        "id": "full-flow",
+        "label": "Flujo Operativo Completo",
+        "focus": ["channels", "gateway", "orchestrator", "rag", "agents", "local-llm", "automation", "erp"],
+        "note": "Traza integral desde los canales de entrada hasta la ejecución en ERP."
+      },
+      {
+        "id": "privacy-local",
+        "label": "Inferencia Local Ubuntu $0/Token",
+        "focus": ["gateway", "orchestrator", "rag", "local-llm"],
+        "note": "Datos confidenciales procesados 100% on-premise en servidor Ubuntu."
+      },
+      {
+        "id": "swarm-execution",
+        "label": "Enjambre Agéntico & Retorno",
+        "focus": ["orchestrator", "agents", "automation", "erp"],
+        "note": "Ejecución automatizada y supervisada con retorno medible."
+      }
+    ]
+  },
+  "components": [
+    { "id": "channels", "type": "external", "label": "Canales PYME", "sublabel": "WhatsApp / Web / Mail", "pos": [40, 260], "size": [130, 60] },
+    { "id": "gateway", "type": "security", "label": "OpenClaw Gateway", "sublabel": "Auth JWT & Firewall", "pos": [230, 260], "size": [140, 60], "tag": "Seguridad" },
+    { "id": "orchestrator", "type": "backend", "label": "Orquestador Swarm", "sublabel": "ReAct Context Hub", "pos": [430, 260], "size": [140, 60], "tag": "Cerebro" },
+    { "id": "rag", "type": "database", "label": "Segundo Cerebro", "sublabel": "GraphRAG & Vectors", "pos": [430, 110], "size": [140, 60], "tag": "Contexto" },
+    { "id": "local-llm", "type": "backend", "label": "Inferencia Local", "sublabel": "Ubuntu / Ollama ($0)", "pos": [630, 110], "size": [140, 60], "tag": "Privado" },
+    { "id": "agents", "type": "backend", "label": "Enjambre Agentes", "sublabel": "Ventas, Soporte, SAT", "pos": [630, 260], "size": [140, 60], "tag": "Especialistas" },
+    { "id": "automation", "type": "messagebus", "label": "Motor n8n & Redis", "sublabel": "Colas Asíncronas", "pos": [830, 260], "size": [140, 60], "tag": "Workflow" },
+    { "id": "erp", "type": "database", "label": "Sistemas Core", "sublabel": "ERP, CRM, Bancos", "pos": [1030, 260], "size": [140, 60], "tag": "Master Data" }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Infraestructura Empresarial OpenClaw & Servidor Local",
+      "wraps": ["gateway", "orchestrator", "rag", "local-llm", "agents", "automation", "erp"],
+      "pad": 16
+    },
+    {
+      "kind": "security-group",
+      "label": "Capa de Inferencia & Memoria Segura",
+      "wraps": ["orchestrator", "rag", "local-llm", "agents"],
+      "pad": 12
+    }
+  ],
+  "connections": [
+    { "from": "channels", "to": "gateway", "label": "HTTPS", "variant": "emphasis" },
+    { "from": "gateway", "to": "orchestrator", "label": "Validado", "variant": "security" },
+    { "from": "orchestrator", "to": "rag", "label": "Query RAG", "fromSide": "top", "toSide": "bottom" },
+    { "from": "rag", "to": "local-llm", "label": "Contexto", "fromSide": "right", "toSide": "left" },
+    { "from": "orchestrator", "to": "agents", "label": "Despacho", "variant": "emphasis" },
+    { "from": "agents", "to": "automation", "label": "Acción", "variant": "dashed" },
+    { "from": "automation", "to": "erp", "label": "Sync Core", "variant": "emphasis" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "1. Entrada & Gobernanza",
+      "items": [
+        "Unificación de canales comerciales y operativos (WhatsApp, Web, Correo)",
+        "OpenClaw Gateway valida permisos y aplica semáforo de privacidad"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "2. Inferencia Local & GraphRAG",
+      "items": [
+        "GraphRAG conecta políticas y contratos internos sin alucinaciones",
+        "Servidor local Ubuntu procesa el 70%+ de cargas a costo $0 por token"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "3. Enjambres & Ejecución Core",
+      "items": [
+        "Agentes especializados colaboran resolviendo procesos de punta a punta",
+        "Integración bidireccional con ERPs, CRM y SAT con supervisión HITL"
+      ]
+    }
+  ]
+}
