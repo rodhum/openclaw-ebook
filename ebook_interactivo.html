@@ -1831,16 +1831,65 @@
       <p>Eran las 2:14 AM de un martes cualquiera. Sobre mi escritorio se acumulaban tres tazas de café frío, dos hojas de cálculo con datos desencajados y una lista interminable de mensajes sin responder de clientes molestos. Sentía una opresión en el pecho que cualquier dueño de PYME reconoce de inmediato: <strong>la sensación de ser el cuello de botella de tu propio negocio</strong>.</p>
       <p>Esa noche entendí que trabajar 14 horas al día no es una medalla de honor; es un síntoma de falla estructural. La mayoría de las pequeñas y medianas empresas no quiebran por falta de ventas, sino por el agotamiento operativo de sus fundadores.</p>
 
-      <!-- Video Master Capsule 1: The New Digital Workforce -->
-      <div class="video-wrapper" style="margin: 28px 0;">
-        <video controls poster="logo_ebook.jpg">
-          <source src="video_new_digital_workforce.mp4" type="video/mp4">
-          Tu navegador no soporta reproducción de video HTML5.
-        </video>
+      <!-- Video Master Capsule 1: OpenClaw Strategic Command (De Operador a Director) -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 16px; padding: 20px; margin: 28px 0; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">🎬 Masterclass Ejecutiva</span>
+            <strong style="color: #fff; font-size: 1rem;">De Operador de Software a Director Estratégico</strong>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-strat-subs" onclick="switchStratVideo('sub')" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              💬 Con Subtítulos
+            </button>
+            <button id="btn-strat-nosubs" onclick="switchStratVideo('nosub')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              🎬 Sin Subtítulos
+            </button>
+          </div>
+        </div>
+
+        <div class="video-wrapper" style="margin: 0; border-radius: 12px;">
+          <video id="strat-video-player" controls poster="poster_strategic_command.jpg" style="width: 100%; height: 100%; border-radius: 12px;">
+            <source id="strat-video-src" src="OpenClaw_Strategic_Command_ES_con_subtitulos.mp4" type="video/mp4">
+            Tu navegador no soporta reproducción de video HTML5.
+          </video>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+          🎙️ <em>OpenClaw Strategic Command (1:40 min)</em> • Audio en Español HD (Voz Ejecutiva) • Servidores Locales & Human-in-the-Loop
+        </div>
       </div>
-      <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: -16px; margin-bottom: 24px;">
-        🎬 Cápsula Ejecutiva: <em>The New Digital Workforce (1:58 min)</em> • Audio en Español HD
-      </div>
+
+      <script>
+        function switchStratVideo(type) {
+          const video = document.getElementById('strat-video-player');
+          const src = document.getElementById('strat-video-src');
+          const btnSubs = document.getElementById('btn-strat-subs');
+          const btnNoSubs = document.getElementById('btn-strat-nosubs');
+          const currentTime = video.currentTime;
+          const wasPlaying = !video.paused;
+
+          if (type === 'sub') {
+            src.src = 'OpenClaw_Strategic_Command_ES_con_subtitulos.mp4';
+            btnSubs.style.background = 'rgba(56, 189, 248, 0.2)';
+            btnSubs.style.borderColor = '#38bdf8';
+            btnSubs.style.color = '#38bdf8';
+            btnNoSubs.style.background = 'rgba(255,255,255,0.05)';
+            btnNoSubs.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnNoSubs.style.color = 'var(--text-muted)';
+          } else {
+            src.src = 'OpenClaw_Strategic_Command_ES_sin_subtitulos.mp4';
+            btnNoSubs.style.background = 'rgba(56, 189, 248, 0.2)';
+            btnNoSubs.style.borderColor = '#38bdf8';
+            btnNoSubs.style.color = '#38bdf8';
+            btnSubs.style.background = 'rgba(255,255,255,0.05)';
+            btnSubs.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnSubs.style.color = 'var(--text-muted)';
+          }
+          video.load();
+          video.currentTime = currentTime;
+          if (wasPlaying) video.play();
+        }
+      </script>
 
       <h3>2. La Brecha del 17.7% y la Trampa de los 44 Puntos (Datos Bancarios 2026)</h3>
       <p>El colapso operativo ocurre cuando el dueño de negocio confunde estar "ocupado" con ser productivo. Estudios bancarios y estadísticos de adopción (<strong>FactoryJet / JPMorgan Chase Institute</strong>) revelan un fenómeno crítico:</p>
@@ -2357,6 +2406,66 @@ Salida: {"calificacion": "NO_APTO", "prioridad": "BAJA", "siguiente_accion": "En
           4. <strong>Generación y Envío:</strong> Genera un PDF formal membretado y lo entrega en el chat de WhatsApp en <strong>menos de 3 minutos</strong>.
         </p>
       </div>
+
+      <!-- Video Caso Práctico: OpenClaw Agentic HVAC -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 16px; padding: 20px; margin: 28px 0; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">🎬 Caso Práctico en Video</span>
+            <strong style="color: #fff; font-size: 1rem;">Operación Agéntica End-to-End en ClimaTech / HVAC</strong>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-hvac-dub" onclick="switchHvacVideo('dub')" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              🇲🇽 Español Doblado
+            </button>
+            <button id="btn-hvac-sub" onclick="switchHvacVideo('sub')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              💬 EN con Subtítulos
+            </button>
+          </div>
+        </div>
+
+        <div class="video-wrapper" style="margin: 0; border-radius: 12px;">
+          <video id="hvac-video-player" controls poster="poster_agentic_hvac.jpg" style="width: 100%; height: 100%; border-radius: 12px;">
+            <source id="hvac-video-src" src="OpenClaw_Agentic_HVAC_ES_doblado.mp4" type="video/mp4">
+            Tu navegador no soporta reproducción de video HTML5.
+          </video>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+          🏭 <em>OpenClaw Agentic HVAC (1:57 min)</em> • Diagnóstico de Falla, Validación de SKU, Cotización Automatizada y Conexión ERP
+        </div>
+      </div>
+
+      <script>
+        function switchHvacVideo(type) {
+          const video = document.getElementById('hvac-video-player');
+          const src = document.getElementById('hvac-video-src');
+          const btnDub = document.getElementById('btn-hvac-dub');
+          const btnSub = document.getElementById('btn-hvac-sub');
+          const currentTime = video.currentTime;
+          const wasPlaying = !video.paused;
+
+          if (type === 'dub') {
+            src.src = 'OpenClaw_Agentic_HVAC_ES_doblado.mp4';
+            btnDub.style.background = 'rgba(16, 185, 129, 0.2)';
+            btnDub.style.borderColor = '#10b981';
+            btnDub.style.color = '#34d399';
+            btnSub.style.background = 'rgba(255,255,255,0.05)';
+            btnSub.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnSub.style.color = 'var(--text-muted)';
+          } else {
+            src.src = 'OpenClaw_Agentic_HVAC_EN_con_subtitulos_ES.mp4';
+            btnSub.style.background = 'rgba(16, 185, 129, 0.2)';
+            btnSub.style.borderColor = '#10b981';
+            btnSub.style.color = '#34d399';
+            btnDub.style.background = 'rgba(255,255,255,0.05)';
+            btnDub.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnDub.style.color = 'var(--text-muted)';
+          }
+          video.load();
+          video.currentTime = currentTime;
+          if (wasPlaying) video.play();
+        }
+      </script>
 
       <!-- Infografía Maestra 5.0 -->
       <div class="infographic-box" style="border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 15px 40px -10px rgba(56, 189, 248, 0.2);">

@@ -1544,6 +1544,66 @@
         </div>
       </div>
 
+      <!-- Video Masterclass: OpenClaw Strategic Command -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 16px; padding: 20px; margin: 28px 0; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">🎬 Video Masterclass</span>
+            <strong style="color: #fff; font-size: 1rem;">OpenClaw Strategic Command: De Operador a Director</strong>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-strat-l2-subs" onclick="switchStratL2Video('sub')" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              💬 Con Subtítulos
+            </button>
+            <button id="btn-strat-l2-nosubs" onclick="switchStratL2Video('nosub')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              🎬 Sin Subtítulos
+            </button>
+          </div>
+        </div>
+
+        <div style="border-radius: 12px; overflow: hidden; background: #000; border: 1px solid rgba(56, 189, 248, 0.25);">
+          <video id="strat-l2-video-player" controls poster="poster_strategic_command.jpg" style="width: 100%; display: block; border-radius: 12px;">
+            <source id="strat-l2-video-src" src="OpenClaw_Strategic_Command_ES_con_subtitulos.mp4" type="video/mp4">
+            Tu navegador no soporta reproducción de video HTML5.
+          </video>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+          🎙️ <em>OpenClaw Strategic Command (1:40 min)</em> • Roles Especialistas (Justo, Álvaro, Memo) & Ejecución Local Segura
+        </div>
+      </div>
+
+      <script>
+        function switchStratL2Video(type) {
+          const video = document.getElementById('strat-l2-video-player');
+          const src = document.getElementById('strat-l2-video-src');
+          const btnSubs = document.getElementById('btn-strat-l2-subs');
+          const btnNoSubs = document.getElementById('btn-strat-l2-nosubs');
+          const currentTime = video.currentTime;
+          const wasPlaying = !video.paused;
+
+          if (type === 'sub') {
+            src.src = 'OpenClaw_Strategic_Command_ES_con_subtitulos.mp4';
+            btnSubs.style.background = 'rgba(56, 189, 248, 0.2)';
+            btnSubs.style.borderColor = '#38bdf8';
+            btnSubs.style.color = '#38bdf8';
+            btnNoSubs.style.background = 'rgba(255,255,255,0.05)';
+            btnNoSubs.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnNoSubs.style.color = 'var(--text-muted)';
+          } else {
+            src.src = 'OpenClaw_Strategic_Command_ES_sin_subtitulos.mp4';
+            btnNoSubs.style.background = 'rgba(56, 189, 248, 0.2)';
+            btnNoSubs.style.borderColor = '#38bdf8';
+            btnNoSubs.style.color = '#38bdf8';
+            btnSubs.style.background = 'rgba(255,255,255,0.05)';
+            btnSubs.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnSubs.style.color = 'var(--text-muted)';
+          }
+          video.load();
+          video.currentTime = currentTime;
+          if (wasPlaying) video.play();
+        }
+      </script>
+
       <h3>Contrato de Datos: JSON Schema para Agentes en Producción</h3>
       <p>Esquema JSON estricto que valida el traspaso de datos entre el Agente Calificador y el Agente de Facturación en el ERP:</p>
 
@@ -1706,6 +1766,66 @@
           <p style="font-size: 0.82rem; margin-top: 4px;">Cuando no existen APIs, OpenClaw navega el DOM web de portales gubernamentales o bancarios ejecutando bucles ReAct.</p>
         </div>
       </div>
+
+      <!-- Video Caso Industrial: OpenClaw Agentic HVAC -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 16px; padding: 20px; margin: 28px 0; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">🎬 Caso Industrial en Video</span>
+            <strong style="color: #fff; font-size: 1rem;">Operación Agéntica End-to-End en ClimaTech / HVAC</strong>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-hvac-l2-dub" onclick="switchHvacL2Video('dub')" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              🇲🇽 Español Doblado
+            </button>
+            <button id="btn-hvac-l2-sub" onclick="switchHvacL2Video('sub')" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+              💬 EN con Subtítulos
+            </button>
+          </div>
+        </div>
+
+        <div style="border-radius: 12px; overflow: hidden; background: #000; border: 1px solid rgba(16, 185, 129, 0.25);">
+          <video id="hvac-l2-video-player" controls poster="poster_agentic_hvac.jpg" style="width: 100%; display: block; border-radius: 12px;">
+            <source id="hvac-l2-video-src" src="OpenClaw_Agentic_HVAC_ES_doblado.mp4" type="video/mp4">
+            Tu navegador no soporta reproducción de video HTML5.
+          </video>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 10px;">
+          🏭 <em>OpenClaw Agentic HVAC (1:57 min)</em> • Diagnóstico Automático, Validación de Inventario, Cotización Instantánea y Conexión ERP
+        </div>
+      </div>
+
+      <script>
+        function switchHvacL2Video(type) {
+          const video = document.getElementById('hvac-l2-video-player');
+          const src = document.getElementById('hvac-l2-video-src');
+          const btnDub = document.getElementById('btn-hvac-l2-dub');
+          const btnSub = document.getElementById('btn-hvac-l2-sub');
+          const currentTime = video.currentTime;
+          const wasPlaying = !video.paused;
+
+          if (type === 'dub') {
+            src.src = 'OpenClaw_Agentic_HVAC_ES_doblado.mp4';
+            btnDub.style.background = 'rgba(16, 185, 129, 0.2)';
+            btnDub.style.borderColor = '#10b981';
+            btnDub.style.color = '#34d399';
+            btnSub.style.background = 'rgba(255,255,255,0.05)';
+            btnSub.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnSub.style.color = 'var(--text-muted)';
+          } else {
+            src.src = 'OpenClaw_Agentic_HVAC_EN_con_subtitulos_ES.mp4';
+            btnSub.style.background = 'rgba(16, 185, 129, 0.2)';
+            btnSub.style.borderColor = '#10b981';
+            btnSub.style.color = '#34d399';
+            btnDub.style.background = 'rgba(255,255,255,0.05)';
+            btnDub.style.borderColor = 'rgba(255,255,255,0.15)';
+            btnDub.style.color = 'var(--text-muted)';
+          }
+          video.load();
+          video.currentTime = currentTime;
+          if (wasPlaying) video.play();
+        }
+      </script>
     </section>
 
     <!-- Módulo 5 -->
