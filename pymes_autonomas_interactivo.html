@@ -9,6 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>mermaid.initialize({startOnLoad:true, theme:'dark', themeVariables: {darkMode: true, background: '#0a0f1d'}});</script>
+  <!-- Supabase JS Client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase_config.js"></script>
   <style>
     :root {
       --bg-dark: #030712;
@@ -2327,9 +2330,9 @@ python3 -m vllm.entrypoints.openai.api_server \
         </p>
 
         <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-          <a href="mailto:contacto@globalcoachconsultores.com?subject=Solicitud%20de%20Diagnostico%20de%20IA%20y%20Datos%20(OpenClaw)&body=Hola%20equipo%20Global%20Coach%20Consultores,%0A%0AHe%20le%C3%ADdo%20el%20Libro%202%20de%20PYMES%20Aut%C3%B3nomas%20y%20el%20Dossier%20Ejecutivo.%20Me%20gustar%C3%ADa%20agendar%20la%20Sesi%C3%B3n%20de%20Diagn%C3%B3stico%20Estrat%C3%A9gico%20de%2045%20minutos%20para%20mi%20empresa.%0A%0ANombre:%0AEmpresa:%0ATel%C3%A9fono/WhatsApp:%0A" class="btn-top-back" style="padding: 12px 28px; font-size: 0.95rem; font-weight: 800;">
+          <button type="button" onclick="openVipDiagnosticModal()" class="btn-top-back" style="padding: 12px 28px; font-size: 0.95rem; font-weight: 800; cursor: pointer; border: none; background: linear-gradient(135deg, #0284c7, #38bdf8); color: #020617; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4); display: inline-flex; align-items: center; gap: 8px;">
             📅 Solicitar Diagnóstico de IA (45 min)
-          </a>
+          </button>
           <a href="dossier_ejecutivo_global_coach_consultores.pdf" download class="btn-copy-code" style="text-decoration: none; padding: 12px 24px; font-size: 0.92rem; font-weight: 700; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); color: #fff;">
             📥 Descargar Dossier en PDF (10 Págs)
           </a>
@@ -2565,6 +2568,211 @@ python3 -m vllm.entrypoints.openai.api_server \
         });
       }
     });
+
+    // VIP Strategic Diagnostic Modal Functions
+    function openVipDiagnosticModal() {
+      const modal = document.getElementById('vip-diagnostic-modal');
+      if (!modal) return;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      const form = document.getElementById('vip-diagnostic-form');
+      const succ = document.getElementById('vip-success-view');
+      const banner = document.getElementById('vip-autofill-banner');
+      if (form) form.style.display = 'flex';
+      if (succ) succ.style.display = 'none';
+
+      // Autofill from localStorage if previous diagnostic was completed
+      try {
+        const savedName = localStorage.getItem('openclaw_lead_name') || '';
+        const savedCompany = localStorage.getItem('openclaw_lead_company') || '';
+        const savedEmail = localStorage.getItem('openclaw_lead_email') || '';
+        const savedWa = localStorage.getItem('openclaw_lead_whatsapp') || '';
+        const savedPain = localStorage.getItem('openclaw_lead_pain') || '';
+
+        if (savedName) document.getElementById('vip_name').value = savedName;
+        if (savedCompany) document.getElementById('vip_company').value = savedCompany;
+        if (savedEmail) document.getElementById('vip_email').value = savedEmail;
+        if (savedWa) document.getElementById('vip_whatsapp').value = savedWa;
+
+        if (savedName || savedCompany || savedEmail) {
+          if (banner) banner.style.display = 'block';
+        } else {
+          if (banner) banner.style.display = 'none';
+        }
+
+        if (savedPain) {
+          const select = document.getElementById('vip_process');
+          if (select) {
+            for (let i = 0; i < select.options.length; i++) {
+              if (select.options[i].text.toLowerCase().includes(savedPain.toLowerCase()) || savedPain.toLowerCase().includes(select.options[i].value.toLowerCase())) {
+                select.selectedIndex = i;
+                break;
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    function closeVipDiagnosticModal() {
+      const modal = document.getElementById('vip-diagnostic-modal');
+      if (modal) modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    async function submitVipDiagnostic(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-submit-vip');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳</span> Enviando Solicitud Prioritaria...';
+      }
+
+      const name = document.getElementById('vip_name').value.trim();
+      const company = document.getElementById('vip_company').value.trim();
+      const email = document.getElementById('vip_email').value.trim();
+      const whatsapp = document.getElementById('vip_whatsapp').value.trim();
+      const process = document.getElementById('vip_process').value;
+      const time = document.getElementById('vip_time').value.trim();
+
+      const payload = {
+        name: name,
+        email: email,
+        whatsapp: whatsapp,
+        source: `SOLICITUD_DIAGNOSTICO_VIP_45MIN [Empresa: ${company} | Proceso: ${process} | Horario: ${time || 'Flexible'}]`,
+        created_at: new Date().toISOString()
+      };
+
+      // 1. Enviar a Supabase
+      try {
+        const client = getSupabaseClient();
+        if (client) {
+          await client.from('ebook_leads').insert([payload]);
+          console.log('Solicitud VIP guardada en Supabase.');
+        }
+      } catch (err) {
+        console.warn('Nota Supabase VIP:', err);
+      }
+
+      // 2. Enviar a endpoint local si existe servidor
+      try {
+        await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {}
+
+      // 3. Persistir en localStorage
+      try {
+        localStorage.setItem('openclaw_lead_name', name);
+        localStorage.setItem('openclaw_lead_company', company);
+        localStorage.setItem('openclaw_lead_email', email);
+        localStorage.setItem('openclaw_lead_whatsapp', whatsapp);
+      } catch (err) {}
+
+      // 4. Mostrar confirmación de éxito y preparar WhatsApp
+      const form = document.getElementById('vip-diagnostic-form');
+      const succ = document.getElementById('vip-success-view');
+      const succComp = document.getElementById('succ_company');
+      const btnWa = document.getElementById('btn-wa-direct');
+
+      if (succComp) succComp.innerText = company || 'tu empresa';
+
+      const waText = encodeURIComponent(`Hola Javier y equipo de Global Coach Consultores, acabo de solicitar el Diagnóstico Estratégico VIP de 45 minutos para mi empresa "${company}". Mi proceso prioritario es: ${process}. ${time ? 'Horario sugerido: ' + time : ''}`);
+      if (btnWa) btnWa.href = `https://wa.me/525540000000?text=${waText}`;
+
+      if (form) form.style.display = 'none';
+      if (succ) succ.style.display = 'block';
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀</span> Confirmar Solicitud de Diagnóstico VIP';
+      }
+    }
   </script>
+
+  <!-- Modal VIP Diagnóstico Estratégico 45 Min -->
+  <div id="vip-diagnostic-modal" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px); z-index: 10000; align-items: center; justify-content: center; padding: 20px; overflow-y: auto;">
+    <div style="background: #0d1322; border: 1px solid rgba(56, 189, 248, 0.45); border-radius: 20px; max-width: 580px; width: 100%; padding: 32px; box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9); position: relative; color: #fff;">
+      <button onclick="closeVipDiagnosticModal()" style="position: absolute; top: 16px; right: 18px; background: transparent; border: none; color: #94a3b8; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
+      
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); padding: 4px 12px; border-radius: 999px; color: #38bdf8; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px;">
+        ⚡ Sesión Estratégica VIP (45 min) • Global Coach Consultores
+      </div>
+
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin: 0 0 6px;">Agendar Diagnóstico Ejecutivo de IA</h3>
+      <p style="font-size: 0.88rem; color: #94a3b8; margin: 0 0 18px; line-height: 1.45;">
+        Analizaremos la arquitectura de tu empresa, cuellos de botella operativos y la viabilidad de implementar agentes y nodos locales con <strong>OpenClaw</strong>.
+      </p>
+
+      <!-- Autofill Notice Banner -->
+      <div id="vip-autofill-banner" style="display: none; background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; border-radius: 6px; padding: 8px 12px; font-size: 0.8rem; color: #34d399; margin-bottom: 16px;">
+        ✨ Hemos precargado tus datos del diagnóstico inicial. Puedes modificarlos si lo requieres.
+      </div>
+
+      <form id="vip-diagnostic-form" onsubmit="submitVipDiagnostic(event)" style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">Nombre y Apellido *</label>
+            <input type="text" id="vip_name" required style="width: 100%; background: #070a12; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem;" placeholder="Ej. Carlos Mendoza">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">Empresa *</label>
+            <input type="text" id="vip_company" required style="width: 100%; background: #070a12; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem;" placeholder="Ej. Logística Global">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">Correo Corporativo *</label>
+            <input type="email" id="vip_email" required style="width: 100%; background: #070a12; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem;" placeholder="nombre@empresa.com">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">WhatsApp / Teléfono *</label>
+            <input type="tel" id="vip_whatsapp" required style="width: 100%; background: #070a12; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem;" placeholder="+52 55 1234 5678">
+          </div>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">Proceso Prioritario a Diagnosticar</label>
+          <select id="vip_process" style="width: 100%; background: #070a12; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem;">
+            <option value="Auditoría Fiscal SAT, Facturación y CFDI">Carga Administrativa, Facturas y Trámites de Impuestos (SAT)</option>
+            <option value="Atención a Clientes y Ventas WhatsApp 24/7">Atención y Cierre de Ventas por WhatsApp 24/7</option>
+            <option value="Cobranza y Conciliación Bancaria ERP">Cobranza, Conciliación de Pagos y Conexión ERP</option>
+            <option value="Infraestructura Local On-Premise (Mac mini / Linux $0/token)">Despliegue de Servidor Local Privado (Mac mini / Linux $0/token)</option>
+            <option value="Otro Proceso a la Medida">Otro flujo o proceso a la medida</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">Horario o Día Preferido (Opcional)</label>
+          <input type="text" id="vip_time" style="width: 100%; background: #070a12; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem;" placeholder="Ej. Jueves por la mañana o cualquier día 4:00 PM">
+        </div>
+
+        <button type="submit" id="btn-submit-vip" style="margin-top: 10px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 10px; padding: 14px 20px; font-size: 0.95rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <span>🚀</span> Confirmar Solicitud de Diagnóstico VIP
+        </button>
+      </form>
+
+      <!-- Success Confirmation View -->
+      <div id="vip-success-view" style="display: none; text-align: center; padding: 15px 0;">
+        <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
+        <h3 style="color: #34d399; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">¡Solicitud Recibida con Éxito!</h3>
+        <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+          Hemos registrado tu solicitud para <strong><span id="succ_company">tu empresa</span></strong>. El equipo directivo de <strong>Global Coach Consultores</strong> ha recibido la alerta inmediata y te contactará en menos de 2 horas hábiles para coordinar la sesión de 45 minutos.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a id="btn-wa-direct" href="#" target="_blank" style="text-decoration: none; background: #25D366; color: #000; font-weight: 800; font-size: 0.92rem; padding: 12px 20px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);">
+            <span>💬</span> Conectar Directamente por WhatsApp con GCC
+          </a>
+          <button onclick="closeVipDiagnosticModal()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;">
+            Cerrar y Continuar Leyendo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

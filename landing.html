@@ -1768,11 +1768,15 @@
         });
       } catch (e) {}
 
-      // 3. Almacenar localmente en navegador
+      // 3. Almacenar localmente en navegador para auto-completar en los libros
       try {
         localStorage.setItem('openclaw_lead_registered', 'true');
         localStorage.setItem('openclaw_lead_name', payload.name);
+        localStorage.setItem('openclaw_lead_email', data.email);
+        localStorage.setItem('openclaw_lead_whatsapp', data.whatsapp);
         localStorage.setItem('openclaw_lead_company', data.company);
+        localStorage.setItem('openclaw_lead_role', data.role || '');
+        localStorage.setItem('openclaw_lead_pain', data.painPoint || '');
         localStorage.setItem('openclaw_lead_score', score.toString());
       } catch (e) {}
     }
