@@ -1397,6 +1397,36 @@
           </div>
         </div>
 
+        <!-- GCC Tailored Action Plan Box -->
+        <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(168, 85, 247, 0.08) 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 16px; padding: 22px; margin-bottom: 28px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">⚡ Solución GCC OpenClaw 2.0</span>
+              <strong style="color: #fff; font-size: 1.05rem;" id="rep-solution-title">Plan de Despliegue Sugerido</strong>
+            </div>
+            <span style="font-size: 0.8rem; color: #a855f7; font-weight: 700;" id="rep-solution-badge">Fase 1: Quick-Launch</span>
+          </div>
+
+          <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 16px;" id="rep-solution-desc">
+            Con base en tus respuestas, este es el paquete de módulos agénticos de Global Coach Consultores diseñado para tu nivel:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;" id="rep-modules-grid">
+            <div style="background: #070a12; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px;">
+              <strong style="color: #38bdf8; font-size: 0.85rem; display: block; margin-bottom: 4px;">1. Cotizador Autónomo</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Atención en WhatsApp 24/7 y cálculo de presupuestos en &lt; 2 min.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px;">
+              <strong style="color: #34d399; font-size: 0.85rem; display: block; margin-bottom: 4px;">2. Segundo Cerebro RAG</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Memoria corporativa en Markdown sin secuestro de datos ni alucinaciones.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px;">
+              <strong style="color: #c084fc; font-size: 0.85rem; display: block; margin-bottom: 4px;">3. Semáforo HITL</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Supervisión humana: el agente analiza y el directivo aprueba antes de emitir.</p>
+            </div>
+          </div>
+        </div>
+
         <!-- Unlocked E-Book Access Section -->
         <div class="ebook-unlocked-section">
           <div class="unlocked-title">
@@ -1594,45 +1624,112 @@
       let levelColor = '#38bdf8';
       let hoursText = '15 - 25 hrs';
 
+      const solutionTitle = document.getElementById('rep-solution-title');
+      const solutionBadge = document.getElementById('rep-solution-badge');
+      const solutionDesc = document.getElementById('rep-solution-desc');
+      const modulesGrid = document.getElementById('rep-modules-grid');
+
       if (score < 40) {
         levelTitle = 'Nivel 1: Manual & Vulnerable (Pegamento Digital)';
         levelColor = '#f87171';
         hoursText = '10 - 20 hrs';
-        summaryText.innerHTML = `Tu operación en <strong>${company}</strong> depende actualmente en gran medida de personas ejecutando tareas mecánicas de captura y respuesta. Existe una alta oportunidad inmediata para automatizar cotizaciones y evitar pérdida de clientes.`;
+        summaryText.innerHTML = `Tu operación en <strong>${company}</strong> depende actualmente de personas ejecutando tareas mecánicas de captura, copiado y respuesta. Existe una alta oportunidad inmediata para automatizar cotizaciones y evitar pérdida de prospectos.`;
         strengthsList.innerHTML = `
-          <li class="insight-item"><strong>Oportunidad de Impacto Rápido:</strong> Cualquier automatización básica generará un retorno visible en la primera semana.</li>
-          <li class="insight-item"><strong>Flujo Comercial Activo:</strong> Cuentas con demanda de clientes lista para ser atendida con mayor agilidad.</li>
+          <li class="insight-item"><strong>Flujo Comercial Activo:</strong> Cuentas con demanda y prospectos listos para ser atendidos con mayor agilidad.</li>
+          <li class="insight-item"><strong>Retorno Rápido (ROI Inmediato):</strong> Cualquier automatización básica de GCC generará impacto visible en la primera semana.</li>
         `;
         oppsList.innerHTML = `
-          <li class="insight-item"><strong>Eliminar Cuellos de Botella:</strong> Conectar WhatsApp con hojas de cálculo o catálogo para cotizar en &lt; 2 minutos.</li>
-          <li class="insight-item"><strong>Estandarizar Respuestas:</strong> Implementar un agente con base de conocimiento RAG básica para dudas frecuentes.</li>
+          <li class="insight-item"><strong>Eliminar Cuellos de Botella:</strong> Conectar WhatsApp con tu catálogo de productos/servicios para cotizar en &lt; 2 minutos.</li>
+          <li class="insight-item"><strong>Segundo Cerebro Base:</strong> Centralizar tus manuales y políticas en Markdown sin alucinaciones.</li>
         `;
+
+        if (solutionTitle) solutionTitle.innerText = 'Paquete Recomendado: GCC Quick-Launch (Fase 1)';
+        if (solutionBadge) { solutionBadge.innerText = 'Setup Rápido en 14 Días'; solutionBadge.style.color = '#38bdf8'; }
+        if (solutionDesc) solutionDesc.innerText = `Solución recomendada por Global Coach Consultores para ${company}:`;
+        if (modulesGrid) {
+          modulesGrid.innerHTML = `
+            <div style="background: #070a12; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #38bdf8; font-size: 0.85rem; display: block; margin-bottom: 4px;">1. Cotizador Autónomo WhatsApp</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Atención 24/7, cálculo de precios y entrega de PDF formal membretado en &lt; 2 min.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #34d399; font-size: 0.85rem; display: block; margin-bottom: 4px;">2. Segundo Cerebro en Markdown</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Repositorio soberano de preguntas frecuentes y políticas: cero secuestro de datos.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #c084fc; font-size: 0.85rem; display: block; margin-bottom: 4px;">3. Supervisión Directiva (HITL)</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Semáforo de seguridad donde el agente redacta y un humano valida antes de emitir.</p>
+            </div>
+          `;
+        }
+
       } else if (score < 70) {
         levelTitle = 'Nivel 2: Explorador Asistido (Transición a Agentes)';
         levelColor = '#fbbf24';
         hoursText = '20 - 35 hrs';
-        summaryText.innerHTML = `<strong>${company}</strong> ya cuenta con procesos y herramientas digitales, pero operan de forma aislada. Estás en el punto óptimo para dar el salto de "chatbots pasivos" a <strong>Agentes Autónomos ReAct</strong> conectados a tu ERP y canales de venta.`;
+        summaryText.innerHTML = `<strong>${company}</strong> ya cuenta con procesos y herramientas digitales (ERP, CRM o Excel estructurado), pero operan de forma aislada. Estás en el punto óptimo para dar el salto de "chatbots pasivos" a <strong>Agentes Autónomos Persistentes OpenClaw</strong> conectados a tus sistemas centrales.`;
         strengthsList.innerHTML = `
-          <li class="insight-item"><strong>Familiaridad con Software:</strong> Tu equipo ya utiliza herramientas digitales (CRM, ERP o Excel avanzado).</li>
-          <li class="insight-item"><strong>Volumen Validado:</strong> Tienes la densidad operativa necesaria para amortizar la adopción de IA en menos de 30 días.</li>
+          <li class="insight-item"><strong>Familiaridad con Software:</strong> Tu equipo ya utiliza herramientas digitales para su operación diaria.</li>
+          <li class="insight-item"><strong>Densidad Operativa:</strong> Volumen y facturación óptimos para amortizar la inversión en menos de 30 días.</li>
         `;
         oppsList.innerHTML = `
-          <li class="insight-item"><strong>Cotizador Autónomo Multi-Agente:</strong> Generación y envío de presupuestos formalizados sin intervención humana.</li>
-          <li class="insight-item"><strong>Conciliación Administrativa:</strong> Extracción de datos de CFDI / facturas SAT directa a tu sistema contable.</li>
+          <li class="insight-item"><strong>Conectividad Directa a ERP / CRM:</strong> Consultar inventarios, clientes y estados de cuenta en tiempo real.</li>
+          <li class="insight-item"><strong>Auditoría Fiscal & SAT 32-D:</strong> Descarga y validación automática de constancias y cotejo de CFDI 4.0.</li>
         `;
+
+        if (solutionTitle) solutionTitle.innerText = 'Paquete Recomendado: OpenClaw Core & Conectividad ERP (Fase 2)';
+        if (solutionBadge) { solutionBadge.innerText = 'Integración Avanzada'; solutionBadge.style.color = '#fbbf24'; }
+        if (solutionDesc) solutionDesc.innerText = `Solución de automatización conectada de Global Coach Consultores para ${company}:`;
+        if (modulesGrid) {
+          modulesGrid.innerHTML = `
+            <div style="background: #070a12; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #38bdf8; font-size: 0.85rem; display: block; margin-bottom: 4px;">1. Bóveda Segura de Secretos (Vault)</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Conexión cifrada a ERPs (SAP, Microsip, Odoo, Aspel) sin exponer contraseñas.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #34d399; font-size: 0.85rem; display: block; margin-bottom: 4px;">2. Agente Auditor Fiscal & SAT</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Descarga automática de SAT 32-D, IMSS y conciliación de CFDI vs pólizas.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #c084fc; font-size: 0.85rem; display: block; margin-bottom: 4px;">3. Flujos Resilientes (Task Flows)</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Procesos multi-etapa que sobreviven a caídas y operan 24/7 sin perder estado.</p>
+            </div>
+          `;
+        }
+
       } else {
         levelTitle = 'Nivel 3: PYME AI-Native Preparada para Enjambres';
         levelColor = '#34d399';
         hoursText = '35 - 55 hrs';
-        summaryText.innerHTML = `<strong>${company}</strong> posee una infraestructura y volumen excepcionales para liderar su sector. Puedes implementar arquitecturas multi-modelo, <strong>GraphRAG corporativo</strong> y servidores locales Ubuntu con inferencia a $0 por token.`;
+        summaryText.innerHTML = `<strong>${company}</strong> posee una infraestructura y volumen excepcionales para liderar su sector. Puedes implementar la <strong>Capa Operativa OpenClaw 2.0</strong> completa con <strong>Nodo Local On-Premise ($0/token)</strong>, memoria persistente *"Dreaming Mode"* y enjambres multi-agente especializados.`;
         strengthsList.innerHTML = `
-          <li class="insight-item"><strong>Alta Madurez Digital:</strong> Software core y volumen operativo robusto.</li>
-          <li class="insight-item"><strong>Capacidad de Escala:</strong> Estructura lista para absorber 3x a 5x más clientes sin incrementar la nómina operativa.</li>
+          <li class="insight-item"><strong>Alta Densidad y Madurez Digital:</strong> Base instalada lista para orquestación agéntica de vanguardia.</li>
+          <li class="insight-item"><strong>Capacidad de Escala Multiplicadora:</strong> Estructura preparada para absorber 3x a 5x más clientes sin inflar nómina.</li>
         `;
         oppsList.innerHTML = `
-          <li class="insight-item"><strong>Enjambre Especializado OpenClaw:</strong> Agente Director + Agentes de Ventas, Soporte, SAT y Compras colaborando mediante JSON Schema.</li>
-          <li class="insight-item"><strong>Inferencia Local On-Premise:</strong> Privacidad total de datos y costos de tokens reducidos a cero.</li>
+          <li class="insight-item"><strong>Nodo Local Soberano On-Premise:</strong> Inferencia privada con costo $0 por token en servidor Linux o Mac mini.</li>
+          <li class="insight-item"><strong>Enjambre Multi-Agente OpenClaw 2.0:</strong> Agente Director coordinando Ventas, SAT, Operaciones y Compras.</li>
         `;
+
+        if (solutionTitle) solutionTitle.innerText = 'Paquete Recomendado: Infraestructura Persistente OpenClaw 2.0 (Fase 3)';
+        if (solutionBadge) { solutionBadge.innerText = 'Soberanía Total & Enjambres'; solutionBadge.style.color = '#34d399'; }
+        if (solutionDesc) solutionDesc.innerText = `Infraestructura Enterprise de Global Coach Consultores para ${company}:`;
+        if (modulesGrid) {
+          modulesGrid.innerHTML = `
+            <div style="background: #070a12; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #38bdf8; font-size: 0.85rem; display: block; margin-bottom: 4px;">1. Appliance Mac mini / Ubuntu</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Servidor local privado, túneles Cloudflare Zero Trust y costo $0 por token.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #34d399; font-size: 0.85rem; display: block; margin-bottom: 4px;">2. Memoria "Dreaming Mode" & GraphRAG</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Consolidación nocturna del conocimiento del negocio en archivos Markdown soberanos.</p>
+            </div>
+            <div style="background: #070a12; border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 12px; padding: 14px;">
+              <strong style="color: #c084fc; font-size: 0.85rem; display: block; margin-bottom: 4px;">3. Enjambre Especializado & Widgets</strong>
+              <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">Subagentes colaborativos con dashboards visuales interactivos y telemetría de costos.</p>
+            </div>
+          `;
+        }
       }
 
       levelPill.innerText = levelTitle;
