@@ -2228,6 +2228,47 @@ python3 -m vllm.entrypoints.openai.api_server \
         </div>
       </div>
 
+      <!-- 2.1 Arquitectura Empresarial: Conectar, no Reemplazar (Pág. 4 del Dossier) -->
+      <div style="background: rgba(7, 10, 18, 0.7); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 16px; padding: 24px; margin: 24px 0;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; text-transform: uppercase;">Pág. 04 • Arquitectura Empresarial</span>
+          <strong style="color: #fff; font-size: 1.05rem;">Una Capa de Inteligencia Sobre la Empresa (Conectar, no Reemplazar)</strong>
+        </div>
+        <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">
+          No se trata de reemplazar tus sistemas actuales: se trata de conectarlos con una capa explícita, gobernada y evolucionable que orquesta datos, modelos y canales de trabajo existentes:
+        </p>
+
+        <div class="mermaid" style="background: rgba(3, 7, 18, 0.6); padding: 18px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);">
+          flowchart TD
+            subgraph CANALES ["📱 CANALES DE TRABAJO & USUARIOS"]
+              C1["WhatsApp Corporativo 24/7"]
+              C2["Telegram Staff & Alertas"]
+              C3["Dashboards Web Interactivos"]
+            end
+
+            subgraph CAPA_GCC ["⚡ CAPA OPERATIVA DE INTELIGENCIA GCC (OpenClaw + Antigravity)"]
+              direction TB
+              G1["🛡️ Bóveda de Secretos & RBAC"]
+              G2["🧠 Memoria Semántica GraphRAG"]
+              G3["🖥️ Inferencia Soberana ($0/token - Mac mini / Linux)"]
+              G4["🚦 Guardrails & Semáforo HITL"]
+            end
+
+            subgraph SISTEMAS ["🏢 SISTEMAS EXISTENTES (CERO REEMPLAZO)"]
+              S1[("Bases SQL / Postgres / MySQL")]
+              S2["ERP: SAP / Microsip / Odoo / Aspel"]
+              S3["Documentos: Google Drive / OneDrive / NAS"]
+              S4["CRM & Facturación SAT CFDI 4.0"]
+            end
+
+            CANALES <-->|Eventos / Webhooks / Consultas| CAPA_GCC
+            CAPA_GCC <-->|Lectura Segura / Citas / Ejecución Controlada| SISTEMAS
+        </div>
+        <div style="font-size: 0.78rem; color: #94a3b8; text-align: center; margin-top: 10px;">
+          Figura DS.1: La arquitectura modular de GCC actúa como orquestador inteligente sin alterar las bases de datos ni el software instalado del cliente.
+        </div>
+      </div>
+
       <!-- 3. Marco de Gobernanza & Semáforo Operativo -->
       <h3 style="color: #38bdf8; margin-top: 32px;">3. Gobernanza y Semáforo Operativo de Control Directivo</h3>
       <p>La adopción empresarial escala únicamente cuando el control también escala. La IA no sustituye la responsabilidad directiva: le proporciona velocidad, contexto y evidencia.</p>
@@ -2317,7 +2358,59 @@ python3 -m vllm.entrypoints.openai.api_server \
         </div>
       </div>
 
-      <!-- 6. VIP CTA Box -->
+      <!-- 6. Modelo de Servicio: Escalera de Adopción Progresiva (Pág. 8 del Dossier) -->
+      <h3 style="color: #38bdf8; margin-top: 32px;">6. Modelo de Servicio: Escalera de Adopción Progresiva</h3>
+      <p>Una escalera de valor que reduce el riesgo operativo y acelera el aprendizaje, avanzando de un diagnóstico puntual a una plataforma agéntica corporativa:</p>
+
+      <table class="compare-table" style="margin: 20px 0;">
+        <thead>
+          <tr>
+            <th>Etapa de Servicio</th>
+            <th>Objetivo Estratégico</th>
+            <th>Entregables Principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #38bdf8;">01 · Diagnóstico Estratégico</strong></td>
+            <td>Seleccionar la oportunidad de mayor retorno e impacto inmediato.</td>
+            <td>Blueprint de IA, mapa de fuentes autorizadas, matriz de riesgos, caso de negocio y plan de trabajo a 90 días.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #818cf8;">02 · Agente Focalizado</strong></td>
+            <td>Validar valor medible en un proceso concreto de alta fricción.</td>
+            <td>Un agente configurado en producción, fuentes autorizadas conectadas, interfaz de uso (WhatsApp/Web) y métricas iniciales.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #34d399;">03 · Conocimiento + Agentes</strong></td>
+            <td>Construir una capacidad reutilizable y transversal en la empresa.</td>
+            <td>Base de conocimiento GraphRAG, múltiples flujos agénticos coordinados, controles de gobernanza RBAC y canales de adopción.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: #fbbf24;">04 · Plataforma Operativa</strong></td>
+            <td>Escalar a todas las áreas con gobierno corporativo integral.</td>
+            <td>Integraciones empresariales completas (ERP/SAT/CRM), orquestación de enjambres 24/7, observabilidad y mejora continua.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 3 Principios Comerciales GCC -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; margin-bottom: 24px;">
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 14px;">
+          <strong style="color: #38bdf8; font-size: 0.88rem; display: block; margin-bottom: 4px;">📈 Métricas Acordadas</strong>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin: 0;">Medimos el éxito con indicadores operativos de negocio (horas ahorradas, errores prevenidos, conversión), no solo con actividad de prompts.</p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 14px;">
+          <strong style="color: #34d399; font-size: 0.88rem; display: block; margin-bottom: 4px;">🛡️ Escalamiento Probado</strong>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin: 0;">La solución se amplía a nuevos departamentos únicamente después de confirmar calidad, adopción del equipo y control seguro en producción.</p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 10px; padding: 14px;">
+          <strong style="color: #c084fc; font-size: 0.88rem; display: block; margin-bottom: 4px;">🎯 Alcance Claro</strong>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin: 0;">Definición explícita de fuentes de datos, procesos autorizados, roles de usuario, límites de seguridad y responsabilidades operativas.</p>
+        </div>
+      </div>
+
+      <!-- 7. VIP CTA Box -->
       <div style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.2) 0%, rgba(168, 85, 247, 0.15) 100%); border: 1px solid rgba(56, 189, 248, 0.45); border-radius: 20px; padding: 32px; margin-top: 36px; text-align: center; box-shadow: 0 20px 50px -15px rgba(0,0,0,0.7);">
         <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); padding: 5px 14px; border-radius: 999px; color: #38bdf8; font-size: 0.8rem; font-weight: 700; margin-bottom: 16px;">
           ⚡ Próximo Paso Estratégico
