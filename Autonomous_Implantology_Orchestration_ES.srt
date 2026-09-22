@@ -1,0 +1,54 @@
+1
+00:00:00,360 --> 00:00:10,932
+La implantología moderna vive un cambio crítico. Dejamos atrás los flujos manuales
+y fragmentados hacia una orquestación autónoma impulsada por IA agéntica y OpenClaw.
+
+2
+00:00:11,800 --> 00:00:23,428
+Las clínicas sufren fricción administrativa oculta: citas perdidas, prospectos desperdiciados
+y falta de seguimiento postoperatorio. Ineficiencias que elevan los costos operativos.
+
+3
+00:00:24,200 --> 00:00:35,108
+El problema central es un ecosistema desconectado. Diagnóstico, software de gestión y
+comunicación operan en silos, forzando al equipo a ser un pegamento digital manual.
+
+4
+00:00:36,800 --> 00:00:48,572
+La IA agéntica como OpenClaw supera a los chatbots tradicionales. No es solo reactiva:
+razona de forma iterativa y opera en tu entorno local para ejecutar tareas clínicas complejas.
+
+5
+00:00:50,200 --> 00:01:02,740
+La seguridad es primordial. Al operar en infraestructura local, OpenClaw garantiza soberanía
+total. Expedientes e historial financiero permanecen en tu clínica bajo arquitectura Zero Trust.
+
+6
+00:01:03,800 --> 00:01:15,200
+OpenClaw actúa como orquestador autónomo: detecta nuevos escaneos, los vincula al expediente,
+gestiona logística de laboratorio y actualiza la preparación quirúrgica sin intervención humana.
+
+7
+00:01:15,500 --> 00:01:25,184
+En cirugía, el asistente de voz brinda acceso inmediato a los datos.
+Esta interacción manos libres evita contaminación y mantiene el enfoque en el paciente.
+
+8
+00:01:26,500 --> 00:01:36,928
+Nuestro ecosistema multi-agente cubre todo el recorrido del paciente: desde calificación
+de prospectos y expedientes seguros, hasta seguimiento postoperatorio y reputación digital.
+
+9
+00:01:37,500 --> 00:01:48,456
+El agente Doctor Claw realiza monitoreo postoperatorio inteligente. Detecta alertas en tiempo
+real y escala de inmediato al equipo quirúrgico si identifica umbrales de riesgo.
+
+10
+00:01:49,000 --> 00:01:58,012
+El retorno es claro: optimiza la agenda, triplica la conversión y
+reduce la carga operativa, fortaleciendo la reputación y eficiencia de tu clínica.
+
+11
+00:01:58,500 --> 00:02:09,500
+Evoluciona tu clínica a un ecosistema conectado y sin fricción. Protege tus datos, recupera
+tu tiempo e integra hoy el cerebro digital para la odontología de alto rendimiento.

@@ -1,0 +1,54 @@
+1
+00:00:00,200 --> 00:00:10,510
+La orquestación digital redefine la implantología. Con OpenClaw, construimos un ecosistema
+autónomo que conecta las consultas de WhatsApp directamente con el quirófano.
+
+2
+00:00:13,200 --> 00:00:22,358
+A pesar de invertir en tecnología avanzada, muchas clínicas sufren caos operativo:
+el problema del pegamento humano y tareas manuales que generan pérdida de ingresos.
+
+3
+00:00:24,900 --> 00:00:35,714
+Los chatbots comunes solo hablan, pero OpenClaw actúa. Combina flujos autónomos
+con infraestructura local para ejecutar tareas, procesar estudios y gestionar datos clínicos.
+
+4
+00:00:38,800 --> 00:00:48,198
+Todo inicia con la admisión autónoma. En 60 segundos, el agente califica al
+paciente y lo agenda en tu sistema, evitando que los prospectos se enfríen.
+
+5
+00:00:49,500 --> 00:00:59,186
+Pasamos del manejo manual de archivos a una transición sin contacto. El paciente llega,
+se sienta en el sillón y todo el ecosistema ya está listo para el cirujano.
+
+6
+00:01:00,600 --> 00:01:09,710
+Con ingesta automática multimodal, el sistema monitorea tus equipos y captura archivos
+en paralelo, organizándolos para que tu equipo no vuelva a mover un archivo.
+
+7
+00:01:12,200 --> 00:01:22,318
+Nuestro motor vincula identidad y estudios clínicos automáticamente. Sin errores manuales,
+el cirujano abre el expediente y comienza la planificación de inmediato.
+
+8
+00:01:23,300 --> 00:01:35,338
+La privacidad es primordial. Con arquitectura local, tus datos sensibles nunca tocan
+la nube pública. Un escudo soberano que protege expedientes bajo estricto cumplimiento normativo.
+
+9
+00:01:38,100 --> 00:01:48,986
+Un ecosistema integrado en 360 grados. Desde la admisión del caso hasta
+el flujo protésico final, OpenClaw unifica tu equipamiento en una sola infraestructura inteligente.
+
+10
+00:01:50,900 --> 00:02:00,082
+En el postoperatorio, el sistema da seguimiento al paciente: gestiona reseñas
+positivas o activa una escalación clínica inmediata si detecta factores de riesgo.
+
+11
+00:02:02,900 --> 00:02:13,042
+Al eliminar la fricción operativa, recuperas el tiempo para lo esencial:
+la atención al paciente. Con OpenClaw, la tecnología finalmente trabaja para ti.
